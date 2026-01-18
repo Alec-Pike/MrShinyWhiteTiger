@@ -1,3 +1,6 @@
+# Original Godot gitignore template by VeeronTen on GitHub:
+# https://github.com/github/gitignore/blob/main/Godot.gitignore
+
 # Godot 4+ specific ignores
 .godot/
 .nomedia
@@ -15,3 +18,10 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# V-Sekai addons
+fbx2gltf*
+FBX2glTF*
+unity_asset_database.*res
+static_cache.*res
+static_storage.*res
