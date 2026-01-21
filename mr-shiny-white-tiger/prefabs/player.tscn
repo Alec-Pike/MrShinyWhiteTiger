@@ -1,0 +1,95 @@
+[gd_scene load_steps=12 format=3 uid="uid://c64slysg5u0dt"]
+
+[ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
+[ext_resource type="PackedScene" uid="uid://b657tggcmv3ow" path="res://3d models/character models/MrShiny.vrm" id="1_d5x3m"]
+[ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
+[ext_resource type="Script" uid="uid://byunh6r4lygh5" path="res://addons/vrm/vrm_collider_group.gd" id="3_joqdm"]
+
+[sub_resource type="Resource" id="Resource_i8cny"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_cmorj")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_L_CoatSkirtBack_01", "J_Sec_L_CoatSkirtBack_end_01", "J_Sec_L_CoatSkirtBack_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.0308961459
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_7hac0"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_cmorj")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_L_CoatSkirtFront_01", "J_Sec_L_CoatSkirtFront_end_01", "J_Sec_L_CoatSkirtFront_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.0308961459
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_xqkdp"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_cmorj")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_L_CoatSkirtSide1_01", "J_Sec_L_CoatSkirtSide2_01", "J_Sec_L_CoatSkirtSide2_end_01", "J_Sec_L_CoatSkirtSide2_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.0308961459
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_r4xi5"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_cmorj")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_R_CoatSkirtBack_01", "J_Sec_R_CoatSkirtBack_end_01", "J_Sec_R_CoatSkirtBack_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.0308961459
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_25wnn"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_cmorj")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_R_CoatSkirtFront_01", "J_Sec_R_CoatSkirtFront_end_01", "J_Sec_R_CoatSkirtFront_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.0308961459
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_jttem"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_cmorj")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_R_CoatSkirtSide1_01", "J_Sec_R_CoatSkirtSide2_01", "J_Sec_R_CoatSkirtSide2_end_01", "J_Sec_R_CoatSkirtSide2_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.0308961459
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0snai"]
+radius = 0.28027344
+height = 1.7312012
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_cmorj")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="CharacterModel" parent="Pivot" instance=ExtResource("1_d5x3m")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+spring_bones = Array[ExtResource("2_cmorj")]([SubResource("Resource_i8cny"), SubResource("Resource_7hac0"), SubResource("Resource_xqkdp"), SubResource("Resource_r4xi5"), SubResource("Resource_25wnn"), SubResource("Resource_jttem")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8748779, 0)
+shape = SubResource("CapsuleShape3D_0snai")
