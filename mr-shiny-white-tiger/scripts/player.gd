@@ -7,7 +7,12 @@ extends CharacterBody3D
 @export var move_speed : float = 14.0;
 @export var jump_strength : float = 50.0;
 # The downward acceleration when in the air, in meters per second squared.
-@export var fall_acceleration : float = 75.0;
+@export var gravity : float = 75.0;
+# Extra parameters to make the physics feel more "gamey"
+@export var fall_multiplier : float = 2.5;
+@export var low_jump_multiplier : float = 2.0;
+@export var num_coyote_frames : int = 10;
+var remaining_coyote_frames : int = num_coyote_frames;
 
 # Camera stuff
 @export_group("Camera")
@@ -45,13 +50,22 @@ func _physics_process(delta: float) -> void:
 		_character_pivot.look_at(global_transform.origin + move_direction);
 	
 	# Vertical movement
+	if remaining_coyote_frames > 0 && Input.is_action_just_pressed("jump"):
+		velocity.y += jump_strength;
 	if is_on_floor():
-		if Input.is_action_just_pressed("jump"):
-			velocity.y = jump_strength;
-		else:
+		remaining_coyote_frames = num_coyote_frames;
+		#TODO: add fall damage
+		if !Input.is_action_just_pressed("jump"):
 			velocity.y = 0.0;
-	else:
-		velocity.y -= (fall_acceleration * delta);
+	else: # Must be in the air
+		remaining_coyote_frames -= 1;
+		# Always add gravity
+		velocity.y -= gravity * delta;
+		# Now add some "game feel"
+		if velocity.y < 0: # If we're falling,
+			velocity.y -= gravity * (fall_multiplier - 1) * delta; # Fall a little faster
+		elif velocity.y > 0 && !Input.is_action_pressed("jump"): # If we did a small jump,
+			velocity.y -= gravity * (low_jump_multiplier - 1) * delta; # Come down sooner
 	
 	# Apply
 	move_and_slide();
