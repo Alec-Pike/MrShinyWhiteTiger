@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cm1it1jbc2fas"]
+[gd_scene load_steps=5 format=3 uid="uid://cm1it1jbc2fas"]
 
 [ext_resource type="PackedScene" uid="uid://c64slysg5u0dt" path="res://prefabs/player.tscn" id="1_dmym1"]
+[ext_resource type="PackedScene" uid="uid://dq7nmm81y657u" path="res://prefabs/grapple_point.tscn" id="2_x6rnu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3q5j6"]
 size = Vector3(60, 2, 60)
@@ -28,3 +29,9 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("1_dmym1")]
 camera_sensitivity_h = 0.06
 camera_sensitivity_v = 0.03
+
+[node name="GrapplePoint" parent="." instance=ExtResource("2_x6rnu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4454603, 1, -4.6256886)
+
+[node name="GrapplePoint2" parent="." instance=ExtResource("2_x6rnu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44546032, 5, -13.625689)

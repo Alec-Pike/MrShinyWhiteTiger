@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c64slysg5u0dt"]
+[gd_scene load_steps=15 format=3 uid="uid://c64slysg5u0dt"]
 
 [ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
 [ext_resource type="PackedScene" uid="uid://b657tggcmv3ow" path="res://3d models/character models/MrShiny.vrm" id="1_d5x3m"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
 [ext_resource type="Script" uid="uid://byunh6r4lygh5" path="res://addons/vrm/vrm_collider_group.gd" id="3_joqdm"]
+[ext_resource type="Script" uid="uid://o0ssfc6rq1kp" path="res://scripts/grapple_targeting.gd" id="5_g2jcq"]
+[ext_resource type="Texture2D" uid="uid://dhn7jhyrgd1sy" path="res://icon.svg" id="6_u51tk"]
 
 [sub_resource type="Resource" id="Resource_i8cny"]
 resource_name = "TopsUpperArm"
@@ -81,6 +83,9 @@ center_bone = "Root_"
 radius = 0.28027344
 height = 1.7312012
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_1txc5"]
+radius = 32.6
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_cmorj")
 
@@ -102,3 +107,26 @@ spring_length = 3.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 0, 0)
+
+[node name="GrappleCast" type="ShapeCast3D" parent="CameraPivot/SpringArm3D/Camera3D"]
+shape = SubResource("SphereShape3D_1txc5")
+target_position = Vector3(0, 0, -60)
+max_results = 40
+collision_mask = 2
+collide_with_areas = true
+
+[node name="GrappleTargeting" type="Node3D" parent="." node_paths=PackedStringArray("grapple_marker", "camera", "shape_cast", "player_obj")]
+script = ExtResource("5_g2jcq")
+grapple_marker = NodePath("../CanvasLayer/GrappleMarker")
+camera = NodePath("../CameraPivot/SpringArm3D/Camera3D")
+shape_cast = NodePath("../CameraPivot/SpringArm3D/Camera3D/GrappleCast")
+player_obj = NodePath("..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GrappleMarker" type="TextureRect" parent="CanvasLayer"]
+visible = false
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("6_u51tk")
