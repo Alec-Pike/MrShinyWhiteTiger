@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
 [ext_resource type="Script" uid="uid://byunh6r4lygh5" path="res://addons/vrm/vrm_collider_group.gd" id="3_joqdm"]
 [ext_resource type="Script" uid="uid://o0ssfc6rq1kp" path="res://scripts/grapple_targeting.gd" id="5_g2jcq"]
-[ext_resource type="Texture2D" uid="uid://dhn7jhyrgd1sy" path="res://icon.svg" id="6_u51tk"]
+[ext_resource type="Texture2D" uid="uid://c10xehdnk1p01" path="res://sprites/grapple_marker.png" id="6_g2jcq"]
 
 [sub_resource type="Resource" id="Resource_i8cny"]
 resource_name = "TopsUpperArm"
@@ -86,8 +86,11 @@ height = 1.7312012
 [sub_resource type="SphereShape3D" id="SphereShape3D_1txc5"]
 radius = 32.6
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("targeting_system")]
+collision_layer = 0
 script = ExtResource("1_cmorj")
+grapple_speed = 40.0
+targeting_system = NodePath("GrappleTargeting")
 
 [node name="CharacterPivot" type="Node3D" parent="."]
 
@@ -125,8 +128,8 @@ player_obj = NodePath("..")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GrappleMarker" type="TextureRect" parent="CanvasLayer"]
-visible = false
-offset_right = 128.0
-offset_bottom = 128.0
-pivot_offset = Vector2(64, 64)
-texture = ExtResource("6_u51tk")
+anchors_preset = -1
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("6_g2jcq")
