@@ -24,7 +24,6 @@ func on_viewport_size_changed() -> void:
 func _physics_process(_delta: float) -> void:
 	update_grapple_target();
 	update_ui_marker();
-	pass;
 #endfunc
 
 func update_grapple_target() -> void:

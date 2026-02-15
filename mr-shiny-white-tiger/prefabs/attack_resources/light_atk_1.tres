@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=3 format=3 uid="uid://i7kl5sa80evv"]
+
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="1_6tytm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6tytm"]
+
+[resource]
+script = ExtResource("1_6tytm")
+hit_shape = SubResource("SphereShape3D_6tytm")
