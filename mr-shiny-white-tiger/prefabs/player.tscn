@@ -1,13 +1,20 @@
-[gd_scene load_steps=19 format=3 uid="uid://c64slysg5u0dt"]
+[gd_scene load_steps=26 format=3 uid="uid://c64slysg5u0dt"]
 
 [ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
 [ext_resource type="PackedScene" uid="uid://b657tggcmv3ow" path="res://3d models/character models/MrShiny.vrm" id="1_d5x3m"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
 [ext_resource type="Script" uid="uid://byunh6r4lygh5" path="res://addons/vrm/vrm_collider_group.gd" id="3_joqdm"]
 [ext_resource type="Script" uid="uid://o0ssfc6rq1kp" path="res://scripts/grapple_targeting.gd" id="5_g2jcq"]
+[ext_resource type="Script" uid="uid://b5c7bki52ubh6" path="res://scripts/camera_controller.gd" id="5_x0bak"]
 [ext_resource type="Texture2D" uid="uid://c10xehdnk1p01" path="res://sprites/grapple_marker.png" id="6_g2jcq"]
 [ext_resource type="Resource" uid="uid://i7kl5sa80evv" path="res://prefabs/attack_resources/light_atk_1.tres" id="7_kbsxf"]
-[ext_resource type="Script" uid="uid://b0vrb7gb0d7el" path="res://scripts/combat_contoller.gd" id="7_u51tk"]
+[ext_resource type="Script" uid="uid://c382udfugqyvh" path="res://scripts/state_machine.gd" id="8_lulei"]
+[ext_resource type="Script" uid="uid://b4oe7c14kqarl" path="res://scripts/states/idle_state.gd" id="9_edtk3"]
+[ext_resource type="Script" uid="uid://ft1mubrbmnly" path="res://scripts/states/running_state.gd" id="10_q2wkl"]
+[ext_resource type="Script" uid="uid://c7xv43yg7jfh6" path="res://scripts/states/air_state.gd" id="11_f2e50"]
+[ext_resource type="Script" uid="uid://cb10pu58mdyaj" path="res://scripts/states/attacking_state.gd" id="12_22xyk"]
+[ext_resource type="Script" uid="uid://ddmjwym8aja1o" path="res://scripts/states/player_state.gd" id="14_r3tw4"]
+[ext_resource type="Script" uid="uid://crj4tn2a2ba67" path="res://scripts/states/grappling_state.gd" id="15_nmymu"]
 
 [sub_resource type="Resource" id="Resource_i8cny"]
 resource_name = "TopsUpperArm"
@@ -93,11 +100,9 @@ height = 1.7312012
 [sub_resource type="SphereShape3D" id="SphereShape3D_1txc5"]
 radius = 32.6
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("targeting_system")]
+[node name="Player" type="CharacterBody3D"]
 collision_layer = 0
 script = ExtResource("1_cmorj")
-grapple_speed = 40.0
-targeting_system = NodePath("GrappleTargeting")
 
 [node name="CharacterPivot" type="Node3D" parent="."]
 
@@ -105,6 +110,9 @@ targeting_system = NodePath("GrappleTargeting")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 update_in_editor = true
 spring_bones = Array[ExtResource("2_cmorj")]([SubResource("Resource_i8cny"), SubResource("Resource_7hac0"), SubResource("Resource_xqkdp"), SubResource("Resource_r4xi5"), SubResource("Resource_25wnn"), SubResource("Resource_jttem")])
+
+[node name="secondary" parent="CharacterPivot/CharacterModel" index="2"]
+update_in_editor = true
 
 [node name="PoseAnimator" type="AnimationPlayer" parent="CharacterPivot/CharacterModel"]
 
@@ -118,46 +126,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("SphereShape3D_kbsxf")
 target_position = Vector3(0, 0, -1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8748779, 0)
 shape = SubResource("CapsuleShape3D_0snai")
 
-[node name="CameraPivot" type="Node3D" parent="."]
+[node name="CameraController" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8660253, 0.49999997, 0, -0.49999997, 0.8660253, 0, 1.5, 0)
+script = ExtResource("5_x0bak")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraController"]
 spring_length = 3.0
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="CameraController/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 0, 0)
 
-[node name="GrappleCast" type="ShapeCast3D" parent="CameraPivot/SpringArm3D/Camera3D"]
+[node name="GrappleTargeting" type="ShapeCast3D" parent="CameraController/SpringArm3D/Camera3D" node_paths=PackedStringArray("grapple_marker", "camera", "player_obj")]
 shape = SubResource("SphereShape3D_1txc5")
 target_position = Vector3(0, 0, -60)
 max_results = 40
 collision_mask = 2
 collide_with_areas = true
-
-[node name="GrappleTargeting" type="Node3D" parent="." node_paths=PackedStringArray("grapple_marker", "camera", "shape_cast", "player_obj")]
 script = ExtResource("5_g2jcq")
-grapple_marker = NodePath("../CanvasLayer/GrappleMarker")
-camera = NodePath("../CameraPivot/SpringArm3D/Camera3D")
-shape_cast = NodePath("../CameraPivot/SpringArm3D/Camera3D/GrappleCast")
-player_obj = NodePath("..")
-
-[node name="CombatController" type="Node3D" parent="." node_paths=PackedStringArray("player_obj", "player_pivot", "camera", "targeting_shapecast", "hit_shapecast", "combo_timeout_timer")]
-script = ExtResource("7_u51tk")
-player_obj = NodePath("..")
-player_pivot = NodePath("../CharacterPivot")
-camera = NodePath("../CameraPivot/SpringArm3D/Camera3D")
-targeting_shapecast = NodePath("../CharacterPivot/AtkTargetingShapeCast")
-hit_shapecast = NodePath("../CharacterPivot/AtkHitShapeCast")
-combo_timeout_timer = NodePath("ComboTimeoutTimer")
-starting_ground_light_atk = ExtResource("7_kbsxf")
-combo_timeout_seconds = 0.5
-attack_cancelling_inputs = Array[String](["jump", "grapple"])
-
-[node name="ComboTimeoutTimer" type="Timer" parent="CombatController"]
+grapple_marker = NodePath("../../../../CanvasLayer/GrappleMarker")
+camera = NodePath("..")
+player_obj = NodePath("../../../..")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -166,3 +158,56 @@ offset_right = 32.0
 offset_bottom = 32.0
 pivot_offset = Vector2(16, 16)
 texture = ExtResource("6_g2jcq")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "damage_state")]
+script = ExtResource("8_lulei")
+initial_state = NodePath("Idle")
+damage_state = NodePath("Getting_Hit")
+metadata/_custom_type_script = "uid://c382udfugqyvh"
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim")]
+script = ExtResource("9_edtk3")
+pose_anim = NodePath("../../CharacterPivot/CharacterModel/PoseAnimator")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Running" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "_camera_pivot", "pose_anim")]
+script = ExtResource("10_q2wkl")
+_character_pivot = NodePath("../../CharacterPivot")
+_camera_pivot = NodePath("../../CameraController")
+pose_anim = NodePath("../../CharacterPivot/CharacterModel/PoseAnimator")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "_camera_pivot", "pose_anim")]
+script = ExtResource("11_f2e50")
+_character_pivot = NodePath("../../CharacterPivot")
+_camera_pivot = NodePath("../../CameraController")
+pose_anim = NodePath("../../CharacterPivot/CharacterModel/PoseAnimator")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_pivot", "camera", "targeting_shapecast", "hit_shapecast", "pose_anim")]
+script = ExtResource("12_22xyk")
+player_pivot = NodePath("../../CharacterPivot")
+camera = NodePath("../../CameraController/SpringArm3D/Camera3D")
+targeting_shapecast = NodePath("../../CharacterPivot/AtkTargetingShapeCast")
+hit_shapecast = NodePath("../../CharacterPivot/AtkHitShapeCast")
+starting_ground_light_atk = ExtResource("7_kbsxf")
+pose_anim = NodePath("../../CharacterPivot/CharacterModel/PoseAnimator")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Getting_Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim")]
+script = ExtResource("14_r3tw4")
+pose_anim = NodePath("../../CharacterPivot/CharacterModel/PoseAnimator")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Grappling" type="Node" parent="StateMachine" node_paths=PackedStringArray("targeting_system", "pose_anim")]
+script = ExtResource("15_nmymu")
+targeting_system = NodePath("../../CameraController/SpringArm3D/Camera3D/GrappleTargeting")
+pose_anim = NodePath("../../CharacterPivot/CharacterModel/PoseAnimator")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Special_Atk" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim")]
+script = ExtResource("14_r3tw4")
+pose_anim = NodePath("../../CharacterPivot/CharacterModel/PoseAnimator")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[editable path="CharacterPivot/CharacterModel"]

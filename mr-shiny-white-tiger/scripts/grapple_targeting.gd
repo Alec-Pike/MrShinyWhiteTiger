@@ -1,10 +1,9 @@
-extends Node3D
+extends ShapeCast3D
 
 @export var max_grapple_dist: float = 20.0;
 @export var grapple_marker: Control;
 @onready var grapple_marker_half_size = grapple_marker.size / 2;
 @export var camera: Camera3D;
-@export var shape_cast: ShapeCast3D;
 @export var player_obj: Node3D;
 @onready var player_obj_rid = player_obj.get_rid();
 
@@ -27,16 +26,16 @@ func _physics_process(_delta: float) -> void:
 #endfunc
 
 func update_grapple_target() -> void:
-	shape_cast.force_shapecast_update();
+	force_shapecast_update();
 	
-	if !shape_cast.is_colliding():
+	if !is_colliding():
 		current_grapple_target = null;
 		return;
 	
 	var best_target: Node3D = null;
 	var shortest_dist_to_center: float = INF;
-	for i in shape_cast.get_collision_count():
-		var target: Node3D = shape_cast.get_collider(i) as Node3D;
+	for i in get_collision_count():
+		var target: Node3D = get_collider(i) as Node3D;
 		if !target: 
 			#print("no valid targets"); 
 			continue;

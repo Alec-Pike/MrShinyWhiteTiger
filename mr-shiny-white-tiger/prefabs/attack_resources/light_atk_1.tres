@@ -7,3 +7,4 @@
 [resource]
 script = ExtResource("1_6tytm")
 hit_shape = SubResource("SphereShape3D_6tytm")
+hit_range = 1.0
