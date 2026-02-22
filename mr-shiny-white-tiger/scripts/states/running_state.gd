@@ -4,7 +4,8 @@ extends PlayerState
 @export var _camera_pivot : Node3D;
 # How fast the player moves in meters per second.
 @export var move_speed : float = 14.0;
-@export var running_anim_name : String;
+@export var walking_anim_name : StringName;
+@export var running_anim_name : StringName;
 
 
 func physics_update(_delta: float) -> void:
@@ -21,11 +22,13 @@ func physics_update(_delta: float) -> void:
 	
 	player.move_and_slide();
 	
-	#TODO: switch which animation we play based on how fast we're moving
-	if movement.length() < 0.5:
-		pass; #pose_anim.play(walking_anim_name);
+	# Switch which animation we play based on how fast we're moving
+	if raw_input.length() < 0.45:
+		if pose_anim.current_animation != walking_anim_name:
+			pose_anim.play(walking_anim_name, 0.25);
 	else:
-		pass; #pose_anim.play(running_anim_name);
+		if pose_anim.current_animation != running_anim_name:
+			pose_anim.play(running_anim_name, 0.25);
 	
 	# State transitions
 	if !player.is_on_floor():

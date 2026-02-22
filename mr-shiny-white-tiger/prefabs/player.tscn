@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://c64slysg5u0dt"]
+[gd_scene load_steps=27 format=3 uid="uid://c64slysg5u0dt"]
 
 [ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
 [ext_resource type="PackedScene" uid="uid://b657tggcmv3ow" path="res://3d models/character models/MrShiny.vrm" id="1_d5x3m"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
 [ext_resource type="Script" uid="uid://byunh6r4lygh5" path="res://addons/vrm/vrm_collider_group.gd" id="3_joqdm"]
 [ext_resource type="Script" uid="uid://o0ssfc6rq1kp" path="res://scripts/grapple_targeting.gd" id="5_g2jcq"]
+[ext_resource type="AnimationLibrary" uid="uid://bhr3qel2vrf22" path="res://animations/MrShiny/MrShinyLocomotionLib.res" id="5_lulei"]
 [ext_resource type="Script" uid="uid://b5c7bki52ubh6" path="res://scripts/camera_controller.gd" id="5_x0bak"]
 [ext_resource type="Texture2D" uid="uid://c10xehdnk1p01" path="res://sprites/grapple_marker.png" id="6_g2jcq"]
 [ext_resource type="Resource" uid="uid://i7kl5sa80evv" path="res://prefabs/attack_resources/light_atk_1.tres" id="7_kbsxf"]
@@ -111,10 +112,70 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 update_in_editor = true
 spring_bones = Array[ExtResource("2_cmorj")]([SubResource("Resource_i8cny"), SubResource("Resource_7hac0"), SubResource("Resource_xqkdp"), SubResource("Resource_r4xi5"), SubResource("Resource_25wnn"), SubResource("Resource_jttem")])
 
+[node name="GeneralSkeleton" parent="CharacterPivot/CharacterModel" index="0"]
+bones/1/position = Vector3(-0.052175645, 0.9743003, -0.096897624)
+bones/1/rotation = Quaternion(-0.12537181, -0.26232892, 0.068012126, 0.9543793)
+bones/2/rotation = Quaternion(0.10509879, -0.0050356793, -0.021400321, 0.99421877)
+bones/3/rotation = Quaternion(0.20903149, -0.009033783, -0.03492685, 0.9772433)
+bones/4/rotation = Quaternion(0.20903161, -0.009033857, -0.034926895, 0.9772433)
+bones/9/rotation = Quaternion(-0.011434458, 0.044548202, -0.05197059, 0.997589)
+bones/10/rotation = Quaternion(0.03736976, 0.093149535, 0.010480207, 0.9948954)
+bones/14/rotation = Quaternion(0.5115874, 0.5207528, 0.49143267, -0.47496212)
+bones/15/rotation = Quaternion(-0.018050164, 0.95521796, 0.120078, 0.26984096)
+bones/16/rotation = Quaternion(0.20648675, -0.68522334, 0.100302264, 0.6912104)
+bones/17/rotation = Quaternion(-0.12400038, 0.6745821, 0.2698937, 0.6758108)
+bones/18/rotation = Quaternion(0.031251967, -0.0063844775, 0.07542874, 0.9966409)
+bones/19/rotation = Quaternion(0.14279011, -0.0006578415, -0.0069780042, 0.98972815)
+bones/20/rotation = Quaternion(0, 0, -5.9604638e-08, 1)
+bones/21/rotation = Quaternion(0.24404557, -0.005135894, -0.16682321, 0.9552934)
+bones/22/rotation = Quaternion(0.28924748, 0.008968725, 0.04910236, 0.9559521)
+bones/23/rotation = Quaternion(-2.9802326e-08, 5.960465e-08, 0, 1)
+bones/24/rotation = Quaternion(0.09505601, 0.0070245564, -0.06781921, 0.9931342)
+bones/25/rotation = Quaternion(0.16217023, -0.0011205672, 0.011111437, 0.9866996)
+bones/26/rotation = Quaternion(-2.9802326e-08, 0, 0, 1)
+bones/27/rotation = Quaternion(0.2208588, -0.0075385277, -0.1295748, 0.9666307)
+bones/28/rotation = Quaternion(0.23144169, 0.0013443679, 0.02150929, 0.9726101)
+bones/29/rotation = Quaternion(5.960465e-08, -1.4901163e-08, -1.0430814e-07, 1)
+bones/30/rotation = Quaternion(-0.15638256, 0.7034204, 0.25346884, 0.64536643)
+bones/31/rotation = Quaternion(0.0003565103, 0.0015869144, -0.0072576115, 0.99997234)
+bones/32/rotation = Quaternion(-4.4703484e-08, 1.0430813e-07, -8.940697e-08, 1)
+bones/33/rotation = Quaternion(0.5671652, -0.4693101, -0.4220812, -0.52907395)
+bones/34/rotation = Quaternion(0.09928958, 0.9769105, 0.03705666, -0.18551159)
+bones/35/rotation = Quaternion(0.20409963, 0.60027224, -0.17412211, 0.75345755)
+bones/36/rotation = Quaternion(-0.18836255, -0.7397736, -0.27150995, 0.5861203)
+bones/37/rotation = Quaternion(0.0378918, 0.010710894, -0.009739279, 0.99917704)
+bones/38/rotation = Quaternion(0.14729439, 0.00025068223, 0.009819746, 0.98904395)
+bones/39/rotation = Quaternion(4.4703484e-08, 0, 5.9604645e-08, 1)
+bones/40/rotation = Quaternion(0.17490277, -0.022086054, 0.10880777, 0.97830576)
+bones/41/rotation = Quaternion(0.29159003, -0.00959678, -0.064968824, 0.9542862)
+bones/43/rotation = Quaternion(0.090146296, 0.007878645, 0.026311453, 0.99554974)
+bones/44/rotation = Quaternion(0.24322744, 0.0012475698, -0.01493871, 0.9698535)
+bones/45/rotation = Quaternion(0, 5.960463e-08, 0, 1)
+bones/46/rotation = Quaternion(0.15470085, -0.011366382, 0.07010758, 0.9854052)
+bones/47/rotation = Quaternion(0.28910598, -0.0021440985, -0.03125352, 0.9567845)
+bones/48/rotation = Quaternion(-2.9802322e-08, -2.9802322e-08, 2.9802322e-08, 1)
+bones/49/rotation = Quaternion(-0.22405067, -0.6103329, -0.18852465, 0.73603916)
+bones/50/rotation = Quaternion(0.13277888, -0.06460314, -0.0075531006, 0.9890092)
+bones/51/rotation = Quaternion(-2.9802319e-08, 1.19209275e-07, 2.9802319e-08, 1)
+bones/52/rotation = Quaternion(0.12106211, 0.54034925, 0.82906693, -0.07755386)
+bones/53/rotation = Quaternion(0.056822002, 0.5981788, -0.7989386, -0.025508646)
+bones/64/rotation = Quaternion(-0.053047713, 0.7283598, -0.68115294, 0.052045118)
+bones/65/rotation = Quaternion(0.0018338037, 0.99986553, 0.015428066, -0.0052528065)
+bones/66/rotation = Quaternion(-0.14685605, 0.5107546, 0.8285025, 0.17648502)
+bones/67/rotation = Quaternion(-0.13792312, 0.505973, -0.8504636, 0.040991336)
+bones/78/rotation = Quaternion(0.14109465, 0.8224807, -0.5180709, -0.18767144)
+bones/79/rotation = Quaternion(0.0060807676, 0.99955726, -0.029103868, 0.0011605541)
+
+[node name="Head" parent="CharacterPivot/CharacterModel/GeneralSkeleton" index="3"]
+transform = Transform3D(0.9524269, -0.30220115, -0.039463803, 0.16612095, 0.623335, -0.76410544, 0.25551265, 0.721199, 0.64388305, -0.17488566, 1.4437692, 0.059786752)
+
 [node name="secondary" parent="CharacterPivot/CharacterModel" index="2"]
 update_in_editor = true
 
 [node name="PoseAnimator" type="AnimationPlayer" parent="CharacterPivot/CharacterModel"]
+libraries = {
+&"MrShinyLocomotionLib": ExtResource("5_lulei")
+}
 
 [node name="AtkTargetingShapeCast" type="ShapeCast3D" parent="CharacterPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -125,6 +186,9 @@ target_position = Vector3(0, 0, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("SphereShape3D_kbsxf")
 target_position = Vector3(0, 0, -1)
+
+[node name="LandingAnimTrigger" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.5, 0)
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8748779, 0)
@@ -167,6 +231,8 @@ metadata/_custom_type_script = "uid://c382udfugqyvh"
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim")]
 script = ExtResource("9_edtk3")
+idle_anim_name = &"MrShinyLocomotionLib/Idle"
+landing_anim_name = &"MrShinyLocomotionLib/Landing"
 pose_anim = NodePath("../../CharacterPivot/CharacterModel/PoseAnimator")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
 
@@ -174,13 +240,19 @@ metadata/_custom_type_script = "uid://ddmjwym8aja1o"
 script = ExtResource("10_q2wkl")
 _character_pivot = NodePath("../../CharacterPivot")
 _camera_pivot = NodePath("../../CameraController")
+walking_anim_name = &"MrShinyLocomotionLib/Walking"
+running_anim_name = &"MrShinyLocomotionLib/Running"
 pose_anim = NodePath("../../CharacterPivot/CharacterModel/PoseAnimator")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
 
-[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "_camera_pivot", "pose_anim")]
+[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "_camera_pivot", "landing_check_raycast", "pose_anim")]
 script = ExtResource("11_f2e50")
 _character_pivot = NodePath("../../CharacterPivot")
 _camera_pivot = NodePath("../../CameraController")
+landing_check_raycast = NodePath("../../LandingAnimTrigger")
+jump_anim_name = "MrShinyLocomotionLib/JumpingUp"
+falling_anim_name = "MrShinyLocomotionLib/Falling"
+landing_anim_name = &"MrShinyLocomotionLib/Landing"
 pose_anim = NodePath("../../CharacterPivot/CharacterModel/PoseAnimator")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
 

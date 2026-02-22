@@ -3,6 +3,7 @@ extends PlayerState
 @export_category("References")
 @export var _character_pivot : Node3D;
 @export var _camera_pivot : Node3D;
+@export var landing_check_raycast : RayCast3D;
 @export_category("Stats")
 @export var jump_strength : float = 50.0;
 @export var air_move_speed : float = 14.0;
@@ -17,6 +18,8 @@ var remaining_coyote_time : float = coyote_time;
 @export_category("Animations")
 @export var jump_anim_name : String;
 @export var falling_anim_name : String;
+@export var landing_anim_name: StringName;
+
 
 func enter(_previous_state_path: String, data := {}) -> void:
 	if data.has("jumping") && data["jumping"]:
@@ -25,13 +28,15 @@ func enter(_previous_state_path: String, data := {}) -> void:
 		print("Jumped");
 		# 2. Immediate Animation (Trimmed Windup)
 		# Note: Set blend_time to 0.1 in AnimationPlayer for smoothness
-		#pose_anim.play(jump_anim_name);
+		pose_anim.play(jump_anim_name, 0.1);
 		
 		remaining_coyote_time = 0;
 	else:
 		# We just walked off a ledge
-		#pose_anim.play(falling_anim_name);
+		pose_anim.play(falling_anim_name, 0.2);
 		remaining_coyote_time = coyote_time;
+	
+	pose_anim.animation_finished.connect(_on_animation_finished);
 
 
 func physics_update(delta: float) -> void:
@@ -61,11 +66,19 @@ func physics_update(delta: float) -> void:
 	
 	player.move_and_slide();
 	
+	# Animation check
+	landing_check_raycast.force_raycast_update();
+	if player.velocity.y <= 0 && landing_check_raycast.is_colliding():
+		if pose_anim.current_animation != landing_anim_name:
+			print("signaled landing anim")
+			pose_anim.play(landing_anim_name, 0.1);
+	
 	# State Transitions
-	if player.is_on_floor() && player.velocity.y <= 0:
-		if raw_input == Vector2.ZERO:
-			finished.emit(IDLE);
-		else:
+	if pose_anim.current_animation == landing_anim_name:
+		if (Input.is_action_just_pressed("jump")):
+			finished.emit(AIR, {"jumping": true});
+	if player.is_on_floor():
+		if raw_input != Vector2.ZERO:
 			finished.emit(RUNNING);
 	elif (Input.is_action_just_pressed("grapple")):
 		finished.emit(GRAPPLING);
@@ -73,3 +86,15 @@ func physics_update(delta: float) -> void:
 		finished.emit(ATTACKING, {"type": "light"});
 	elif (Input.is_action_just_pressed("heavy_attack")):
 		finished.emit(ATTACKING, {"type": "heavy"});
+
+
+func _on_animation_finished(_anim_name: StringName):
+	print("anim that ended: " + _anim_name)
+	if _anim_name == landing_anim_name:
+		finished.emit(IDLE);
+	else:
+		pose_anim.play(falling_anim_name, 0.2);
+
+
+func exit() -> void:
+	pose_anim.animation_finished.disconnect(_on_animation_finished);

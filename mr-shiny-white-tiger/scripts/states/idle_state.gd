@@ -2,23 +2,21 @@ extends PlayerState
 
 @export var idle_anim_name: StringName;
 @export var landing_anim_name: StringName;
+#@export var gravity : float = 75.0;
 
-func enter(previous_state_path: String, _data := {}) -> void:
+func enter(_previous_state_path: String, _data := {}) -> void:
 	player.velocity.x = 0.0;
 	player.velocity.z = 0.0;
 	pose_anim.animation_finished.connect(_on_animation_finished);
-	if previous_state_path == AIR:
-		#pose_anim.play(landing_anim_name);
-		pass;
-	else:
-		#pose_anim.play(idle_anim_name);
-		pass;
+	#if _previous_state_path != AIR:
+	pose_anim.play(idle_anim_name, 0.2);
+
 
 func physics_update(_delta: float) -> void:
-	#player.velocity.y += player.gravity * _delta
+	#player.velocity.y -= gravity * _delta
 	#player.move_and_slide();
-
-	# State transitions
+#
+	## State transitions
 	#if !player.is_on_floor():
 		#finished.emit(AIR, {"jumping": false});
 	#el
@@ -41,11 +39,9 @@ func physics_update(_delta: float) -> void:
 		finished.emit(SPECIAL_ATK);
 
 
-func _on_animation_finished():
-	#pose_anim.play(idle_anim_name);
-	pass;
+func _on_animation_finished(_anim_name: StringName):
+	pose_anim.play(idle_anim_name);
 
 
 func exit() -> void:
 	pose_anim.animation_finished.disconnect(_on_animation_finished);
-	pass;
