@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di1cam20jifk"
-path.s3tc="res://.godot/imported/Grappling_0.png-b5604289c19fa0a74b69c19005a793d9.s3tc.ctex"
+uid="uid://bcswnoc6tfsjc"
+path.s3tc="res://.godot/imported/GrapplingWithTPose_0.png-5a8baab3edf173f7ff4d318b7fabdf0b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://animations/MrShiny/Grappling_0.png"
-dest_files=["res://.godot/imported/Grappling_0.png-b5604289c19fa0a74b69c19005a793d9.s3tc.ctex"]
+source_file="res://animations/MrShiny/GrapplingWithTPose_0.png"
+dest_files=["res://.godot/imported/GrapplingWithTPose_0.png-5a8baab3edf173f7ff4d318b7fabdf0b.s3tc.ctex"]
 
 [params]
 

@@ -68,7 +68,7 @@ func physics_update(delta: float) -> void:
 	
 	# Animation check
 	landing_check_raycast.force_raycast_update();
-	if player.velocity.y <= 0 && landing_check_raycast.is_colliding():
+	if (player.velocity.y <= 0 && landing_check_raycast.is_colliding()) || player.is_on_floor():
 		if pose_anim.current_animation != landing_anim_name:
 			print("signaled landing anim")
 			pose_anim.play(landing_anim_name, 0.1);

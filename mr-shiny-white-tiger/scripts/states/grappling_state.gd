@@ -3,12 +3,18 @@ extends PlayerState
 @export var grapple_speed: float = 20.0 # How fast you travel through the air
 @export var grapple_stop_distance: float = 1.0 # How close to get before "letting go"
 @export var targeting_system: Node3D;
+@export var character_pivot: Node3D;
+@export var character_model: Node3D;
 @export var target_position_y_offset: float = 1.0;
 @export var finishing_vertical_boost: float = 25.0;
 @export var gravity : float = 75.0;
-@export var grapple_anim : String;
+@export var grapple_anim : StringName;
+@export var rotation_speed: float = 5.0
 var is_grappling: bool = false;
 var grapple_target_point: Vector3;
+
+func is_invulnerable() -> bool:
+	return true;
 
 # I had a lot of help from Google Gemini
 
@@ -22,7 +28,9 @@ func enter(previous_state_path: String, _data := {}) -> void:
 	grapple_target_point.y += target_position_y_offset;
 	# Calculate the velocity ONCE at the start
 	player.velocity = calculate_arc_velocity(player.global_position, grapple_target_point, grapple_speed);
-	#pose_anim.play(grapple_anim);
+	pose_anim.play(grapple_anim, 0.1);
+	character_model.rotation_degrees.x = 90;
+	character_pivot.look_at(grapple_target_point);
 
 
 # Calculates initial velocity for grappling
@@ -68,3 +76,33 @@ func physics_update(delta: float) -> void:
 		finished.emit(AIR, {"jumping": false}); # Transition to a Fall or Wall Slide state
 		return;
 #endfunc
+
+
+func update(_delta: float) -> void:
+	point_top_smoothly(player.global_position + player.velocity, _delta);
+
+
+func point_top_smoothly(target_position: Vector3, delta: float):
+	# 1. Get the direction from the pivot to the target
+	var direction = character_pivot.global_position.direction_to(target_position)
+	
+	# Prevent math errors if the target is in the exact same spot as the pivot
+	if direction.is_zero_approx():
+		return
+		
+	# 2. Calculate the "Goal" Basis. 
+	# Basis.looking_at() calculates what the rotation SHOULD be if it looked at the direction.
+	# We use Vector3.UP to tell it which way the "top" of the pivot should face.
+	var target_basis = Basis.looking_at(direction, Vector3.UP)
+	
+	# 3. Slerp the pivot's current rotation towards the goal rotation
+	character_pivot.global_basis = character_pivot.global_basis.slerp(target_basis, rotation_speed * delta)
+	
+	# 4. Cleanup: Slerping over a long time can introduce tiny floating-point errors.
+	# Orthonormalizing ensures the pivot's scale remains exactly 1,1,1 and doesn't warp.
+	character_pivot.global_basis = character_pivot.global_basis.orthonormalized()
+
+
+func exit() -> void:
+	character_model.rotation_degrees.x = 0;
+	character_pivot.rotation_degrees.x = 0;
