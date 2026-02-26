@@ -33,6 +33,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 #endfunc
 
 func execute_current_attack():
+	print("curr atk: " + (curr_atk.animation_name if curr_atk else &"Nil"));
 	if !curr_atk:
 		# Combo over
 		if player.is_on_floor():
@@ -45,7 +46,8 @@ func execute_current_attack():
 	if targeting_shapecast.is_colliding(): 
 		var target_position: Vector3 = (targeting_shapecast.get_collider(0) as Node3D).global_transform.origin;
 		target_position.y = player.global_transform.origin.y;
-		player_pivot.look_at(target_position);
+		if target_position != player_pivot.global_transform.origin:
+			player_pivot.look_at(target_position);
 
 	# Setup Hitbox
 	hit_shapecast.shape = curr_atk.hit_shape

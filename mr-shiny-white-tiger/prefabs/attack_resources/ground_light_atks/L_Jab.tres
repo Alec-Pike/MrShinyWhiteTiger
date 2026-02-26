@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=4 format=3 uid="uid://i7kl5sa80evv"]
+
+[ext_resource type="Resource" uid="uid://d4au55jnohd1g" path="res://prefabs/attack_resources/ground_light_atks/R_Cross.tres" id="1_w1jjl"]
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="2_2yswf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6tytm"]
+radius = 0.6
+
+[resource]
+script = ExtResource("2_2yswf")
+animation_name = &"MrShinyGroundLightAtksLib/L_Jab"
+active_time_start = 0.115
+active_time_end = 0.21
+transition_ok_time = 0.34
+damage = 5
+hit_shape = SubResource("SphereShape3D_6tytm")
+hit_range = 1.0
+knockback = Vector3(0, 0, -0.5)
+next_light_atk = ExtResource("1_w1jjl")
