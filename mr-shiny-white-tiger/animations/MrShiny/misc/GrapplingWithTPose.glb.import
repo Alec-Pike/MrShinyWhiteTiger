@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bkeu31axjtk3k"
-path="res://.godot/imported/GrapplingWithTPose.glb-08e1de1d73d700db92c51b12d5bc2f13.scn"
+path="res://.godot/imported/GrapplingWithTPose.glb-0b4dffaddc73ee43825d256e8407321e.scn"
 
 [deps]
 
-source_file="res://animations/MrShiny/GrapplingWithTPose.glb"
-dest_files=["res://.godot/imported/GrapplingWithTPose.glb-08e1de1d73d700db92c51b12d5bc2f13.scn"]
+source_file="res://animations/MrShiny/misc/GrapplingWithTPose.glb"
+dest_files=["res://.godot/imported/GrapplingWithTPose.glb-0b4dffaddc73ee43825d256e8407321e.scn"]
 
 [params]
 

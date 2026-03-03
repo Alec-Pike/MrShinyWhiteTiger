@@ -12,6 +12,7 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	pose_anim.play(idle_anim_name, 0.2);
 
 
+
 func physics_update(_delta: float) -> void:
 	#player.velocity.y -= gravity * _delta
 	#player.move_and_slide();
