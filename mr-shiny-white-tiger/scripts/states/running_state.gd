@@ -25,9 +25,11 @@ func physics_update(_delta: float) -> void:
 	# Switch which animation we play based on how fast we're moving
 	if raw_input.length() < 0.45:
 		if pose_anim.current_animation != walking_anim_name:
+			#print("switching to walk anim");
 			pose_anim.play(walking_anim_name, 0.25);
 	else:
 		if pose_anim.current_animation != running_anim_name:
+			#print("switching to run anim");
 			pose_anim.play(running_anim_name, 0.25);
 	
 	# State transitions

@@ -5,15 +5,16 @@ extends PlayerState
 @export var camera : Camera3D;
 @export var targeting_shapecast : ShapeCast3D;
 @export var hit_shapecast : ShapeCast3D;
-#@export var animation_player : AnimationPlayer;
-#@export var combo_timeout_timer : Timer;
+@export var style_score_display : Node;
 @export_category("Starting Attacks")
 @export var starting_ground_light_atk : AttackResource;
 @export var starting_ground_heavy_atk : AttackResource;
 @export var starting_air_light_atk : AttackResource;
 @export var starting_air_heavy_atk : AttackResource;
-#@export_category("Other")
-#@export var combo_timeout_seconds : float;
+
+signal atk_successful(atk: AttackResource);
+
+var already_hit : bool = false;
 
 var curr_atk : AttackResource = null;
 var pending_attack_type : String = "" # For the Input Buffer
@@ -43,6 +44,7 @@ func execute_current_attack():
 		return;
 
 	# Auto-Rotate to face most likely intended target
+	targeting_shapecast.force_shapecast_update();
 	if targeting_shapecast.is_colliding(): 
 		var target_position: Vector3 = (targeting_shapecast.get_collider(0) as Node3D).global_transform.origin;
 		target_position.y = player.global_transform.origin.y;
@@ -53,6 +55,7 @@ func execute_current_attack():
 	hit_shapecast.shape = curr_atk.hit_shape
 	hit_shapecast.position.z = -curr_atk.hit_range
 	
+	already_hit = false;
 	# Play Animation
 	pose_anim.play(curr_atk.animation_name)
 	
@@ -77,6 +80,9 @@ func physics_update(_delta: float) -> void:
 			var target: Node3D = hit_shapecast.get_collider(i) as Node3D; #TODO: not as `Node3D`, as `Enemy`
 			#TODO: target.take_damage(curr_atk.damage, curr_atk.knockback, player_pivot.global_transform.origin);
 			print("Attack '" + curr_atk.animation_name + "' hit target '" + target.name + "'");
+			if !already_hit: # Only do this once
+				already_hit = true;
+				atk_successful.emit(curr_atk);
 	else:
 		hit_shapecast.enabled = false
 

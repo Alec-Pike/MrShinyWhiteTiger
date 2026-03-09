@@ -16,5 +16,6 @@ damage = 15
 hit_shape = SubResource("SphereShape3D_pkes2")
 hit_range = 1.0
 knockback = Vector3(0, 6, -5)
+style_points = 16
 next_heavy_atk = ExtResource("1_rgjc1")
 metadata/_custom_type_script = "uid://b3m1xa3wp4bdx"

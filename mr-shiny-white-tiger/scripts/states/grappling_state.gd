@@ -6,13 +6,14 @@ extends PlayerState
 @export var character_pivot: Node3D;
 @export var character_model: Node3D;
 @export var target_position_y_offset: float = 1.0;
-@export var finishing_vertical_boost: float = 25.0;
+@export var finishing_boost: float = 25.0;
 @export var gravity : float = 75.0;
 @export var grapple_anim : StringName;
 @export var rotation_speed: float = 5.0
 var is_grappling: bool = false;
 var grapple_target_point: Vector3;
 
+# override
 func is_invulnerable() -> bool:
 	return true;
 
@@ -58,8 +59,10 @@ func physics_update(delta: float) -> void:
 	player.velocity.y -= gravity * delta;
 	# 2. Check if we reached the target
 	if player.global_position.distance_to(grapple_target_point) < grapple_stop_distance:
-		player.velocity = Vector3.UP * finishing_vertical_boost;
+		print("reached grapple target successfully");
+		player.velocity.y = finishing_boost;
 		finished.emit(AIR, {"jumping": false});
+		return;
 	player.move_and_slide();
 	
 	# Failsafe in case player bonks into something and can't complete the trajectory	
@@ -71,6 +74,7 @@ func physics_update(delta: float) -> void:
 	# Check 1: Are we moving AWAY? (Dot product is negative)
 	# Check 2: Did we hit a wall? (Standard Godot check)
 	if alignment < -0.1: #|| player.is_on_wall():
+		print("out of alignment; aborting grapple");
 		# Stop the grapple immediately so we don't slide into orbit
 		player.velocity = Vector3.ZERO;
 		finished.emit(AIR, {"jumping": false}); # Transition to a Fall or Wall Slide state

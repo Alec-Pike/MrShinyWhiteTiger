@@ -22,7 +22,7 @@ func _ready() -> void:
 func _on_getting_hit(amount: int, knockback: Vector3):
 	# 1. OPTIONAL: Check for "Super Armor"
 	# If the current state has a flag saying "cannot be interrupted", ignore this.
-	if state.has_method("is_invulnerable") and state.is_invulnerable():
+	if state.is_invulnerable():
 		return
 
 	# 2. Force the transition

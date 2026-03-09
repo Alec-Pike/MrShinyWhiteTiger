@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm1it1jbc2fas"]
+[gd_scene load_steps=6 format=3 uid="uid://cm1it1jbc2fas"]
 
 [ext_resource type="PackedScene" uid="uid://c64slysg5u0dt" path="res://prefabs/player.tscn" id="1_dmym1"]
 [ext_resource type="PackedScene" uid="uid://t0jk1ckiemtt" path="res://prefabs/tower.tscn" id="1_x6rnu"]
@@ -8,6 +8,8 @@ size = Vector3(60, 2, 60)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lavtb"]
 size = Vector3(60, 2, 60)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x6rnu"]
 
 [node name="Main" type="Node"]
 
@@ -30,5 +32,12 @@ light_color = Color(1, 0.7336837, 0.26790705, 1)
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_dmym1")]
-camera_sensitivity_h = 0.06
-camera_sensitivity_v = 0.03
+
+[node name="dummyEnemy" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="dummyEnemy"]
+shape = SubResource("CapsuleShape3D_x6rnu")
+debug_color = Color(0.87731564, 0.00040622352, 0.8319653, 0.41960785)

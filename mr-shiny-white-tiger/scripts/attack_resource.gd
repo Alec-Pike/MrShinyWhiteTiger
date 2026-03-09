@@ -11,6 +11,7 @@ extends Resource
 @export var hit_shape : Shape3D;
 @export var hit_range : float;
 @export var knockback : Vector3 = Vector3(0, 0, 0.5);
+@export var style_points : int;
 @export_category("Next Attacks")
 @export var next_light_atk : AttackResource = null;
 @export var next_heavy_atk : AttackResource = null;

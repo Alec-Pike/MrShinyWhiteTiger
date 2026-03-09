@@ -17,5 +17,6 @@ damage = 7
 hit_shape = SubResource("SphereShape3D_6tytm")
 hit_range = 1.0
 knockback = Vector3(0, 0, -0.5)
+style_points = 2
 next_light_atk = ExtResource("1_hbb16")
 next_heavy_atk = ExtResource("1_gfxh1")

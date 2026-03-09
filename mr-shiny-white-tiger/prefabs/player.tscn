@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c64slysg5u0dt"]
+[gd_scene load_steps=35 format=3 uid="uid://c64slysg5u0dt"]
 
 [ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://c382udfugqyvh" path="res://scripts/state_machine.gd" id="8_lulei"]
 [ext_resource type="Script" uid="uid://b4oe7c14kqarl" path="res://scripts/states/idle_state.gd" id="9_edtk3"]
 [ext_resource type="Script" uid="uid://ft1mubrbmnly" path="res://scripts/states/running_state.gd" id="10_q2wkl"]
+[ext_resource type="Script" uid="uid://csbub0jiyspxt" path="res://scripts/style_manager.gd" id="11_22xyk"]
 [ext_resource type="Script" uid="uid://c7xv43yg7jfh6" path="res://scripts/states/air_state.gd" id="11_f2e50"]
 [ext_resource type="Script" uid="uid://cb10pu58mdyaj" path="res://scripts/states/attacking_state.gd" id="12_22xyk"]
 [ext_resource type="Script" uid="uid://ddmjwym8aja1o" path="res://scripts/states/player_state.gd" id="14_r3tw4"]
@@ -104,6 +105,21 @@ height = 1.7312012
 [sub_resource type="SphereShape3D" id="SphereShape3D_1txc5"]
 radius = 32.6
 
+[sub_resource type="LabelSettings" id="LabelSettings_r3tw4"]
+font_size = 40
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_22xyk"]
+size = Vector2(256, 64)
+
+[sub_resource type="Gradient" id="Gradient_r3tw4"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.89411765, 0.6901961, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nmymu"]
+gradient = SubResource("Gradient_r3tw4")
+width = 256
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 0
 script = ExtResource("1_cmorj")
@@ -172,6 +188,30 @@ offset_bottom = 32.0
 pivot_offset = Vector2(16, 16)
 texture = ExtResource("6_g2jcq")
 
+[node name="StyleScoreDisplay" type="Label" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 122.0
+offset_bottom = 95.0
+text = "10000"
+label_settings = SubResource("LabelSettings_r3tw4")
+
+[node name="SpAtkMeter" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 264.0
+offset_bottom = 72.0
+scale = Vector2(0.98480374, 0.49225837)
+value = 50.0
+texture_under = SubResource("PlaceholderTexture2D_22xyk")
+texture_progress = SubResource("GradientTexture2D_nmymu")
+
+[node name="StyleManager" type="Node" parent="." node_paths=PackedStringArray("sp_atk_meter_display", "style_score_display", "atk_state")]
+script = ExtResource("11_22xyk")
+sp_atk_meter_display = NodePath("../CanvasLayer/SpAtkMeter")
+style_score_display = NodePath("../CanvasLayer/StyleScoreDisplay")
+atk_state = NodePath("../StateMachine/Attacking")
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "damage_state")]
 script = ExtResource("8_lulei")
 initial_state = NodePath("Idle")
@@ -208,12 +248,13 @@ pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
 
-[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_pivot", "camera", "targeting_shapecast", "hit_shapecast", "pose_anim", "face_anim")]
+[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_pivot", "camera", "targeting_shapecast", "hit_shapecast", "style_score_display", "pose_anim", "face_anim")]
 script = ExtResource("12_22xyk")
 player_pivot = NodePath("../../CharacterPivot")
 camera = NodePath("../../CameraController/SpringArm3D/Camera3D")
 targeting_shapecast = NodePath("../../CharacterPivot/AtkTargetingShapeCast")
 hit_shapecast = NodePath("../../CharacterPivot/AtkHitShapeCast")
+style_score_display = NodePath("../../CanvasLayer/StyleScoreDisplay")
 starting_ground_light_atk = ExtResource("7_kbsxf")
 starting_ground_heavy_atk = ExtResource("21_gf0v6")
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
