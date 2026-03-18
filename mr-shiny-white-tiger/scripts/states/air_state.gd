@@ -24,7 +24,8 @@ var remaining_coyote_time : float = coyote_time;
 func enter(_previous_state_path: String, data := {}) -> void:
 	if data.has("jumping") && data["jumping"]:
 		# 1. Immediate Physics (Responsiveness)
-		player.velocity.y = jump_strength;
+		var jmp_multiplier : float = 1.5 if special_mode_on else 1;
+		player.velocity.y = jump_strength * jmp_multiplier;
 		print("Jumped");
 		# 2. Immediate Animation (Trimmed Windup)
 		# Note: Set blend_time to 0.1 in AnimationPlayer for smoothness
@@ -46,6 +47,7 @@ func physics_update(delta: float) -> void:
 	# Correct rotation
 	move_direction = move_direction.rotated(Vector3.UP, _camera_pivot.rotation.y);
 	move_direction = move_direction.normalized() * air_move_speed;
+	if special_mode_on: move_direction *= 1.5;
 	player.velocity = move_direction + (player.velocity.y * Vector3.UP);
 	# While we're here, rotate the character model
 	if move_direction != Vector3.ZERO:

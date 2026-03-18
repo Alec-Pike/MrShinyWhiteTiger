@@ -15,6 +15,8 @@ func physics_update(_delta: float) -> void:
 	# Correct rotation
 	movement = movement.rotated(Vector3.UP, _camera_pivot.rotation.y);
 	movement *= move_speed;
+	if special_mode_on:
+		movement *= 2;
 	player.velocity = movement;
 	# While we're here, rotate the character model
 	if movement.length() > 0.2:
@@ -45,5 +47,5 @@ func physics_update(_delta: float) -> void:
 		finished.emit(ATTACKING, {"type": "light"});
 	elif (Input.is_action_just_pressed("heavy_attack")):
 		finished.emit(ATTACKING, {"type": "heavy"});
-	elif (Input.is_action_just_pressed("special_attack")):
-		finished.emit(SPECIAL_ATK);
+	#elif (Input.is_action_just_pressed("special_attack")):
+		#finished.emit(SPECIAL_ATK);

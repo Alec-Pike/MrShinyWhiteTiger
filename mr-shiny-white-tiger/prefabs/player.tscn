@@ -277,8 +277,6 @@ pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
 
-[node name="Special_Atk" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim", "face_anim")]
-script = ExtResource("14_r3tw4")
-pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
-face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
-metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+[connection signal="set_special_mode" from="StyleManager" to="StateMachine/Running" method="set_special_mode"]
+[connection signal="set_special_mode" from="StyleManager" to="StateMachine/Air" method="set_special_mode"]
+[connection signal="set_special_mode" from="StyleManager" to="StateMachine/Attacking" method="set_special_mode"]

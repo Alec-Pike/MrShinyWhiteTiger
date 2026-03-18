@@ -10,6 +10,8 @@ const SPECIAL_ATK = "Special_Atk"
 
 var player: Player
 
+var special_mode_on : bool = false;
+
 @export var pose_anim: AnimationPlayer;
 @export var face_anim: AnimationPlayer;
 
@@ -22,3 +24,7 @@ func _ready() -> void:
 # also now we don't have to do duck typing :D
 func is_invulnerable() -> bool:
 	return false
+
+# Activated by signal from the style manager
+func set_special_mode(setting : bool) -> void:
+	special_mode_on = setting;

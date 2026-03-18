@@ -78,11 +78,17 @@ func physics_update(_delta: float) -> void:
 		hit_shapecast.force_shapecast_update();
 		for i in hit_shapecast.get_collision_count():
 			var target: Node3D = hit_shapecast.get_collider(i) as Node3D; #TODO: not as `Node3D`, as `Enemy`
-			#TODO: target.take_damage(curr_atk.damage, curr_atk.knockback, player_pivot.global_transform.origin);
+			#TODO: var dmg_multiplier : float = 2 if special_mode_on else 1;
+			#TODO: var kbk_multiplier : float = 1.5 if special_mode_on else 1;
+			#TODO: target.take_damage(curr_atk.damage * dmg_multiplier, curr_atk.knockback * kbk_multiplier, player_pivot.global_transform.origin);
 			print("Attack '" + curr_atk.animation_name + "' hit target '" + target.name + "'");
 			if !already_hit: # Only do this once
 				already_hit = true;
 				atk_successful.emit(curr_atk);
+				# Health steal in special mode
+				if special_mode_on:
+					#TODO: increase player HP by curr_atk.damage * dmg_multiplier
+					pass;
 	else:
 		hit_shapecast.enabled = false
 
@@ -113,8 +119,8 @@ func physics_update(_delta: float) -> void:
 					finished.emit(IDLE);
 			else:
 				finished.emit(AIR, {"jumping": false});
-		elif (Input.is_action_just_pressed("special_attack")):
-			finished.emit(SPECIAL_ATK);
+		#elif (Input.is_action_just_pressed("special_attack")):
+			#finished.emit(SPECIAL_ATK);
 	
 	# These state transitions can cancel an attack
 	if player.is_on_floor() && Input.is_action_just_pressed("jump"):
