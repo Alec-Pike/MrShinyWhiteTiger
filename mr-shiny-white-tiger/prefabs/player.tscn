@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c64slysg5u0dt"]
+[gd_scene load_steps=36 format=3 uid="uid://c64slysg5u0dt"]
 
 [ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c10xehdnk1p01" path="res://sprites/grapple_marker.png" id="6_g2jcq"]
 [ext_resource type="Resource" uid="uid://i7kl5sa80evv" path="res://prefabs/attack_resources/ground_light_atks/L_Jab.tres" id="7_kbsxf"]
 [ext_resource type="Script" uid="uid://c382udfugqyvh" path="res://scripts/state_machine.gd" id="8_lulei"]
+[ext_resource type="AnimationLibrary" uid="uid://ywtsrua8fk68" path="res://animations/Common/TakingDamageLib.res" id="8_r3tw4"]
 [ext_resource type="Script" uid="uid://b4oe7c14kqarl" path="res://scripts/states/idle_state.gd" id="9_edtk3"]
 [ext_resource type="Script" uid="uid://ft1mubrbmnly" path="res://scripts/states/running_state.gd" id="10_q2wkl"]
 [ext_resource type="Script" uid="uid://csbub0jiyspxt" path="res://scripts/style_manager.gd" id="11_22xyk"]
@@ -135,7 +136,8 @@ root_node = NodePath("../CharacterModel")
 libraries = {
 &"MrShinyGroundHeavyAtksLib": ExtResource("5_q2wkl"),
 &"MrShinyGroundLightAtksLib": ExtResource("5_edtk3"),
-&"MrShinyLocomotionLib": ExtResource("5_lulei")
+&"MrShinyLocomotionLib": ExtResource("5_lulei"),
+&"TakingDamageLib": ExtResource("8_r3tw4")
 }
 
 [node name="AtkTargetingShapeCast" type="ShapeCast3D" parent="CharacterPivot"]

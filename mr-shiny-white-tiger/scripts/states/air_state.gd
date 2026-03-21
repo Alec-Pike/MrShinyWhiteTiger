@@ -24,7 +24,7 @@ var remaining_coyote_time : float = coyote_time;
 func enter(_previous_state_path: String, data := {}) -> void:
 	if data.has("jumping") && data["jumping"]:
 		# 1. Immediate Physics (Responsiveness)
-		var jmp_multiplier : float = 1.5 if special_mode_on else 1;
+		var jmp_multiplier : float = 1.5 if special_mode_on else 1.0;
 		player.velocity.y = jump_strength * jmp_multiplier;
 		print("Jumped");
 		# 2. Immediate Animation (Trimmed Windup)
