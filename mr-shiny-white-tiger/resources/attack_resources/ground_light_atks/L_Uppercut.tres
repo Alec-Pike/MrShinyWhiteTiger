@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=4 format=3 uid="uid://bd4fvv3fleqn1"]
+
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="1_fq0pj"]
+[ext_resource type="Resource" uid="uid://onv1nj7022i7" path="res://resources/attack_resources/ground_heavy_atks/L_Flying_Side_Kick.tres" id="1_rgjc1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pkes2"]
+radius = 1.0
+
+[resource]
+script = ExtResource("1_fq0pj")
+animation_name = &"MrShinyGroundLightAtksLib/L_Uppercut"
+active_time_start = 0.2
+active_time_end = 0.345
+transition_ok_time = 0.73
+damage = 15
+hit_shape = SubResource("SphereShape3D_pkes2")
+hit_range = 1.0
+knockback = Vector3(0, 6, -5)
+style_points = 16
+next_heavy_atk = ExtResource("1_rgjc1")
+metadata/_custom_type_script = "uid://b3m1xa3wp4bdx"

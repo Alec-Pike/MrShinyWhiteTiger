@@ -1,0 +1,74 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://wqwidmwby5it"
+path="res://.godot/imported/building_8.fbx-16f3ab24550083a2359678e15227ff4e.scn"
+
+[deps]
+
+source_file="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Models/full buildings and decorations/building_8.fbx"
+dest_files=["res://.godot/imported/building_8.fbx-16f3ab24550083a2359678e15227ff4e.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"meshes": {
+"Scene_010": {
+"generate/lightmap_uv": 1,
+"generate/lods": 1,
+"generate/shadow_meshes": 1,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Models/building_8_parts/building_9_bottom.res",
+"save_to_file/path": "uid://brksnkepg4ch6"
+},
+"Scene_014": {
+"generate/lightmap_uv": 1,
+"generate/lods": 1,
+"generate/shadow_meshes": 1,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Models/building_8_parts/building_9_middle.res",
+"save_to_file/path": "uid://cu8mhyrluce8"
+},
+"Scene_018": {
+"generate/lightmap_uv": 1,
+"generate/lods": 1,
+"generate/shadow_meshes": 1,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Models/building_8_parts/building_9_roof.res",
+"save_to_file/path": "uid://cufdf2urcbegn"
+}
+}
+}
+fbx/importer=0
+fbx/allow_geometry_helper_nodes=false
+fbx/embedded_image_handling=1
+fbx/naming_version=2

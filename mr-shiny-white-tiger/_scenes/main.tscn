@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cm1it1jbc2fas"]
 
-[ext_resource type="PackedScene" uid="uid://c64slysg5u0dt" path="res://prefabs/player.tscn" id="1_dmym1"]
-[ext_resource type="PackedScene" uid="uid://t0jk1ckiemtt" path="res://prefabs/tower.tscn" id="1_x6rnu"]
+[ext_resource type="PackedScene" uid="uid://c64slysg5u0dt" path="res://_scenes/player.tscn" id="1_dmym1"]
+[ext_resource type="PackedScene" uid="uid://t0jk1ckiemtt" path="res://_scenes/tower.tscn" id="1_x6rnu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3q5j6"]
 size = Vector3(60, 2, 60)

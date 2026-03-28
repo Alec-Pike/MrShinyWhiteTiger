@@ -1,0 +1,284 @@
+[gd_scene load_steps=36 format=3 uid="uid://c64slysg5u0dt"]
+
+[ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
+[ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
+[ext_resource type="PackedScene" uid="uid://b5yxc4jeaywb0" path="res://models/character models/MrShinyFinal.vrm" id="2_f2e50"]
+[ext_resource type="Script" uid="uid://byunh6r4lygh5" path="res://addons/vrm/vrm_collider_group.gd" id="3_joqdm"]
+[ext_resource type="AnimationLibrary" uid="uid://hx6hwsrlgsp8" path="res://animations/MrShiny/MrShinyGroundLightAtksLib.res" id="5_edtk3"]
+[ext_resource type="Script" uid="uid://o0ssfc6rq1kp" path="res://scripts/grapple_targeting.gd" id="5_g2jcq"]
+[ext_resource type="AnimationLibrary" uid="uid://bhr3qel2vrf22" path="res://animations/MrShiny/MrShinyLocomotionLib.res" id="5_lulei"]
+[ext_resource type="AnimationLibrary" uid="uid://dm3qsspj1k7wl" path="res://animations/MrShiny/MrShinyGroundHeavyAtksLib.res" id="5_q2wkl"]
+[ext_resource type="Script" uid="uid://b5c7bki52ubh6" path="res://scripts/camera_controller.gd" id="5_x0bak"]
+[ext_resource type="Texture2D" uid="uid://c10xehdnk1p01" path="res://sprites/grapple_marker.png" id="6_g2jcq"]
+[ext_resource type="Resource" uid="uid://i7kl5sa80evv" path="res://resources/attack_resources/ground_light_atks/L_Jab.tres" id="7_kbsxf"]
+[ext_resource type="Script" uid="uid://c382udfugqyvh" path="res://scripts/state_machine.gd" id="8_lulei"]
+[ext_resource type="AnimationLibrary" uid="uid://ywtsrua8fk68" path="res://animations/Common/TakingDamageLib.res" id="8_r3tw4"]
+[ext_resource type="Script" uid="uid://b4oe7c14kqarl" path="res://scripts/states/idle_state.gd" id="9_edtk3"]
+[ext_resource type="Script" uid="uid://ft1mubrbmnly" path="res://scripts/states/running_state.gd" id="10_q2wkl"]
+[ext_resource type="Script" uid="uid://csbub0jiyspxt" path="res://scripts/style_manager.gd" id="11_22xyk"]
+[ext_resource type="Script" uid="uid://c7xv43yg7jfh6" path="res://scripts/states/air_state.gd" id="11_f2e50"]
+[ext_resource type="Script" uid="uid://cb10pu58mdyaj" path="res://scripts/states/attacking_state.gd" id="12_22xyk"]
+[ext_resource type="Script" uid="uid://ddmjwym8aja1o" path="res://scripts/states/player_state.gd" id="14_r3tw4"]
+[ext_resource type="Script" uid="uid://crj4tn2a2ba67" path="res://scripts/states/grappling_state.gd" id="15_nmymu"]
+[ext_resource type="Resource" uid="uid://cueb8ric3w518" path="res://resources/attack_resources/ground_heavy_atks/L_Side_Kick.tres" id="21_gf0v6"]
+
+[sub_resource type="Resource" id="Resource_i5bwi"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_cmorj")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_L_CoatSkirtBack_01", "J_Sec_L_CoatSkirtBack_end_01", "J_Sec_L_CoatSkirtBack_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.03074866905808448
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_glsrp"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_cmorj")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_L_CoatSkirtFront_01", "J_Sec_L_CoatSkirtFront_end_01", "J_Sec_L_CoatSkirtFront_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.03074866905808448
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_xtlyc"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_cmorj")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_L_CoatSkirtSide1_01", "J_Sec_L_CoatSkirtSide2_01", "J_Sec_L_CoatSkirtSide2_end_01", "J_Sec_L_CoatSkirtSide2_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.03074866905808448
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_ss3g3"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_cmorj")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_R_CoatSkirtBack_01", "J_Sec_R_CoatSkirtBack_end_01", "J_Sec_R_CoatSkirtBack_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.03074866905808448
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_cobwv"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_cmorj")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_R_CoatSkirtFront_01", "J_Sec_R_CoatSkirtFront_end_01", "J_Sec_R_CoatSkirtFront_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.03074866905808448
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_cjb5k"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_cmorj")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_R_CoatSkirtSide1_01", "J_Sec_R_CoatSkirtSide2_01", "J_Sec_R_CoatSkirtSide2_end_01", "J_Sec_R_CoatSkirtSide2_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.03074866905808448
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u51tk"]
+radius = 1.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kbsxf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0snai"]
+radius = 0.28027344
+height = 1.7312012
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1txc5"]
+radius = 32.6
+
+[sub_resource type="LabelSettings" id="LabelSettings_r3tw4"]
+font_size = 40
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_22xyk"]
+size = Vector2(256, 64)
+
+[sub_resource type="Gradient" id="Gradient_r3tw4"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.89411765, 0.6901961, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nmymu"]
+gradient = SubResource("Gradient_r3tw4")
+width = 256
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 0
+script = ExtResource("1_cmorj")
+
+[node name="CharacterPivot" type="Node3D" parent="."]
+
+[node name="CharacterModel" parent="CharacterPivot" instance=ExtResource("2_f2e50")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+spring_bones = Array[ExtResource("2_cmorj")]([SubResource("Resource_i5bwi"), SubResource("Resource_glsrp"), SubResource("Resource_xtlyc"), SubResource("Resource_ss3g3"), SubResource("Resource_cobwv"), SubResource("Resource_cjb5k")])
+
+[node name="PoseAnimator" type="AnimationPlayer" parent="CharacterPivot"]
+root_node = NodePath("../CharacterModel")
+libraries = {
+&"MrShinyGroundHeavyAtksLib": ExtResource("5_q2wkl"),
+&"MrShinyGroundLightAtksLib": ExtResource("5_edtk3"),
+&"MrShinyLocomotionLib": ExtResource("5_lulei"),
+&"TakingDamageLib": ExtResource("8_r3tw4")
+}
+
+[node name="AtkTargetingShapeCast" type="ShapeCast3D" parent="CharacterPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+enabled = false
+shape = SubResource("SphereShape3D_u51tk")
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
+
+[node name="AtkHitShapeCast" type="ShapeCast3D" parent="CharacterPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+enabled = false
+shape = SubResource("SphereShape3D_kbsxf")
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
+
+[node name="LandingAnimTrigger" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.5, 0)
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8748779, 0)
+shape = SubResource("CapsuleShape3D_0snai")
+
+[node name="CameraController" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8660253, 0.49999997, 0, -0.49999997, 0.8660253, 0, 1.5, 0)
+script = ExtResource("5_x0bak")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraController"]
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 0, 0)
+
+[node name="GrappleTargeting" type="ShapeCast3D" parent="CameraController/SpringArm3D/Camera3D" node_paths=PackedStringArray("grapple_marker", "camera", "player_obj")]
+shape = SubResource("SphereShape3D_1txc5")
+target_position = Vector3(0, 0, -60)
+max_results = 40
+collision_mask = 6
+collide_with_areas = true
+script = ExtResource("5_g2jcq")
+grapple_marker = NodePath("../../../../CanvasLayer/GrappleMarker")
+camera = NodePath("..")
+player_obj = NodePath("../../../..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GrappleMarker" type="TextureRect" parent="CanvasLayer"]
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("6_g2jcq")
+
+[node name="StyleScoreDisplay" type="Label" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 122.0
+offset_bottom = 95.0
+text = "10000"
+label_settings = SubResource("LabelSettings_r3tw4")
+
+[node name="SpAtkMeter" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 264.0
+offset_bottom = 72.0
+scale = Vector2(0.98480374, 0.49225837)
+value = 50.0
+texture_under = SubResource("PlaceholderTexture2D_22xyk")
+texture_progress = SubResource("GradientTexture2D_nmymu")
+
+[node name="StyleManager" type="Node" parent="." node_paths=PackedStringArray("sp_atk_meter_display", "style_score_display", "atk_state")]
+script = ExtResource("11_22xyk")
+sp_atk_meter_display = NodePath("../CanvasLayer/SpAtkMeter")
+style_score_display = NodePath("../CanvasLayer/StyleScoreDisplay")
+atk_state = NodePath("../StateMachine/Attacking")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "damage_state")]
+script = ExtResource("8_lulei")
+initial_state = NodePath("Idle")
+damage_state = NodePath("Getting_Hit")
+metadata/_custom_type_script = "uid://c382udfugqyvh"
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim", "face_anim")]
+script = ExtResource("9_edtk3")
+idle_anim_name = &"MrShinyLocomotionLib/Idle"
+landing_anim_name = &"MrShinyLocomotionLib/Landing"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Running" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "_camera_pivot", "pose_anim", "face_anim")]
+script = ExtResource("10_q2wkl")
+_character_pivot = NodePath("../../CharacterPivot")
+_camera_pivot = NodePath("../../CameraController")
+walking_anim_name = &"MrShinyLocomotionLib/Walking"
+running_anim_name = &"MrShinyLocomotionLib/Running"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "_camera_pivot", "landing_check_raycast", "pose_anim", "face_anim")]
+script = ExtResource("11_f2e50")
+_character_pivot = NodePath("../../CharacterPivot")
+_camera_pivot = NodePath("../../CameraController")
+landing_check_raycast = NodePath("../../LandingAnimTrigger")
+jump_anim_name = "MrShinyLocomotionLib/JumpingUp"
+falling_anim_name = "MrShinyLocomotionLib/Falling"
+landing_anim_name = &"MrShinyLocomotionLib/Landing"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_pivot", "camera", "targeting_shapecast", "hit_shapecast", "style_score_display", "pose_anim", "face_anim")]
+script = ExtResource("12_22xyk")
+player_pivot = NodePath("../../CharacterPivot")
+camera = NodePath("../../CameraController/SpringArm3D/Camera3D")
+targeting_shapecast = NodePath("../../CharacterPivot/AtkTargetingShapeCast")
+hit_shapecast = NodePath("../../CharacterPivot/AtkHitShapeCast")
+style_score_display = NodePath("../../CanvasLayer/StyleScoreDisplay")
+starting_ground_light_atk = ExtResource("7_kbsxf")
+starting_ground_heavy_atk = ExtResource("21_gf0v6")
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Getting_Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim", "face_anim")]
+script = ExtResource("14_r3tw4")
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Grappling" type="Node" parent="StateMachine" node_paths=PackedStringArray("targeting_system", "character_pivot", "character_model", "pose_anim", "face_anim")]
+script = ExtResource("15_nmymu")
+targeting_system = NodePath("../../CameraController/SpringArm3D/Camera3D/GrappleTargeting")
+character_pivot = NodePath("../../CharacterPivot")
+character_model = NodePath("../../CharacterPivot/CharacterModel")
+grapple_anim = &"MrShinyLocomotionLib/Grappling"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[connection signal="set_special_mode" from="StyleManager" to="StateMachine/Running" method="set_special_mode"]
+[connection signal="set_special_mode" from="StyleManager" to="StateMachine/Air" method="set_special_mode"]
+[connection signal="set_special_mode" from="StyleManager" to="StateMachine/Attacking" method="set_special_mode"]
