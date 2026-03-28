@@ -22,7 +22,7 @@
 [ext_resource type="Script" uid="uid://crj4tn2a2ba67" path="res://scripts/states/grappling_state.gd" id="15_nmymu"]
 [ext_resource type="Resource" uid="uid://cueb8ric3w518" path="res://resources/attack_resources/ground_heavy_atks/L_Side_Kick.tres" id="21_gf0v6"]
 
-[sub_resource type="Resource" id="Resource_i5bwi"]
+[sub_resource type="Resource" id="Resource_2ue6v"]
 resource_name = "TopsUpperArm"
 script = ExtResource("2_cmorj")
 comment = "TopsUpperArm"
@@ -34,7 +34,7 @@ drag_force = PackedFloat64Array(0, 0, 1)
 hit_radius = PackedFloat64Array(1, 1, 0)
 center_bone = "Root_"
 
-[sub_resource type="Resource" id="Resource_glsrp"]
+[sub_resource type="Resource" id="Resource_wne0i"]
 resource_name = "TopsUpperArm"
 script = ExtResource("2_cmorj")
 comment = "TopsUpperArm"
@@ -46,7 +46,7 @@ drag_force = PackedFloat64Array(0, 0, 1)
 hit_radius = PackedFloat64Array(1, 1, 0)
 center_bone = "Root_"
 
-[sub_resource type="Resource" id="Resource_xtlyc"]
+[sub_resource type="Resource" id="Resource_yp48x"]
 resource_name = "TopsUpperArm"
 script = ExtResource("2_cmorj")
 comment = "TopsUpperArm"
@@ -58,7 +58,7 @@ drag_force = PackedFloat64Array(0, 0, 0, 1)
 hit_radius = PackedFloat64Array(1, 1, 1, 0)
 center_bone = "Root_"
 
-[sub_resource type="Resource" id="Resource_ss3g3"]
+[sub_resource type="Resource" id="Resource_nytsn"]
 resource_name = "TopsUpperArm"
 script = ExtResource("2_cmorj")
 comment = "TopsUpperArm"
@@ -70,7 +70,7 @@ drag_force = PackedFloat64Array(0, 0, 1)
 hit_radius = PackedFloat64Array(1, 1, 0)
 center_bone = "Root_"
 
-[sub_resource type="Resource" id="Resource_cobwv"]
+[sub_resource type="Resource" id="Resource_str1h"]
 resource_name = "TopsUpperArm"
 script = ExtResource("2_cmorj")
 comment = "TopsUpperArm"
@@ -82,7 +82,7 @@ drag_force = PackedFloat64Array(0, 0, 1)
 hit_radius = PackedFloat64Array(1, 1, 0)
 center_bone = "Root_"
 
-[sub_resource type="Resource" id="Resource_cjb5k"]
+[sub_resource type="Resource" id="Resource_m3kow"]
 resource_name = "TopsUpperArm"
 script = ExtResource("2_cmorj")
 comment = "TopsUpperArm"
@@ -129,7 +129,8 @@ script = ExtResource("1_cmorj")
 
 [node name="CharacterModel" parent="CharacterPivot" instance=ExtResource("2_f2e50")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-spring_bones = Array[ExtResource("2_cmorj")]([SubResource("Resource_i5bwi"), SubResource("Resource_glsrp"), SubResource("Resource_xtlyc"), SubResource("Resource_ss3g3"), SubResource("Resource_cobwv"), SubResource("Resource_cjb5k")])
+update_in_editor = true
+spring_bones = Array[ExtResource("2_cmorj")]([SubResource("Resource_2ue6v"), SubResource("Resource_wne0i"), SubResource("Resource_yp48x"), SubResource("Resource_nytsn"), SubResource("Resource_str1h"), SubResource("Resource_m3kow")])
 
 [node name="PoseAnimator" type="AnimationPlayer" parent="CharacterPivot"]
 root_node = NodePath("../CharacterModel")
@@ -166,10 +167,11 @@ transform = Transform3D(1, 0, 0, 0, 0.8660253, 0.49999997, 0, -0.49999997, 0.866
 script = ExtResource("5_x0bak")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraController"]
-spring_length = 3.0
+spring_length = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraController/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 0, 0)
+fov = 50.0
 
 [node name="GrappleTargeting" type="ShapeCast3D" parent="CameraController/SpringArm3D/Camera3D" node_paths=PackedStringArray("grapple_marker", "camera", "player_obj")]
 shape = SubResource("SphereShape3D_1txc5")

@@ -1,7 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://cm1it1jbc2fas"]
+[gd_scene load_steps=10 format=3 uid="uid://cm1it1jbc2fas"]
 
+[ext_resource type="Texture2D" uid="uid://c8n2tl830eil6" path="res://Assets/Free HDR Skyboxes Pack/Texture/Sky-5.hdr" id="1_3q5j6"]
 [ext_resource type="PackedScene" uid="uid://c64slysg5u0dt" path="res://_scenes/player.tscn" id="1_dmym1"]
-[ext_resource type="PackedScene" uid="uid://t0jk1ckiemtt" path="res://_scenes/tower.tscn" id="1_x6rnu"]
+[ext_resource type="PackedScene" uid="uid://bwgh11eofhruj" path="res://_scenes/basic_enemy.tscn" id="3_lavtb"]
+[ext_resource type="PackedScene" uid="uid://t1j85g731tad" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_1 Variant.prefab.scn" id="4_lavtb"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lavtb"]
+panorama = ExtResource("1_3q5j6")
+
+[sub_resource type="Sky" id="Sky_3q5j6"]
+sky_material = SubResource("PanoramaSkyMaterial_lavtb")
+
+[sub_resource type="Environment" id="Environment_lavtb"]
+background_mode = 2
+sky = SubResource("Sky_3q5j6")
+sky_rotation = Vector3(0, 0.56548667, 0)
+tonemap_mode = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3q5j6"]
 size = Vector3(60, 2, 60)
@@ -9,12 +23,10 @@ size = Vector3(60, 2, 60)
 [sub_resource type="BoxMesh" id="BoxMesh_lavtb"]
 size = Vector3(60, 2, 60)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x6rnu"]
-
 [node name="Main" type="Node"]
 
-[node name="Tower" parent="." instance=ExtResource("1_x6rnu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -14)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lavtb")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
@@ -27,17 +39,15 @@ mesh = SubResource("BoxMesh_lavtb")
 skeleton = NodePath("../..")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.983885, 0.17880218, 0, -0.17880218, -0.983885, 0, 26, 0)
-light_color = Color(1, 0.7336837, 0.26790705, 1)
+transform = Transform3D(-0.7477981, -0.1459616, -0.647683, -8.5283936e-08, -0.97553456, 0.2198462, -0.66392624, 0.16440064, 0.72950286, 0, 26, 0)
+light_color = Color(0.9116014, 0.72117347, 0.42295617, 1)
+light_bake_mode = 1
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_dmym1")]
 
-[node name="dummyEnemy" type="CharacterBody3D" parent="."]
+[node name="BasicEnemy" parent="." instance=ExtResource("3_lavtb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
-collision_layer = 5
-collision_mask = 5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="dummyEnemy"]
-shape = SubResource("CapsuleShape3D_x6rnu")
-debug_color = Color(0.87731564, 0.00040622352, 0.8319653, 0.41960785)
+[node name="building_1_1 Variant" parent="." instance=ExtResource("4_lavtb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.054688, 9.1873835e-06, -46.84719)
