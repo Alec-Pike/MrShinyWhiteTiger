@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c8n2tl830eil6" path="res://Assets/Free HDR Skyboxes Pack/Texture/Sky-5.hdr" id="1_3q5j6"]
 [ext_resource type="PackedScene" uid="uid://c64slysg5u0dt" path="res://_scenes/player.tscn" id="1_dmym1"]
-[ext_resource type="PackedScene" uid="uid://bwgh11eofhruj" path="res://_scenes/basic_enemy.tscn" id="3_lavtb"]
+[ext_resource type="PackedScene" uid="uid://bwgh11eofhruj" path="res://_scenes/goon_a.tscn" id="3_lavtb"]
 [ext_resource type="PackedScene" uid="uid://t1j85g731tad" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_1 Variant.prefab.scn" id="4_lavtb"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lavtb"]
@@ -23,7 +23,7 @@ size = Vector3(60, 2, 60)
 [sub_resource type="BoxMesh" id="BoxMesh_lavtb"]
 size = Vector3(60, 2, 60)
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lavtb")

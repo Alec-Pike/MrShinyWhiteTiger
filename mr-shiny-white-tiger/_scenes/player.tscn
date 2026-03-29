@@ -13,13 +13,13 @@
 [ext_resource type="Resource" uid="uid://i7kl5sa80evv" path="res://resources/attack_resources/ground_light_atks/L_Jab.tres" id="7_kbsxf"]
 [ext_resource type="Script" uid="uid://c382udfugqyvh" path="res://scripts/state_machine.gd" id="8_lulei"]
 [ext_resource type="AnimationLibrary" uid="uid://ywtsrua8fk68" path="res://animations/Common/TakingDamageLib.res" id="8_r3tw4"]
-[ext_resource type="Script" uid="uid://b4oe7c14kqarl" path="res://scripts/states/idle_state.gd" id="9_edtk3"]
-[ext_resource type="Script" uid="uid://ft1mubrbmnly" path="res://scripts/states/running_state.gd" id="10_q2wkl"]
+[ext_resource type="Script" uid="uid://b4oe7c14kqarl" path="res://scripts/states/player states/idle_state.gd" id="9_edtk3"]
+[ext_resource type="Script" uid="uid://ft1mubrbmnly" path="res://scripts/states/player states/running_state.gd" id="10_q2wkl"]
 [ext_resource type="Script" uid="uid://csbub0jiyspxt" path="res://scripts/style_manager.gd" id="11_22xyk"]
-[ext_resource type="Script" uid="uid://c7xv43yg7jfh6" path="res://scripts/states/air_state.gd" id="11_f2e50"]
-[ext_resource type="Script" uid="uid://cb10pu58mdyaj" path="res://scripts/states/attacking_state.gd" id="12_22xyk"]
-[ext_resource type="Script" uid="uid://ddmjwym8aja1o" path="res://scripts/states/player_state.gd" id="14_r3tw4"]
-[ext_resource type="Script" uid="uid://crj4tn2a2ba67" path="res://scripts/states/grappling_state.gd" id="15_nmymu"]
+[ext_resource type="Script" uid="uid://c7xv43yg7jfh6" path="res://scripts/states/player states/air_state.gd" id="11_f2e50"]
+[ext_resource type="Script" uid="uid://cb10pu58mdyaj" path="res://scripts/states/player states/attacking_state.gd" id="12_22xyk"]
+[ext_resource type="Script" uid="uid://ddmjwym8aja1o" path="res://scripts/states/player states/player_state.gd" id="14_r3tw4"]
+[ext_resource type="Script" uid="uid://crj4tn2a2ba67" path="res://scripts/states/player states/grappling_state.gd" id="15_nmymu"]
 [ext_resource type="Resource" uid="uid://cueb8ric3w518" path="res://resources/attack_resources/ground_heavy_atks/L_Side_Kick.tres" id="21_gf0v6"]
 
 [sub_resource type="Resource" id="Resource_2ue6v"]
@@ -122,7 +122,6 @@ gradient = SubResource("Gradient_r3tw4")
 width = 256
 
 [node name="Player" type="CharacterBody3D"]
-collision_layer = 0
 script = ExtResource("1_cmorj")
 
 [node name="CharacterPivot" type="Node3D" parent="."]
@@ -177,7 +176,7 @@ fov = 50.0
 shape = SubResource("SphereShape3D_1txc5")
 target_position = Vector3(0, 0, -60)
 max_results = 40
-collision_mask = 6
+collision_mask = 2
 collide_with_areas = true
 script = ExtResource("5_g2jcq")
 grapple_marker = NodePath("../../../../CanvasLayer/GrappleMarker")

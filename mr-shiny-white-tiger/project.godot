@@ -16,6 +16,10 @@ run/main_scene="uid://cm1it1jbc2fas"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="uid://ctixtqxniofi0"
 
+[autoload]
+
+Global="*res://scripts/global.gd"
+
 [dotnet]
 
 project/assembly_name="MrShinyWhiteTiger"
