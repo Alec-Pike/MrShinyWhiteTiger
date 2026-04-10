@@ -20,11 +20,6 @@ func _ready() -> void:
 	player = owner as Player
 	assert(player != null, "The PlayerState state type must be used only in the player scene. It needs the owner to be a Player node.")
 
-# Can be overridden by specific states
-# also now we don't have to do duck typing :D
-func is_invulnerable() -> bool:
-	return false
-
 # Activated by signal from the style manager
 func set_special_mode(setting : bool) -> void:
 	special_mode_on = setting;

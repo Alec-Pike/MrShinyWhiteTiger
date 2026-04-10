@@ -2,6 +2,12 @@ extends EnemyState
 
 @export var idle_anim_name: StringName;
 @export var landing_anim_name: StringName;
+@export var player_detection_raycast : RayCast3D;
+
+func _ready() -> void:
+	await super._ready();
+	player_detection_raycast.target_position = Vector3(0, 0, -this_enemy.detection_range);
+
 
 func enter(_previous_state_path: String, _data := {}) -> void:
 	this_enemy.velocity.x = 0.0;
@@ -12,10 +18,10 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 
 
 func physics_update(_delta: float) -> void:
-	var vec_to_player : Vector3 = Global.player.global_position - this_enemy.global_position;
-	if vec_to_player.length() <= this_enemy.detection_range:
-		#TODO: vector math to transition
-		pass
+	player_detection_raycast.look_at(Global.player.global_transform.origin);
+	if player_detection_raycast.is_colliding():
+		if (-player_detection_raycast.global_basis.z).angle_to(-this_enemy.global_basis.z) < this_enemy.fov:
+			finished.emit(CHASING);
 
 func _on_animation_finished(_anim_name: StringName):
 	pose_anim.play(idle_anim_name);

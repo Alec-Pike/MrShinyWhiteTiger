@@ -78,8 +78,8 @@ func physics_update(_delta: float) -> void:
 		hit_shapecast.force_shapecast_update();
 		for i in hit_shapecast.get_collision_count():
 			var target: Node3D = hit_shapecast.get_collider(i) as Node3D; #TODO: not as `Node3D`, as `Enemy`
-			#TODO: var dmg_multiplier : float = 2 if special_mode_on else 1;
-			#TODO: var kbk_multiplier : float = 1.5 if special_mode_on else 1;
+			var dmg_multiplier : float = 2 if special_mode_on else 1;
+			var kbk_multiplier : float = 1.5 if special_mode_on else 1;
 			#TODO: target.take_damage(curr_atk.damage * dmg_multiplier, curr_atk.knockback * kbk_multiplier, player_pivot.global_transform.origin);
 			print("Attack '" + curr_atk.animation_name + "' hit target '" + target.name + "'");
 			if !already_hit: # Only do this once
@@ -93,7 +93,7 @@ func physics_update(_delta: float) -> void:
 		hit_shapecast.enabled = false
 
 	# C. Check for Transition/Combo Window
-	# If the animation is finished (or passed the "cancel" point)
+	# If the animation is finished (or past the "cancel" point)
 	if anim_time >= curr_atk.transition_ok_time:
 		if pending_attack_type != "":
 			# --- ADVANCE COMBO ---

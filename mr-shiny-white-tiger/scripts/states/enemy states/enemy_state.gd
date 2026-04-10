@@ -2,9 +2,11 @@ class_name EnemyState extends State
 
 const READY = "Ready"
 const CHASING = "Chasing"
+const CIRCLING = "Circling"
 const AIR = "Air"
 const ATTACKING = "Attacking"
 const GETTING_HIT = "Getting_Hit"
+const RETURNING = "Returning"
 
 var this_enemy: Enemy
 
@@ -15,8 +17,3 @@ func _ready() -> void:
 	await owner.ready
 	this_enemy = owner as Enemy
 	assert(this_enemy != null, "The EnemyState state type must be used only in enemy scenes. It needs the owner to be an Enemy node.")
-
-# Can be overridden by specific states
-# also now we don't have to do duck typing :D
-func is_invulnerable() -> bool:
-	return false

@@ -27,3 +27,8 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 ## to clean up the state.
 func exit() -> void:
 	pass;
+
+# Can be overridden by specific states
+# also now we don't have to do duck typing :D
+func is_invulnerable() -> bool:
+	return false

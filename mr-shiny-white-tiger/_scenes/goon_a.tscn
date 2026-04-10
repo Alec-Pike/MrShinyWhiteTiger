@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bwgh11eofhruj"]
+[gd_scene load_steps=67 format=3 uid="uid://bwgh11eofhruj"]
 
 [ext_resource type="Script" uid="uid://bbu5rq5uxcd6o" path="res://scripts/enemy.gd" id="1_5hvrv"]
 [ext_resource type="PackedScene" uid="uid://c8y7ltbe7muhk" path="res://models/character models/WTGoonA.vrm" id="1_u2ai6"]
@@ -6,6 +6,13 @@
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_w2uy8"]
 [ext_resource type="Script" uid="uid://byunh6r4lygh5" path="res://addons/vrm/vrm_collider_group.gd" id="3_5hvrv"]
 [ext_resource type="Script" uid="uid://brlqsowi6ytji" path="res://addons/vrm/vrm_collider.gd" id="4_hlhur"]
+[ext_resource type="AnimationLibrary" uid="uid://bhr3qel2vrf22" path="res://animations/MrShiny/MrShinyLocomotionLib.res" id="7_igsl0"]
+[ext_resource type="Script" uid="uid://c382udfugqyvh" path="res://scripts/states/state_machine.gd" id="7_jp2p8"]
+[ext_resource type="AnimationLibrary" uid="uid://ywtsrua8fk68" path="res://animations/Common/TakingDamageLib.res" id="8_p6350"]
+[ext_resource type="Script" uid="uid://m16gs35tma1r" path="res://scripts/states/enemy states/ready_state.gd" id="8_x6d25"]
+[ext_resource type="Script" uid="uid://c7c5ra2s3ce2n" path="res://scripts/states/enemy states/enemy_state.gd" id="9_x6d25"]
+[ext_resource type="Script" uid="uid://qfldkjljtmia" path="res://scripts/states/enemy states/chasing_state.gd" id="9_yxo7v"]
+[ext_resource type="Script" uid="uid://cvet2qo0in07e" path="res://scripts/states/enemy states/circling_state.gd" id="11_p6350"]
 
 [sub_resource type="Resource" id="Resource_aymve"]
 resource_name = "TopsUpperArm"
@@ -458,9 +465,12 @@ height = 1.85
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_5hvrv")
+fov = 65.0
+run_speed = 7.0
+atk_range = 2.0
 
 [node name="Grapple Point" parent="." instance=ExtResource("1_w2uy8")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1.41, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1.41, -0.1)
 
 [node name="CharacterPivot" type="Node3D" parent="."]
 
@@ -471,22 +481,31 @@ spring_bones = Array[ExtResource("2_w2uy8")]([SubResource("Resource_aymve"), Sub
 collider_groups = Array[ExtResource("3_5hvrv")]([SubResource("Resource_eywin"), SubResource("Resource_su7yg"), SubResource("Resource_fqhgw"), SubResource("Resource_a2eo6"), SubResource("Resource_jxlms"), SubResource("Resource_gerwa"), SubResource("Resource_cvw64"), SubResource("Resource_tdinc"), SubResource("Resource_77wob"), SubResource("Resource_c5fv2")])
 collider_library = Array[ExtResource("4_hlhur")]([SubResource("Resource_yj2yi"), SubResource("Resource_7v84h"), SubResource("Resource_m37iw"), SubResource("Resource_jx1k8"), SubResource("Resource_g316a"), SubResource("Resource_ycncv"), SubResource("Resource_1jw32"), SubResource("Resource_q7tov"), SubResource("Resource_aqckq"), SubResource("Resource_ousdd"), SubResource("Resource_n0xjn"), SubResource("Resource_fxqgq"), SubResource("Resource_o5oef"), SubResource("Resource_rh0tn"), SubResource("Resource_bgay8"), SubResource("Resource_ej82d"), SubResource("Resource_5xfle"), SubResource("Resource_16cvw"), SubResource("Resource_1wq4i"), SubResource("Resource_p75k5"), SubResource("Resource_lomae"), SubResource("Resource_rgdaw")])
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterPivot"]
+[node name="PoseAnimator" type="AnimationPlayer" parent="CharacterPivot"]
 root_node = NodePath("../CharacterModel")
+libraries = {
+&"MrShinyLocomotionLib": ExtResource("7_igsl0"),
+&"TakingDamageLib": ExtResource("8_p6350")
+}
 
 [node name="AtkTargetingShapeCast" type="ShapeCast3D" parent="CharacterPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 enabled = false
 shape = SubResource("SphereShape3D_u2ai6")
 target_position = Vector3(0, 0, -1)
-collision_mask = 4
+collision_mask = 8
 
 [node name="AtkHitShapeCast" type="ShapeCast3D" parent="CharacterPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 enabled = false
 shape = SubResource("SphereShape3D_w2uy8")
 target_position = Vector3(0, 0, -1)
-collision_mask = 4
+collision_mask = 8
+
+[node name="PlayerDetectionRayCast" type="RayCast3D" parent="CharacterPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+target_position = Vector3(0, 0, 0)
+collision_mask = 8
 
 [node name="LandingAnimTrigger" type="RayCast3D" parent="."]
 target_position = Vector3(0, -1.5, 0)
@@ -495,3 +514,57 @@ target_position = Vector3(0, -1.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92529297, 0)
 shape = SubResource("CapsuleShape3D_x6rnu")
 debug_color = Color(0.87731564, 0.00040622352, 0.8319653, 0.41960785)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "damage_state")]
+script = ExtResource("7_jp2p8")
+debug_messages = true
+initial_state = NodePath("Ready")
+damage_state = NodePath("Getting_Hit")
+metadata/_custom_type_script = "uid://c382udfugqyvh"
+
+[node name="Ready" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_detection_raycast", "pose_anim", "face_anim")]
+script = ExtResource("8_x6d25")
+idle_anim_name = &"MrShinyLocomotionLib/Idle"
+landing_anim_name = &"MrShinyLocomotionLib/Landing"
+player_detection_raycast = NodePath("../../CharacterPivot/PlayerDetectionRayCast")
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Chasing" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "pose_anim", "face_anim")]
+script = ExtResource("9_yxo7v")
+_character_pivot = NodePath("../../CharacterPivot")
+running_anim_name = &"MrShinyLocomotionLib/Running"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Circling" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "pose_anim", "face_anim")]
+script = ExtResource("11_p6350")
+_character_pivot = NodePath("../../CharacterPivot")
+running_anim_name = &"MrShinyLocomotionLib/Running"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Returning" type="Node" parent="StateMachine"]
+script = ExtResource("9_x6d25")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim", "face_anim")]
+script = ExtResource("9_x6d25")
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim", "face_anim")]
+script = ExtResource("9_x6d25")
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Getting_Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim", "face_anim")]
+script = ExtResource("9_x6d25")
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"

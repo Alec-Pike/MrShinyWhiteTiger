@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://b5c7bki52ubh6" path="res://scripts/camera_controller.gd" id="5_x0bak"]
 [ext_resource type="Texture2D" uid="uid://c10xehdnk1p01" path="res://sprites/grapple_marker.png" id="6_g2jcq"]
 [ext_resource type="Resource" uid="uid://i7kl5sa80evv" path="res://resources/attack_resources/ground_light_atks/L_Jab.tres" id="7_kbsxf"]
-[ext_resource type="Script" uid="uid://c382udfugqyvh" path="res://scripts/state_machine.gd" id="8_lulei"]
+[ext_resource type="Script" uid="uid://c382udfugqyvh" path="res://scripts/states/state_machine.gd" id="8_lulei"]
 [ext_resource type="AnimationLibrary" uid="uid://ywtsrua8fk68" path="res://animations/Common/TakingDamageLib.res" id="8_r3tw4"]
 [ext_resource type="Script" uid="uid://b4oe7c14kqarl" path="res://scripts/states/player states/idle_state.gd" id="9_edtk3"]
 [ext_resource type="Script" uid="uid://ft1mubrbmnly" path="res://scripts/states/player states/running_state.gd" id="10_q2wkl"]
@@ -122,6 +122,7 @@ gradient = SubResource("Gradient_r3tw4")
 width = 256
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 8
 script = ExtResource("1_cmorj")
 
 [node name="CharacterPivot" type="Node3D" parent="."]

@@ -3,9 +3,11 @@
 
 class_name StateMachine extends Node
 
+@export var debug_messages: bool = false;
+
 @export var initial_state: State = null;
 @export var damage_state: State = null;
-@onready var damage_state_path: String = damage_state.get_path();
+@onready var damage_state_path: String = damage_state.get_path() if damage_state else &"Nil";
 
 @onready var state: State = initial_state if initial_state else get_child(0);
 
@@ -51,4 +53,5 @@ func _transition_to_next_state(target_state_path: String, data: Dictionary = {})
 	state.exit();
 	state = get_node(target_state_path);
 	state.enter(previous_state_path, data);
-	print("Transitioned to state " + state.name);
+	if debug_messages:
+		print(owner.name + " transitioned to state " + state.name);
