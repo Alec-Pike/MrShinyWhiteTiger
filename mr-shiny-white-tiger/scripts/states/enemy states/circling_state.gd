@@ -19,7 +19,7 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 
 func physics_update(_delta: float) -> void:
 	var vec_to_player : Vector3 = Global.player.global_position - this_enemy.global_position;
-	var move_vec : Vector3 = vec_to_player.normalized() * this_enemy.run_speed;
+	var move_vec : Vector3 = vec_to_player.normalized() * this_enemy.chase_speed;
 	move_vec.y = 0;
 	# pi/2 radians == 90 degrees
 	move_vec = move_vec.rotated(Vector3.UP, PI/2 * circling_direction);
@@ -36,3 +36,6 @@ func physics_update(_delta: float) -> void:
 	if circle_timer >= circle_time_threshold:
 		circle_timer = 0;
 		finished.emit(ATTACKING);
+		
+	if !this_enemy.is_on_floor():
+		finished.emit(AIR);

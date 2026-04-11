@@ -3,7 +3,6 @@ extends EnemyState
 @export var _character_pivot : Node3D;
 @export var running_anim_name : StringName;
 
-@onready var circling_direction = [1, -1].pick_random();
 var chase_timer : float = 0;
 
 
@@ -14,7 +13,7 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 
 func physics_update(_delta: float) -> void:
 	var vec_to_player : Vector3 = Global.player.global_position - this_enemy.global_position;
-	var move_vec : Vector3 = vec_to_player.normalized() * this_enemy.run_speed;
+	var move_vec : Vector3 = vec_to_player.normalized() * this_enemy.chase_speed;
 	move_vec.y = 0;
 	this_enemy.velocity = move_vec;
 	# Rotate character model
@@ -28,4 +27,8 @@ func physics_update(_delta: float) -> void:
 	
 	chase_timer += _delta;
 	if chase_timer >= this_enemy.chase_time_out_threshold:
+		chase_timer = 0.0;
 		finished.emit(RETURNING);
+		
+	if !this_enemy.is_on_floor():
+		finished.emit(AIR);

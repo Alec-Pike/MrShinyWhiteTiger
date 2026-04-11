@@ -1,7 +1,7 @@
 extends PlayerState
 
 @export var idle_anim_name: StringName;
-@export var landing_anim_name: StringName;
+#@export var landing_anim_name: StringName;
 #@export var gravity : float = 75.0;
 
 func enter(_previous_state_path: String, _data := {}) -> void:

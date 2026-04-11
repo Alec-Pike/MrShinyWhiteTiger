@@ -3,6 +3,7 @@ extends EnemyState
 @export var idle_anim_name: StringName;
 @export var landing_anim_name: StringName;
 @export var player_detection_raycast : RayCast3D;
+@export var _character_pivot : Node3D;
 
 func _ready() -> void:
 	await super._ready();
@@ -13,14 +14,14 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	this_enemy.velocity.x = 0.0;
 	this_enemy.velocity.z = 0.0;
 	pose_anim.animation_finished.connect(_on_animation_finished);
-	#if _previous_state_path != AIR:
 	pose_anim.play(idle_anim_name, 0.2);
+	player_detection_raycast.enabled = true;
 
 
 func physics_update(_delta: float) -> void:
-	player_detection_raycast.look_at(Global.player.global_transform.origin);
-	if player_detection_raycast.is_colliding():
-		if (-player_detection_raycast.global_basis.z).angle_to(-this_enemy.global_basis.z) < this_enemy.fov:
+	player_detection_raycast.look_at(Global.player.global_position + 1 * Vector3.UP);
+	if (player_detection_raycast.get_collider() as Player) != null:
+		if (-player_detection_raycast.global_basis.z).angle_to(-_character_pivot.global_basis.z) < this_enemy.fov:
 			finished.emit(CHASING);
 
 func _on_animation_finished(_anim_name: StringName):
@@ -29,3 +30,4 @@ func _on_animation_finished(_anim_name: StringName):
 
 func exit() -> void:
 	pose_anim.animation_finished.disconnect(_on_animation_finished);
+	player_detection_raycast.enabled = false;
