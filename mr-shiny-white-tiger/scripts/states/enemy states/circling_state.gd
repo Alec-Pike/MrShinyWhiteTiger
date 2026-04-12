@@ -37,5 +37,5 @@ func physics_update(_delta: float) -> void:
 		circle_timer = 0;
 		finished.emit(ATTACKING);
 		
-	if !this_enemy.is_on_floor():
-		finished.emit(AIR);
+	if this_enemy.is_on_wall() || !this_enemy.is_on_floor():
+		circling_direction *= -1;

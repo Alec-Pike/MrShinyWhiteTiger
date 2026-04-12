@@ -19,6 +19,7 @@ var already_hit : bool = false;
 var curr_atk : AttackResource = null;
 var pending_attack_type : String = "" # For the Input Buffer
 
+
 func enter(previous_state_path: String, data := {}) -> void:
 	player.velocity = Vector3.ZERO; # Stop sliding
 	hit_shapecast.enabled = false;
