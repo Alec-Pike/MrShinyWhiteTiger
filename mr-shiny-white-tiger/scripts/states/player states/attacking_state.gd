@@ -128,6 +128,8 @@ func physics_update(_delta: float) -> void:
 		finished.emit(AIR, {"jumping": true});
 	elif (Input.is_action_just_pressed("grapple")):
 		finished.emit(GRAPPLING);
+	elif (Input.is_action_just_pressed("dodge")):
+		finished.emit(DODGING);
 
 func exit() -> void:
 	hit_shapecast.enabled = false;

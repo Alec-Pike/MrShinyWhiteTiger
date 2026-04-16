@@ -6,7 +6,7 @@ const AIR = "Air"
 const ATTACKING = "Attacking"
 const GETTING_HIT = "Getting_Hit"
 const GRAPPLING = "Grappling"
-const SPECIAL_ATK = "Special_Atk"
+const DODGING = "Dodging"
 
 var player: Player
 

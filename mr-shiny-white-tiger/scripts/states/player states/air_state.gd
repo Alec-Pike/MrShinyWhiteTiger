@@ -88,6 +88,8 @@ func physics_update(delta: float) -> void:
 		finished.emit(ATTACKING, {"type": "light"});
 	elif (Input.is_action_just_pressed("heavy_attack")):
 		finished.emit(ATTACKING, {"type": "heavy"});
+	elif (Input.is_action_just_pressed("dodge")):
+		finished.emit(DODGING);
 
 
 func _on_animation_finished(_anim_name: StringName):

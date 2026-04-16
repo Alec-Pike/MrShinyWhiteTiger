@@ -47,5 +47,5 @@ func physics_update(_delta: float) -> void:
 		finished.emit(ATTACKING, {"type": "light"});
 	elif (Input.is_action_just_pressed("heavy_attack")):
 		finished.emit(ATTACKING, {"type": "heavy"});
-	#elif (Input.is_action_just_pressed("special_attack")):
-		#finished.emit(SPECIAL_ATK);
+	elif (Input.is_action_just_pressed("dodge")):
+		finished.emit(DODGING);

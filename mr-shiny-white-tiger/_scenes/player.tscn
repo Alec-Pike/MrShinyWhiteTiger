@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c64slysg5u0dt"]
+[gd_scene load_steps=37 format=3 uid="uid://c64slysg5u0dt"]
 
 [ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://ddmjwym8aja1o" path="res://scripts/states/player states/player_state.gd" id="14_r3tw4"]
 [ext_resource type="Script" uid="uid://crj4tn2a2ba67" path="res://scripts/states/player states/grappling_state.gd" id="15_nmymu"]
 [ext_resource type="Resource" uid="uid://cueb8ric3w518" path="res://resources/attack_resources/ground_heavy_atks/L_Side_Kick.tres" id="21_gf0v6"]
+[ext_resource type="Script" uid="uid://ctev77pe4gsrp" path="res://scripts/states/player states/dodging.gd" id="22_373r6"]
 
 [sub_resource type="Resource" id="Resource_2ue6v"]
 resource_name = "TopsUpperArm"
@@ -225,7 +226,6 @@ metadata/_custom_type_script = "uid://c382udfugqyvh"
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim", "face_anim")]
 script = ExtResource("9_edtk3")
 idle_anim_name = &"MrShinyLocomotionLib/Idle"
-landing_anim_name = &"MrShinyLocomotionLib/Landing"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
@@ -277,6 +277,15 @@ targeting_system = NodePath("../../CameraController/SpringArm3D/Camera3D/Grapple
 character_pivot = NodePath("../../CharacterPivot")
 character_model = NodePath("../../CharacterPivot/CharacterModel")
 grapple_anim = &"MrShinyLocomotionLib/Grappling"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Dodging" type="Node" parent="StateMachine" node_paths=PackedStringArray("_camera_pivot", "pose_anim", "face_anim")]
+script = ExtResource("22_373r6")
+dodge_anim_name = &"TakingDamageLib/Dodge"
+_camera_pivot = NodePath("../../CameraController")
+move_speed = 3.0
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
