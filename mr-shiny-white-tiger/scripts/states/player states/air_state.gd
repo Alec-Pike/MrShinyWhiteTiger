@@ -76,9 +76,13 @@ func physics_update(delta: float) -> void:
 			pose_anim.play(landing_anim_name, 0.1);
 	
 	# State Transitions
+	if (player.global_position.y < -5):
+		finished.emit(DEATH);
+	
 	if pose_anim.current_animation == landing_anim_name:
 		if (Input.is_action_just_pressed("jump")):
 			finished.emit(AIR, {"jumping": true});
+	
 	if player.is_on_floor():
 		if raw_input != Vector2.ZERO:
 			finished.emit(RUNNING);

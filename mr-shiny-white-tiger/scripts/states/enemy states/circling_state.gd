@@ -22,6 +22,7 @@ func physics_update(_delta: float) -> void:
 	var move_vec : Vector3 = vec_to_player.normalized() * this_enemy.chase_speed;
 	move_vec.y = 0;
 	# pi/2 radians == 90 degrees
+	#TODO: edit this to prevent sliding out of circle
 	move_vec = move_vec.rotated(Vector3.UP, PI/2 * circling_direction);
 	this_enemy.velocity = move_vec;
 	# Rotate character model
@@ -36,6 +37,7 @@ func physics_update(_delta: float) -> void:
 	if circle_timer >= circle_time_threshold:
 		circle_timer = 0;
 		finished.emit(ATTACKING);
-		
+	
+	#TODO: change the second condition here to reference the LedgeDetector raycast
 	if this_enemy.is_on_wall() || !this_enemy.is_on_floor():
 		circling_direction *= -1;

@@ -7,7 +7,7 @@ class_name StateMachine extends Node
 
 @export var initial_state: State = null;
 @export var damage_state: State = null;
-@onready var damage_state_path: String = damage_state.get_path() if damage_state else &"Nil";
+@onready var damage_state_path: NodePath = damage_state.get_path() if damage_state else ^"";
 
 @onready var state: State = initial_state if initial_state else get_child(0);
 
@@ -21,15 +21,15 @@ func _ready() -> void:
 	
 	owner.taking_damage.connect(_on_getting_hit)
 
-func _on_getting_hit(amount: int, knockback: Vector3):
+func _on_getting_hit(damage: int, knockback: Vector3, attacker_position: Vector3):
 	# 1. OPTIONAL: Check for "Super Armor"
 	# If the current state has a flag saying "cannot be interrupted", ignore this.
 	if state.is_invulnerable():
 		return
 
 	# 2. Force the transition
-	# We pass the knockback vector so the Hurt state knows which way to fly
-	_transition_to_next_state(damage_state_path, {"amount": amount, "knockback": knockback})
+	# We pass the knockback vector and attacker's rotation so the Hurt state knows which way to fly
+	_transition_to_next_state(damage_state_path, {"damage": damage, "knockback": knockback, "attacker_position": attacker_position})
 
 
 func _unhandled_input(event: InputEvent) -> void:

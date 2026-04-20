@@ -38,6 +38,9 @@ func physics_update(delta: float) -> void:
 			pose_anim.play(landing_anim_name, 0.1);
 	
 	# State Transitions
+	if (this_enemy.global_position.y < -5):
+		finished.emit(DEATH);
+	
 	if this_enemy.is_on_floor():
 		if prev_state == GETTING_HIT:
 			finished.emit(CHASING);

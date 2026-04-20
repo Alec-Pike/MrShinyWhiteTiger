@@ -12,7 +12,7 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	
 	# Calculate horizontal movement once at the start
 	var raw_input : Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back");
-	if prev_state == IDLE:
+	if raw_input.is_zero_approx():
 		raw_input = Vector2(0.0, 1.0); # Defaults to backwards
 	var movement : Vector3 = Vector3(raw_input.x, 0.0, raw_input.y);
 	movement = movement.normalized();
@@ -29,7 +29,7 @@ func physics_update(_delta: float) -> void:
 
 
 func _on_animation_finished(_anim : StringName):
-	print("Detected end of dodge animation");
+	#print("Detected end of dodge animation");
 	finished.emit(prev_state);
 
 

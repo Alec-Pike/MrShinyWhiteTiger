@@ -7,6 +7,8 @@ const ATTACKING = "Attacking"
 const GETTING_HIT = "Getting_Hit"
 const GRAPPLING = "Grappling"
 const DODGING = "Dodging"
+const RECOVERING = "Recovering"
+const DEATH = "Death"
 
 var player: Player
 

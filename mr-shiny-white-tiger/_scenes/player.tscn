@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c64slysg5u0dt"]
+[gd_scene load_steps=39 format=3 uid="uid://c64slysg5u0dt"]
 
 [ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
@@ -18,10 +18,12 @@
 [ext_resource type="Script" uid="uid://csbub0jiyspxt" path="res://scripts/style_manager.gd" id="11_22xyk"]
 [ext_resource type="Script" uid="uid://c7xv43yg7jfh6" path="res://scripts/states/player states/air_state.gd" id="11_f2e50"]
 [ext_resource type="Script" uid="uid://cb10pu58mdyaj" path="res://scripts/states/player states/attacking_state.gd" id="12_22xyk"]
-[ext_resource type="Script" uid="uid://ddmjwym8aja1o" path="res://scripts/states/player states/player_state.gd" id="14_r3tw4"]
 [ext_resource type="Script" uid="uid://crj4tn2a2ba67" path="res://scripts/states/player states/grappling_state.gd" id="15_nmymu"]
+[ext_resource type="Script" uid="uid://chcu74c7xyki3" path="res://scripts/states/getting_hit.gd" id="20_373r6"]
 [ext_resource type="Resource" uid="uid://cueb8ric3w518" path="res://resources/attack_resources/ground_heavy_atks/L_Side_Kick.tres" id="21_gf0v6"]
 [ext_resource type="Script" uid="uid://ctev77pe4gsrp" path="res://scripts/states/player states/dodging.gd" id="22_373r6"]
+[ext_resource type="Script" uid="uid://bva6ixuqk4wbx" path="res://scripts/states/recovering_state.gd" id="23_aj6rt"]
+[ext_resource type="Script" uid="uid://cm1afagd0va2d" path="res://scripts/states/death_state.gd" id="24_jh3hg"]
 
 [sub_resource type="Resource" id="Resource_2ue6v"]
 resource_name = "TopsUpperArm"
@@ -265,12 +267,6 @@ pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
 
-[node name="Getting_Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim", "face_anim")]
-script = ExtResource("14_r3tw4")
-pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
-face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
-metadata/_custom_type_script = "uid://ddmjwym8aja1o"
-
 [node name="Grappling" type="Node" parent="StateMachine" node_paths=PackedStringArray("targeting_system", "character_pivot", "character_model", "pose_anim", "face_anim")]
 script = ExtResource("15_nmymu")
 targeting_system = NodePath("../../CameraController/SpringArm3D/Camera3D/GrappleTargeting")
@@ -289,6 +285,35 @@ move_speed = 3.0
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Getting_Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_pivot", "pose_anim", "face_anim")]
+script = ExtResource("20_373r6")
+character_pivot = NodePath("../../CharacterPivot")
+gravity = 75.0
+next_state_name = &"Idle"
+hit_small_anim_name = &"TakingDamageLib/Getting Hit Small"
+hit_large_anim_name = &"TakingDamageLib/Getting Hit Large"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://ddmjwym8aja1o"
+
+[node name="Recovering" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim", "face_anim")]
+script = ExtResource("23_aj6rt")
+next_state_name = &"Idle"
+recovery_anim_name = &"TakingDamageLib/Stand Up"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://hnvtv7wnt2qf"
+
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "character_model", "to_deactivate", "pose_anim", "face_anim")]
+script = ExtResource("24_jh3hg")
+character = NodePath("../..")
+character_model = NodePath("../../CharacterPivot/CharacterModel")
+to_deactivate = [NodePath("../../CharacterPivot/AtkTargetingShapeCast"), NodePath("../../CharacterPivot/AtkHitShapeCast"), NodePath("../../LandingAnimTrigger"), NodePath("../../Collider")]
+death_anim_name = &"TakingDamageLib/Dying Slow"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+metadata/_custom_type_script = "uid://hnvtv7wnt2qf"
 
 [connection signal="set_special_mode" from="StyleManager" to="StateMachine/Running" method="set_special_mode"]
 [connection signal="set_special_mode" from="StyleManager" to="StateMachine/Air" method="set_special_mode"]

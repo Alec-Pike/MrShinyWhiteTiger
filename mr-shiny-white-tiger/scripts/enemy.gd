@@ -1,5 +1,6 @@
 class_name Enemy extends CharacterBody3D
 
+@export var hp : int = 100;
 @export_category("Ready")
 @export var detection_range : float = 25.0;
 @export var fov : float = 75.0;
@@ -26,6 +27,12 @@ func _ready() -> void:
 	fov = deg_to_rad(fov);
 
 # Damage taking
-signal taking_damage(amount: int, knockback: Vector3);
-func take_damage(amount: int, knockback: Vector3):
-	taking_damage.emit(amount, knockback);
+signal taking_damage(damage: int, knockback: Vector3, attacker_rotation: Vector3);
+func take_damage(damage: int, knockback: Vector3, attacker_rotation: Vector3):
+	taking_damage.emit(damage, knockback, attacker_rotation);
+
+# Death
+signal is_dead();
+func die():
+	is_dead.emit();
+	queue_free();

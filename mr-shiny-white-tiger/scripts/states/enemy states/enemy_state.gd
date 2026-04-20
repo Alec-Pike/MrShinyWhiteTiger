@@ -7,6 +7,8 @@ const AIR = "Air"
 const ATTACKING = "Attacking"
 const GETTING_HIT = "Getting_Hit"
 const RETURNING = "Returning"
+const RECOVERING = "Recovering"
+const DEATH = "Death"
 
 var this_enemy: Enemy
 

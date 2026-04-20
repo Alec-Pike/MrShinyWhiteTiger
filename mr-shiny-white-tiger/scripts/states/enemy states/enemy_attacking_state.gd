@@ -60,7 +60,7 @@ func physics_update(_delta: float) -> void:
 		hit_shapecast.enabled = true
 		hit_shapecast.force_shapecast_update();
 		if !already_hit && hit_shapecast.is_colliding():
-			#TODO: Global.player.take_damage(curr_atk.damage, curr_atk.knockback, character_pivot.global_position);
+			Global.player.take_damage(curr_atk.damage, curr_atk.knockback, character_pivot.global_position);
 			print("Attack '" + curr_atk.animation_name + "' hit Player");
 			if !already_hit: # Only do this once
 				already_hit = true;

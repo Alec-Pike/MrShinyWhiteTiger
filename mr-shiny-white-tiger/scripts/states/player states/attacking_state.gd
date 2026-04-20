@@ -75,21 +75,22 @@ func physics_update(_delta: float) -> void:
 	var anim_time : float = pose_anim.current_animation_position;
 	
 	if anim_time >= curr_atk.active_time_start && anim_time <= curr_atk.active_time_end:
+		var dmg_multiplier : int = 2 if special_mode_on else 1;
+		var kbk_multiplier : float = 1.5 if special_mode_on else 1.0;
+		var final_dmg : int = curr_atk.damage * dmg_multiplier;
 		hit_shapecast.enabled = true
 		hit_shapecast.force_shapecast_update();
 		for i in hit_shapecast.get_collision_count():
-			var target: Node3D = hit_shapecast.get_collider(i) as Node3D; #TODO: not as `Node3D`, as `Enemy`
-			var dmg_multiplier : float = 2 if special_mode_on else 1;
-			var kbk_multiplier : float = 1.5 if special_mode_on else 1;
-			#TODO: target.take_damage(curr_atk.damage * dmg_multiplier, curr_atk.knockback * kbk_multiplier, player_pivot.global_transform.origin);
+			var target: Enemy = hit_shapecast.get_collider(i) as Enemy;
+			#FIXME: edit this to only hit each enemy once
+			target.take_damage(final_dmg, curr_atk.knockback * kbk_multiplier, player_pivot.global_transform.origin);
 			print("Attack '" + curr_atk.animation_name + "' hit target '" + target.name + "'");
 			if !already_hit: # Only do this once
 				already_hit = true;
 				atk_successful.emit(curr_atk);
 				# Health steal in special mode
 				if special_mode_on:
-					#TODO: increase player HP by curr_atk.damage * dmg_multiplier
-					pass;
+					player.hp += final_dmg;
 	else:
 		hit_shapecast.enabled = false
 
