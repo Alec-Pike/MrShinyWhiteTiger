@@ -14,7 +14,7 @@ extends PlayerState
 
 signal atk_successful(atk: AttackResource);
 
-var already_hit : bool = false;
+var targets_hit : Dictionary[Enemy, bool] = {};
 
 var curr_atk : AttackResource = null;
 var pending_attack_type : String = "" # For the Input Buffer
@@ -23,7 +23,6 @@ var pending_attack_type : String = "" # For the Input Buffer
 func enter(previous_state_path: String, data := {}) -> void:
 	player.velocity = Vector3.ZERO; # Stop sliding
 	hit_shapecast.enabled = false;
-	targeting_shapecast.enabled = true;
 	
 	var is_air: bool = (previous_state_path == AIR);
 	if data.has("type") && data["type"] == "heavy":
@@ -45,6 +44,7 @@ func execute_current_attack():
 		return;
 
 	# Auto-Rotate to face most likely intended target
+	targeting_shapecast.enabled = true;
 	targeting_shapecast.force_shapecast_update();
 	if targeting_shapecast.is_colliding(): 
 		var target_position: Vector3 = (targeting_shapecast.get_collider(0) as Node3D).global_transform.origin;
@@ -52,11 +52,12 @@ func execute_current_attack():
 		if target_position != player_pivot.global_transform.origin:
 			player_pivot.look_at(target_position);
 
-	# Setup Hitbox
+	# Set up Hitbox
 	hit_shapecast.shape = curr_atk.hit_shape
 	hit_shapecast.position.z = -curr_atk.hit_range
 	
-	already_hit = false;
+	targets_hit.clear();
+	
 	# Play Animation
 	pose_anim.play(curr_atk.animation_name)
 	
@@ -75,22 +76,29 @@ func physics_update(_delta: float) -> void:
 	var anim_time : float = pose_anim.current_animation_position;
 	
 	if anim_time >= curr_atk.active_time_start && anim_time <= curr_atk.active_time_end:
-		var dmg_multiplier : int = 2 if special_mode_on else 1;
-		var kbk_multiplier : float = 1.5 if special_mode_on else 1.0;
-		var final_dmg : int = curr_atk.damage * dmg_multiplier;
+		var dmg : int
+		var kbk : Vector3;
+		if special_mode_on:
+			dmg = curr_atk.damage * 2;
+			kbk = curr_atk.knockback * 1.5;
+		else:
+			dmg = curr_atk.damage;
+			kbk = curr_atk.knockback;
+		
 		hit_shapecast.enabled = true
 		hit_shapecast.force_shapecast_update();
 		for i in hit_shapecast.get_collision_count():
 			var target: Enemy = hit_shapecast.get_collider(i) as Enemy;
-			#FIXME: edit this to only hit each enemy once
-			target.take_damage(final_dmg, curr_atk.knockback * kbk_multiplier, player_pivot.global_transform.origin);
-			print("Attack '" + curr_atk.animation_name + "' hit target '" + target.name + "'");
-			if !already_hit: # Only do this once
-				already_hit = true;
-				atk_successful.emit(curr_atk);
+			# Only hit each enemy once per attack
+			if target not in targets_hit:
+				target.take_damage(dmg, kbk, player_pivot.global_transform.origin);
+				print("Attack '" + curr_atk.animation_name + "' hit target '" + target.name + "'");
+				targets_hit[target] = true;
 				# Health steal in special mode
 				if special_mode_on:
-					player.hp += final_dmg;
+					player.hp += dmg;
+			if targets_hit.is_empty(): # Only do this once
+				atk_successful.emit(curr_atk);
 	else:
 		hit_shapecast.enabled = false
 
@@ -121,8 +129,6 @@ func physics_update(_delta: float) -> void:
 					finished.emit(IDLE);
 			else:
 				finished.emit(AIR, {"jumping": false});
-		#elif (Input.is_action_just_pressed("special_attack")):
-			#finished.emit(SPECIAL_ATK);
 	
 	# These state transitions can cancel an attack
 	if player.is_on_floor() && Input.is_action_just_pressed("jump"):

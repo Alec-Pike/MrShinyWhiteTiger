@@ -1,6 +1,7 @@
 extends EnemyState
 
 @export var _character_pivot : Node3D;
+@export var floor_detector : RayCast3D;
 @export var running_anim_name : StringName;
 
 @onready var circling_direction = [1, -1].pick_random();
@@ -15,15 +16,15 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	circle_time_threshold = randf_range(this_enemy.min_circle_time, this_enemy.max_circle_time);
 	if pose_anim.current_animation != running_anim_name:
 		pose_anim.play(running_anim_name, 0.25);
+	floor_detector.enabled = true;
 	
 
 func physics_update(_delta: float) -> void:
 	var vec_to_player : Vector3 = Global.player.global_position - this_enemy.global_position;
 	var move_vec : Vector3 = vec_to_player.normalized() * this_enemy.chase_speed;
 	move_vec.y = 0;
-	# pi/2 radians == 90 degrees
-	#TODO: edit this to prevent sliding out of circle
-	move_vec = move_vec.rotated(Vector3.UP, PI/2 * circling_direction);
+	const TURN_ANGLE : float = deg_to_rad(89);
+	move_vec = move_vec.rotated(Vector3.UP, TURN_ANGLE * circling_direction);
 	this_enemy.velocity = move_vec;
 	# Rotate character model
 	if move_vec.length() > 0.2:
@@ -38,6 +39,13 @@ func physics_update(_delta: float) -> void:
 		circle_timer = 0;
 		finished.emit(ATTACKING);
 	
-	#TODO: change the second condition here to reference the LedgeDetector raycast
-	if this_enemy.is_on_wall() || !this_enemy.is_on_floor():
+	if this_enemy.is_on_wall():
 		circling_direction *= -1;
+	else:
+		floor_detector.force_raycast_update();
+		if !floor_detector.is_colliding():
+			circling_direction *= -1;
+
+
+func exit() -> void:
+	floor_detector.enabled = false;

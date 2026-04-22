@@ -291,6 +291,7 @@ script = ExtResource("20_373r6")
 character_pivot = NodePath("../../CharacterPivot")
 gravity = 75.0
 next_state_name = &"Idle"
+i_frame_seconds = 0.5
 hit_small_anim_name = &"TakingDamageLib/Getting Hit Small"
 hit_large_anim_name = &"TakingDamageLib/Getting Hit Large"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")

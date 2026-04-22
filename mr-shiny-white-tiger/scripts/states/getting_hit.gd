@@ -5,6 +5,7 @@ extends State
 @export var knockback_scale : float = 1.0;
 @export var big_hit_threshold : int = 10;
 @export var next_state_name : StringName;
+@export var i_frame_seconds : float = 0.0;
 @export_category("Animation")
 @export var hit_small_anim_name : StringName;
 @export var hit_large_anim_name : StringName;
@@ -16,6 +17,7 @@ extends State
 var character : CharacterBody3D;
 var is_big_hit : bool = false;
 var anim_is_done : bool = false;
+var i_frame_timer : float = 0.0;
 
 
 
@@ -26,7 +28,7 @@ func _ready() -> void:
 
 func enter(_previous_state_path: String, _data := {}) -> void:
 	character.hp -= _data.damage;
-	print("%s has %d hp remaining", character.name, character.hp)
+	print(character.name, " has ", character.hp, "hp remaining")
 	# Handle death if necessary
 	if character.hp <= 0:
 		finished.emit("Death");
@@ -44,6 +46,14 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	# calculate and set knockback velocity
 	character_pivot.look_at(_data.attacker_position);
 	character.velocity = character_pivot.global_basis * _data.knockback * -1;
+
+
+func update(_delta: float) -> void:
+	i_frame_timer += _delta;
+
+
+func is_invulnerable() -> bool:
+	return (i_frame_timer < i_frame_seconds);
 
 
 func physics_update(_delta: float) -> void:
@@ -72,3 +82,4 @@ func _on_animation_finished(_anim_name: StringName):
 func exit() -> void:
 	pose_anim.animation_finished.disconnect(_on_animation_finished);
 	character.velocity = Vector3.ZERO;
+	i_frame_timer = 0.0;

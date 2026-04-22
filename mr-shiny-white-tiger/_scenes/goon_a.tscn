@@ -505,14 +505,15 @@ shape = SubResource("SphereShape3D_w2uy8")
 target_position = Vector3(0, 0, -1)
 collision_mask = 8
 
-[node name="PlayerDetectionRayCast" type="RayCast3D" parent="CharacterPivot"]
+[node name="FloorDetector" type="RayCast3D" parent="CharacterPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, -1)
+enabled = false
+target_position = Vector3(0, -0.1, 0)
+
+[node name="PlayerDetectionRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 target_position = Vector3(0, 0, 0)
 collision_mask = 9
-
-[node name="LedgeDetector" type="RayCast3D" parent="CharacterPivot"]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 1, 0)
-target_position = Vector3(0, -2, 0)
 
 [node name="LandingAnimTrigger" type="RayCast3D" parent="."]
 target_position = Vector3(0, -1.5, 0)
@@ -533,7 +534,7 @@ metadata/_custom_type_script = "uid://c382udfugqyvh"
 script = ExtResource("8_x6d25")
 idle_anim_name = &"MrShinyLocomotionLib/Idle"
 landing_anim_name = &"MrShinyLocomotionLib/Landing"
-player_detection_raycast = NodePath("../../CharacterPivot/PlayerDetectionRayCast")
+player_detection_raycast = NodePath("../../PlayerDetectionRayCast")
 _character_pivot = NodePath("../../CharacterPivot")
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
@@ -547,9 +548,10 @@ pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
 
-[node name="Circling" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "pose_anim", "face_anim")]
+[node name="Circling" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "floor_detector", "pose_anim", "face_anim")]
 script = ExtResource("11_p6350")
 _character_pivot = NodePath("../../CharacterPivot")
+floor_detector = NodePath("../../CharacterPivot/FloorDetector")
 running_anim_name = &"MrShinyLocomotionLib/Running"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
@@ -559,7 +561,7 @@ metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
 script = ExtResource("13_lsuae")
 _character_pivot = NodePath("../../CharacterPivot")
 walking_anim_name = &"MrShinyLocomotionLib/Walking"
-player_detection_raycast = NodePath("../../CharacterPivot/PlayerDetectionRayCast")
+player_detection_raycast = NodePath("../../PlayerDetectionRayCast")
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
@@ -605,7 +607,7 @@ metadata/_custom_type_script = "uid://hnvtv7wnt2qf"
 script = ExtResource("22_xlubk")
 character = NodePath("../..")
 character_model = NodePath("../../CharacterPivot/CharacterModel")
-to_deactivate = [NodePath("../../Grapple Point"), NodePath("../../CharacterPivot/AtkHitShapeCast"), NodePath("../../CharacterPivot/PlayerDetectionRayCast"), NodePath("../../CharacterPivot/LedgeDetector"), NodePath("../../LandingAnimTrigger"), NodePath("../../Collider")]
+to_deactivate = [NodePath("../../Grapple Point"), NodePath("../../CharacterPivot/AtkHitShapeCast"), NodePath("../../PlayerDetectionRayCast"), NodePath("../../CharacterPivot/FloorDetector"), NodePath("../../LandingAnimTrigger"), NodePath("../../Collider")]
 death_anim_name = &"TakingDamageLib/Dying Fast"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
