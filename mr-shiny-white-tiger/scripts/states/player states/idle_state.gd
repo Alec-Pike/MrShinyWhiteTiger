@@ -18,10 +18,9 @@ func physics_update(_delta: float) -> void:
 	#player.move_and_slide();
 #
 	## State transitions
-	#if !player.is_on_floor():
-		#finished.emit(AIR, {"jumping": false});
-	#el
-	if Input.is_action_just_pressed("jump"):
+	if !player.is_on_floor():
+		finished.emit(AIR, {"jumping": false});
+	elif Input.is_action_just_pressed("jump"):
 		finished.emit(AIR, {"jumping": true});
 	elif (
 	Input.is_action_pressed("move_forward") ||

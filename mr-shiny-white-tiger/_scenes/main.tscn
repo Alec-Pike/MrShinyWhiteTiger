@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c8n2tl830eil6" path="res://Assets/Free HDR Skyboxes Pack/Texture/Sky-5.hdr" id="1_3q5j6"]
 [ext_resource type="PackedScene" uid="uid://c64slysg5u0dt" path="res://_scenes/player.tscn" id="1_dmym1"]
-[ext_resource type="PackedScene" uid="uid://bwgh11eofhruj" path="res://_scenes/goon_a.tscn" id="3_lavtb"]
+[ext_resource type="PackedScene" uid="uid://bmubmx1kqvtpx" path="res://_scenes/goon_a.tscn" id="3_lavtb"]
 [ext_resource type="PackedScene" uid="uid://t1j85g731tad" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_1 Variant.prefab.scn" id="4_lavtb"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lavtb"]
@@ -46,11 +46,11 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_dmym1")]
 
-[node name="BasicEnemy" parent="." instance=ExtResource("3_lavtb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
-
 [node name="building_1_1 Variant" parent="." instance=ExtResource("4_lavtb")]
 transform = Transform3D(0.19999999, 0, 0, 0, 0.099999964, 0, 0, 0, 0.099999964, 5.0546875, 9.1873835e-06, -12.847191)
 
 [node name="building_1_1 Variant2" parent="." instance=ExtResource("4_lavtb")]
 transform = Transform3D(-8.742277e-09, 0, 0.099999964, 0, 0.099999964, 0, -0.19999999, 0, -4.3711372e-09, -6.9453125, 9.1873835e-06, -11.847191)
+
+[node name="BasicEnemy" parent="." instance=ExtResource("3_lavtb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)

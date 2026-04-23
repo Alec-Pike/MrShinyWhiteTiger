@@ -1,9 +1,25 @@
 class_name Player extends CharacterBody3D
 
-@export var hp : int = 100;
+
+@export var starting_hp : int = 100;
+@export var health_bar : TextureProgressBar;
+var hp : int = starting_hp;
+
 
 func _enter_tree():
 	Global.player = self
+
+
+func _ready() -> void:
+	health_bar.max_value = starting_hp;
+	health_bar.min_value = 0;
+
+
+func _process(_delta: float) -> void:
+	if hp > starting_hp:
+		hp = starting_hp;
+	health_bar.value = hp;
+
 
 # Damage taking
 signal taking_damage(damage: int, knockback: Vector3, attacker_rotation: Vector3);

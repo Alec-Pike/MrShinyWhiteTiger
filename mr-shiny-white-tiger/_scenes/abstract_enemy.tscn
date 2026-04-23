@@ -1,0 +1,165 @@
+[gd_scene load_steps=21 format=3 uid="uid://bwgh11eofhruj"]
+
+[ext_resource type="Script" uid="uid://bbu5rq5uxcd6o" path="res://scripts/enemy.gd" id="1_5hvrv"]
+[ext_resource type="PackedScene" uid="uid://ckp88nw877i4w" path="res://_scenes/Grapple Point.prefab.scn" id="1_w2uy8"]
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="2_4ql1q"]
+[ext_resource type="Resource" uid="uid://i7kl5sa80evv" path="res://resources/attack_resources/ground_light_atks/L_Jab.tres" id="3_8ooy2"]
+[ext_resource type="Resource" uid="uid://d4au55jnohd1g" path="res://resources/attack_resources/ground_light_atks/R_Cross.tres" id="4_l8sre"]
+[ext_resource type="AnimationLibrary" uid="uid://bhr3qel2vrf22" path="res://animations/MrShiny/MrShinyLocomotionLib.res" id="7_igsl0"]
+[ext_resource type="Script" uid="uid://c382udfugqyvh" path="res://scripts/states/state_machine.gd" id="7_jp2p8"]
+[ext_resource type="AnimationLibrary" uid="uid://ywtsrua8fk68" path="res://animations/Common/TakingDamageLib.res" id="8_p6350"]
+[ext_resource type="Script" uid="uid://m16gs35tma1r" path="res://scripts/states/enemy states/ready_state.gd" id="8_x6d25"]
+[ext_resource type="Script" uid="uid://qfldkjljtmia" path="res://scripts/states/enemy states/chasing_state.gd" id="9_yxo7v"]
+[ext_resource type="AnimationLibrary" uid="uid://hx6hwsrlgsp8" path="res://animations/MrShiny/MrShinyGroundLightAtksLib.res" id="10_l8sre"]
+[ext_resource type="Script" uid="uid://cvet2qo0in07e" path="res://scripts/states/enemy states/circling_state.gd" id="11_p6350"]
+[ext_resource type="Script" uid="uid://bcb0ofjr7tuwm" path="res://scripts/states/enemy states/returning_state.gd" id="13_lsuae"]
+[ext_resource type="Script" uid="uid://bjcdls3e3vkjt" path="res://scripts/states/enemy states/enemy_air_state.gd" id="14_yimgy"]
+[ext_resource type="Script" uid="uid://di5opniqg4cxn" path="res://scripts/states/enemy states/enemy_attacking_state.gd" id="18_8ooy2"]
+[ext_resource type="Script" uid="uid://chcu74c7xyki3" path="res://scripts/states/getting_hit.gd" id="20_l8sre"]
+[ext_resource type="Script" uid="uid://bva6ixuqk4wbx" path="res://scripts/states/recovering_state.gd" id="21_tpipv"]
+[ext_resource type="Script" uid="uid://cm1afagd0va2d" path="res://scripts/states/death_state.gd" id="22_xlubk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w2uy8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x6rnu"]
+radius = 0.35
+height = 1.85
+
+[node name="BasicEnemy" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_5hvrv")
+fov = 65.0
+atk_range = 2.0
+attacks_and_probabilities = Dictionary[ExtResource("2_4ql1q"), float]({
+ExtResource("3_8ooy2"): 0.66,
+ExtResource("4_l8sre"): 0.34
+})
+
+[node name="Grapple Point" parent="." instance=ExtResource("1_w2uy8")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1.41, -0.1)
+
+[node name="CharacterPivot" type="Node3D" parent="."]
+
+[node name="PoseAnimator" type="AnimationPlayer" parent="CharacterPivot"]
+root_node = NodePath("")
+libraries = {
+&"MrShinyGroundLightAtksLib": ExtResource("10_l8sre"),
+&"MrShinyLocomotionLib": ExtResource("7_igsl0"),
+&"TakingDamageLib": ExtResource("8_p6350")
+}
+
+[node name="AtkHitShapeCast" type="ShapeCast3D" parent="CharacterPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+enabled = false
+shape = SubResource("SphereShape3D_w2uy8")
+target_position = Vector3(0, 0, -1)
+collision_mask = 8
+
+[node name="FloorDetector" type="RayCast3D" parent="CharacterPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, -1)
+enabled = false
+target_position = Vector3(0, -0.1, 0)
+
+[node name="PlayerDetectionRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+target_position = Vector3(0, 0, 0)
+collision_mask = 9
+
+[node name="LandingAnimTrigger" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.5, 0)
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92529297, 0)
+shape = SubResource("CapsuleShape3D_x6rnu")
+debug_color = Color(0.87731564, 0.00040622352, 0.8319653, 0.41960785)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "damage_state")]
+script = ExtResource("7_jp2p8")
+debug_messages = true
+initial_state = NodePath("Ready")
+damage_state = NodePath("Getting_Hit")
+metadata/_custom_type_script = "uid://c382udfugqyvh"
+
+[node name="Ready" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_detection_raycast", "_character_pivot", "pose_anim", "face_anim")]
+script = ExtResource("8_x6d25")
+idle_anim_name = &"MrShinyLocomotionLib/Idle"
+landing_anim_name = &"MrShinyLocomotionLib/Landing"
+player_detection_raycast = NodePath("../../PlayerDetectionRayCast")
+_character_pivot = NodePath("../../CharacterPivot")
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Chasing" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "pose_anim", "face_anim")]
+script = ExtResource("9_yxo7v")
+_character_pivot = NodePath("../../CharacterPivot")
+running_anim_name = &"MrShinyLocomotionLib/Running"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Circling" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "floor_detector", "pose_anim", "face_anim")]
+script = ExtResource("11_p6350")
+_character_pivot = NodePath("../../CharacterPivot")
+floor_detector = NodePath("../../CharacterPivot/FloorDetector")
+running_anim_name = &"MrShinyLocomotionLib/Running"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Returning" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "player_detection_raycast", "pose_anim", "face_anim")]
+script = ExtResource("13_lsuae")
+_character_pivot = NodePath("../../CharacterPivot")
+walking_anim_name = &"MrShinyLocomotionLib/Walking"
+player_detection_raycast = NodePath("../../PlayerDetectionRayCast")
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "landing_check_raycast", "pose_anim", "face_anim")]
+script = ExtResource("14_yimgy")
+_character_pivot = NodePath("../../CharacterPivot")
+landing_check_raycast = NodePath("../../LandingAnimTrigger")
+falling_anim_name = &"MrShinyLocomotionLib/Falling"
+landing_anim_name = &"MrShinyLocomotionLib/Landing"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_pivot", "hit_shapecast", "pose_anim", "face_anim")]
+script = ExtResource("18_8ooy2")
+character_pivot = NodePath("../../CharacterPivot")
+hit_shapecast = NodePath("../../CharacterPivot/AtkHitShapeCast")
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Getting_Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_pivot", "pose_anim", "face_anim")]
+script = ExtResource("20_l8sre")
+character_pivot = NodePath("../../CharacterPivot")
+gravity = 75.0
+next_state_name = &"Chasing"
+hit_small_anim_name = &"TakingDamageLib/Getting Hit Small"
+hit_large_anim_name = &"TakingDamageLib/Getting Hit Large"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("")
+metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
+
+[node name="Recovering" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim", "face_anim")]
+script = ExtResource("21_tpipv")
+next_state_name = &"Chasing"
+recovery_anim_name = &"TakingDamageLib/Stand Up"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("")
+metadata/_custom_type_script = "uid://hnvtv7wnt2qf"
+
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "character_model", "to_deactivate", "pose_anim", "face_anim")]
+script = ExtResource("22_xlubk")
+character = NodePath("../..")
+character_model = NodePath("")
+to_deactivate = [NodePath("../../Grapple Point"), NodePath("../../CharacterPivot/AtkHitShapeCast"), NodePath("../../PlayerDetectionRayCast"), NodePath("../../CharacterPivot/FloorDetector"), NodePath("../../LandingAnimTrigger"), NodePath("../../Collider")]
+death_anim_name = &"TakingDamageLib/Dying Fast"
+pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
+face_anim = NodePath("")
+metadata/_custom_type_script = "uid://hnvtv7wnt2qf"

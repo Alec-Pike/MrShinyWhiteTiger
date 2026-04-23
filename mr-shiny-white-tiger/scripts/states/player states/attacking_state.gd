@@ -5,7 +5,7 @@ extends PlayerState
 @export var camera : Camera3D;
 @export var targeting_shapecast : ShapeCast3D;
 @export var hit_shapecast : ShapeCast3D;
-@export var style_score_display : Node;
+@export var style_manager : Node;
 @export_category("Starting Attacks")
 @export var starting_ground_light_atk : AttackResource;
 @export var starting_ground_heavy_atk : AttackResource;
@@ -89,6 +89,8 @@ func physics_update(_delta: float) -> void:
 		hit_shapecast.force_shapecast_update();
 		for i in hit_shapecast.get_collision_count():
 			var target: Enemy = hit_shapecast.get_collider(i) as Enemy;
+			if targets_hit.is_empty(): # Only do this once
+				atk_successful.emit(curr_atk);
 			# Only hit each enemy once per attack
 			if target not in targets_hit:
 				target.take_damage(dmg, kbk, player_pivot.global_transform.origin);
@@ -97,8 +99,7 @@ func physics_update(_delta: float) -> void:
 				# Health steal in special mode
 				if special_mode_on:
 					player.hp += dmg;
-			if targets_hit.is_empty(): # Only do this once
-				atk_successful.emit(curr_atk);
+			
 	else:
 		hit_shapecast.enabled = false
 

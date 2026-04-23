@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c64slysg5u0dt"]
+[gd_scene load_steps=43 format=3 uid="uid://c64slysg5u0dt"]
 
 [ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
@@ -124,9 +124,24 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 0.89411765, 0.6901961, 1)
 gradient = SubResource("Gradient_r3tw4")
 width = 256
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="Gradient" id="Gradient_jh3hg"]
+offsets = PackedFloat32Array(0.9954955, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dcfia"]
+gradient = SubResource("Gradient_jh3hg")
+width = 256
+
+[sub_resource type="Gradient" id="Gradient_ykfka"]
+colors = PackedColorArray(1, 0, 0, 1, 0.38431373, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fpvv5"]
+gradient = SubResource("Gradient_ykfka")
+width = 256
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("health_bar")]
 collision_layer = 8
 script = ExtResource("1_cmorj")
+health_bar = NodePath("CanvasLayer/HealthBar")
 
 [node name="CharacterPivot" type="Node3D" parent="."]
 
@@ -213,6 +228,20 @@ value = 50.0
 texture_under = SubResource("PlaceholderTexture2D_22xyk")
 texture_progress = SubResource("GradientTexture2D_nmymu")
 
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -42.0
+offset_right = 264.0
+offset_bottom = 22.0
+grow_vertical = 0
+scale = Vector2(0.985, 0.492)
+value = 50.0
+texture_under = SubResource("GradientTexture2D_dcfia")
+texture_progress = SubResource("GradientTexture2D_fpvv5")
+
 [node name="StyleManager" type="Node" parent="." node_paths=PackedStringArray("sp_atk_meter_display", "style_score_display", "atk_state")]
 script = ExtResource("11_22xyk")
 sp_atk_meter_display = NodePath("../CanvasLayer/SpAtkMeter")
@@ -254,13 +283,12 @@ pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
 
-[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_pivot", "camera", "targeting_shapecast", "hit_shapecast", "style_score_display", "pose_anim", "face_anim")]
+[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_pivot", "camera", "targeting_shapecast", "hit_shapecast", "pose_anim", "face_anim")]
 script = ExtResource("12_22xyk")
 player_pivot = NodePath("../../CharacterPivot")
 camera = NodePath("../../CameraController/SpringArm3D/Camera3D")
 targeting_shapecast = NodePath("../../CharacterPivot/AtkTargetingShapeCast")
 hit_shapecast = NodePath("../../CharacterPivot/AtkHitShapeCast")
-style_score_display = NodePath("../../CanvasLayer/StyleScoreDisplay")
 starting_ground_light_atk = ExtResource("7_kbsxf")
 starting_ground_heavy_atk = ExtResource("21_gf0v6")
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
@@ -282,6 +310,7 @@ script = ExtResource("22_373r6")
 dodge_anim_name = &"TakingDamageLib/Dodge"
 _camera_pivot = NodePath("../../CameraController")
 move_speed = 3.0
+cooldown_seconds = 1.0
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"

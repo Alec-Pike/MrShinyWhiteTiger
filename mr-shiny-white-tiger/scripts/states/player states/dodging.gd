@@ -3,10 +3,14 @@ extends PlayerState
 @export var dodge_anim_name : StringName;
 @export var _camera_pivot : Node3D;
 @export var move_speed : float;
-var prev_state : String;
+@export var cooldown_seconds : float = 3.0;
+var cooldown_timer : float = 0;
 
 func enter(_previous_state_path: String, _data := {}) -> void:
-	prev_state = _previous_state_path;
+	if cooldown_timer > 0.0:
+		finished.emit(_previous_state_path);
+		return;
+	
 	pose_anim.animation_finished.connect(_on_animation_finished);
 	pose_anim.play(dodge_anim_name, 0.2);
 	
@@ -24,14 +28,20 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 	player.velocity = movement;
 
 
+func _process(delta: float) -> void:
+	cooldown_timer -= delta;
+
+
 func physics_update(_delta: float) -> void:
 	player.move_and_slide();
 
 
 func _on_animation_finished(_anim : StringName):
 	#print("Detected end of dodge animation");
-	finished.emit(prev_state);
+	finished.emit(IDLE);
 
 
 func exit() -> void:
 	pose_anim.animation_finished.disconnect(_on_animation_finished);
+	if cooldown_timer <= 0.0:
+		cooldown_timer = cooldown_seconds;
