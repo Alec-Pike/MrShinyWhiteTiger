@@ -4,10 +4,8 @@ extends Node3D
 @export_range(0.0, 1.0) var camera_sensitivity_v : float = 0.01;
 @export var tilt_limit_up : float = 65;
 @export var tilt_limit_down : float = -65;
-@export var invert_camera_h : bool = false;
-@export var invert_camera_v : bool = true;
-@onready var invert_camera_h_multiplier : int = -1 if invert_camera_h else 1;
-@onready var invert_camera_v_multiplier : int = -1 if invert_camera_v else 1;
+@onready var invert_camera_h_multiplier : int = -1 if Global.invert_camera_h else 1;
+@onready var invert_camera_v_multiplier : int = -1 if Global.invert_camera_v else 1;
 
 
 func _ready() -> void:

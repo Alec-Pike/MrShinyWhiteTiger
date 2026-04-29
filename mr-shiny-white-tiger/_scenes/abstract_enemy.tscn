@@ -81,61 +81,55 @@ initial_state = NodePath("Ready")
 damage_state = NodePath("Getting_Hit")
 metadata/_custom_type_script = "uid://c382udfugqyvh"
 
-[node name="Ready" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_detection_raycast", "_character_pivot", "pose_anim", "face_anim")]
+[node name="Ready" type="Node" parent="StateMachine" node_paths=PackedStringArray("player_detection_raycast", "_character_pivot", "pose_anim")]
 script = ExtResource("8_x6d25")
 idle_anim_name = &"MrShinyLocomotionLib/Idle"
 landing_anim_name = &"MrShinyLocomotionLib/Landing"
 player_detection_raycast = NodePath("../../PlayerDetectionRayCast")
 _character_pivot = NodePath("../../CharacterPivot")
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
-face_anim = NodePath("")
 metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
 
-[node name="Chasing" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "pose_anim", "face_anim")]
+[node name="Chasing" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "pose_anim")]
 script = ExtResource("9_yxo7v")
 _character_pivot = NodePath("../../CharacterPivot")
 running_anim_name = &"MrShinyLocomotionLib/Running"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
-face_anim = NodePath("")
 metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
 
-[node name="Circling" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "floor_detector", "pose_anim", "face_anim")]
+[node name="Circling" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "floor_detector", "pose_anim")]
 script = ExtResource("11_p6350")
 _character_pivot = NodePath("../../CharacterPivot")
 floor_detector = NodePath("../../CharacterPivot/FloorDetector")
 running_anim_name = &"MrShinyLocomotionLib/Running"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
-face_anim = NodePath("")
 metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
 
-[node name="Returning" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "player_detection_raycast", "pose_anim", "face_anim")]
+[node name="Returning" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "player_detection_raycast", "pose_anim")]
 script = ExtResource("13_lsuae")
 _character_pivot = NodePath("../../CharacterPivot")
 walking_anim_name = &"MrShinyLocomotionLib/Walking"
 player_detection_raycast = NodePath("../../PlayerDetectionRayCast")
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
-face_anim = NodePath("")
 metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
 
-[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "landing_check_raycast", "pose_anim", "face_anim")]
+[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("_character_pivot", "landing_check_raycast", "pose_anim")]
 script = ExtResource("14_yimgy")
 _character_pivot = NodePath("../../CharacterPivot")
 landing_check_raycast = NodePath("../../LandingAnimTrigger")
 falling_anim_name = &"MrShinyLocomotionLib/Falling"
 landing_anim_name = &"MrShinyLocomotionLib/Landing"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
-face_anim = NodePath("")
 metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
 
-[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_pivot", "hit_shapecast", "pose_anim", "face_anim")]
+[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_pivot", "hit_shapecast", "pose_anim")]
 script = ExtResource("18_8ooy2")
 character_pivot = NodePath("../../CharacterPivot")
 hit_shapecast = NodePath("../../CharacterPivot/AtkHitShapeCast")
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
-face_anim = NodePath("")
 metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
 
-[node name="Getting_Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_pivot", "pose_anim", "face_anim")]
+[node name="Getting_Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_pivot", "pose_anim")]
 script = ExtResource("20_l8sre")
 character_pivot = NodePath("../../CharacterPivot")
 gravity = 75.0
@@ -143,23 +137,19 @@ next_state_name = &"Chasing"
 hit_small_anim_name = &"TakingDamageLib/Getting Hit Small"
 hit_large_anim_name = &"TakingDamageLib/Getting Hit Large"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
-face_anim = NodePath("")
 metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
 
-[node name="Recovering" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim", "face_anim")]
+[node name="Recovering" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim")]
 script = ExtResource("21_tpipv")
 next_state_name = &"Chasing"
 recovery_anim_name = &"TakingDamageLib/Stand Up"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
-face_anim = NodePath("")
 metadata/_custom_type_script = "uid://hnvtv7wnt2qf"
 
-[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "character_model", "to_deactivate", "pose_anim", "face_anim")]
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "to_deactivate", "pose_anim")]
 script = ExtResource("22_xlubk")
 character = NodePath("../..")
-character_model = NodePath("")
 to_deactivate = [NodePath("../../Grapple Point"), NodePath("../../CharacterPivot/AtkHitShapeCast"), NodePath("../../PlayerDetectionRayCast"), NodePath("../../CharacterPivot/FloorDetector"), NodePath("../../LandingAnimTrigger"), NodePath("../../Collider")]
 death_anim_name = &"TakingDamageLib/Dying Fast"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
-face_anim = NodePath("")
 metadata/_custom_type_script = "uid://hnvtv7wnt2qf"

@@ -8,6 +8,7 @@ var hp : int = starting_hp;
 
 func _enter_tree():
 	Global.player = self
+	Global.game_init();
 
 
 func _ready() -> void:

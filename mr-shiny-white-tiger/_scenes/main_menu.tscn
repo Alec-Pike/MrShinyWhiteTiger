@@ -1,0 +1,265 @@
+[gd_scene load_steps=15 format=3 uid="uid://6td4spwofdgn"]
+
+[ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="1_j2tf1"]
+[ext_resource type="Script" uid="uid://dj2l47m3tw6j2" path="res://scripts/menu stuff/main_menu.gd" id="1_jx3df"]
+[ext_resource type="Texture2D" uid="uid://cd0vmheamvv7a" path="res://sprites/MrShinyControlsImage.png" id="2_fasvp"]
+[ext_resource type="Script" uid="uid://do4mndlvxboer" path="res://scripts/menu stuff/options_menu.gd" id="2_tcb7q"]
+[ext_resource type="Script" uid="uid://ddaiob86lhxi4" path="res://scripts/menu stuff/invert_camera_h_check_box.gd" id="3_niher"]
+[ext_resource type="Script" uid="uid://byu3ld32035go" path="res://scripts/menu stuff/invert_camera_v_check_box.gd" id="4_j2tf1"]
+[ext_resource type="Script" uid="uid://xk7li4us6a15" path="res://scripts/menu stuff/volume_slider.gd" id="4_q13kq"]
+[ext_resource type="Script" uid="uid://buqj8ht6a2egd" path="res://scripts/menu stuff/fullscreen_check_button.gd" id="4_tmamg"]
+[ext_resource type="Script" uid="uid://c6od37i026cwm" path="res://scripts/menu stuff/3d_rendering_quality_dropdown.gd" id="7_xeutb"]
+
+[sub_resource type="Theme" id="Theme_xeutb"]
+default_font = ExtResource("1_j2tf1")
+default_font_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmamg"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tcb7q"]
+color = Color(1, 1, 1, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_q13kq"]
+color = Color(0.29333335, 0.5063266, 1, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tmamg"]
+color = Color(0.0017534032, 0.00012273341, 0.6658606, 1)
+thickness = 5
+
+[node name="Root" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xeutb")
+
+[node name="MainMenu" type="Control" parent="." node_paths=PackedStringArray("play_btn", "records_btn", "options_btn", "credits_btn", "quit_btn", "options_menu")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jx3df")
+play_btn = NodePath("MainVBoxContainer/PlayButton")
+records_btn = NodePath("MainVBoxContainer/RecordsButton")
+options_btn = NodePath("MainVBoxContainer/OptionsButton")
+credits_btn = NodePath("MainVBoxContainer/CreditsButton")
+quit_btn = NodePath("MainVBoxContainer/QuitButton")
+options_menu = NodePath("../OptionsMenu")
+
+[node name="LogoTEMP" type="Label" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -63.0
+offset_top = -192.0
+offset_right = 61.0
+offset_bottom = -169.0
+grow_horizontal = 2
+text = "[logo goes here]"
+horizontal_alignment = 1
+
+[node name="MainVBoxContainer" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -125.0
+offset_right = 100.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayButton" type="Button" parent="MainMenu/MainVBoxContainer"]
+layout_mode = 2
+text = "Start Mission"
+
+[node name="RecordsButton" type="Button" parent="MainMenu/MainVBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Records"
+
+[node name="OptionsButton" type="Button" parent="MainMenu/MainVBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="CreditsButton" type="Button" parent="MainMenu/MainVBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="MainMenu/MainVBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="OptionsMenu" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -664.0
+offset_top = -392.5
+offset_right = 664.0
+offset_bottom = 392.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tmamg")
+script = ExtResource("2_tcb7q")
+
+[node name="OptionsHBoxContainer" type="HBoxContainer" parent="OptionsMenu"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="ControlsVBoxContainer" type="VBoxContainer" parent="OptionsMenu/OptionsHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ControlsLabel" type="Label" parent="OptionsMenu/OptionsHBoxContainer/ControlsVBoxContainer"]
+layout_mode = 2
+text = "Controls"
+horizontal_alignment = 1
+
+[node name="InvertCameraHCheckBox" type="CheckBox" parent="OptionsMenu/OptionsHBoxContainer/ControlsVBoxContainer"]
+layout_mode = 2
+text = " Invert Camera Horizontal"
+script = ExtResource("3_niher")
+
+[node name="InvertCameraVCheckBox" type="CheckBox" parent="OptionsMenu/OptionsHBoxContainer/ControlsVBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = " Invert Camera Vertical"
+script = ExtResource("4_j2tf1")
+
+[node name="ControlsDiagram" type="TextureRect" parent="OptionsMenu/OptionsHBoxContainer/ControlsVBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_fasvp")
+expand_mode = 5
+
+[node name="SystemVBoxContainer" type="VBoxContainer" parent="OptionsMenu/OptionsHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+theme_override_constants/separation = 12
+
+[node name="SystemLabel" type="Label" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer"]
+layout_mode = 2
+text = "System"
+horizontal_alignment = 1
+
+[node name="SystemHBoxContainer" type="HBoxContainer" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LabelsVBoxContainer" type="VBoxContainer" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 70
+
+[node name="FullscreenLabel" type="Label" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/LabelsVBoxContainer"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="3DRenderingQualityLabel" type="Label" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/LabelsVBoxContainer"]
+layout_mode = 2
+text = "3D Rendering Quality"
+
+[node name="VoiceVolumeLabel" type="Label" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/LabelsVBoxContainer"]
+layout_mode = 2
+text = "Voice Volume"
+
+[node name="EffectsVolumeLabel" type="Label" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/LabelsVBoxContainer"]
+layout_mode = 2
+text = "Effects Volume"
+
+[node name="MusicLabel" type="Label" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/LabelsVBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="ButtonsVBoxContainer" type="VBoxContainer" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.71
+theme_override_constants/separation = 70
+
+[node name="FullscreenCheckButton" type="CheckButton" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/ButtonsVBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("4_tmamg")
+
+[node name="3DRenderingQualityDropdown" type="OptionButton" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/ButtonsVBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "Highest"
+popup/item_0/id = 0
+popup/item_1/text = "High"
+popup/item_1/id = 1
+popup/item_2/text = "Medium"
+popup/item_2/id = 2
+popup/item_3/text = "Low"
+popup/item_3/id = 3
+script = ExtResource("7_xeutb")
+
+[node name="VoiceVolumeSlider" type="HSlider" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/ButtonsVBoxContainer"]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_tcb7q")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_q13kq")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_tmamg")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("4_q13kq")
+audio_bus_name = "Voice"
+
+[node name="EffectsVolumeSlider" type="HSlider" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/ButtonsVBoxContainer"]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_tcb7q")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_q13kq")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_tmamg")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("4_q13kq")
+audio_bus_name = "SFX"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/ButtonsVBoxContainer"]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_tcb7q")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_q13kq")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_tmamg")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("4_q13kq")
+audio_bus_name = "Music"
+
+[node name="BackButton" type="Button" parent="OptionsMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Done"
