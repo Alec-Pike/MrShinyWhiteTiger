@@ -44,9 +44,15 @@ Gitignore template by VeeronTen on GitHub (https://github.com/github/gitignore/b
 
 ### Assets
 
-(building asset credits go here)
+(HDRP) NYC-like City Buildings Set (PBR) by MARCIN'S ASSETS, licenced under the Standard Unity Asset Store EULA (https://assetstore.unity.com/packages/3d/environments/urban/hdrp-nyc-like-city-buildings-set-pbr-239452)
 
-(skybox asset credits go here)
+Free HDR Skyboxes Pack by BG Studio, licenced under Standard Unity Asset Store EULA the (https://assetstore.unity.com/packages/2d/textures-materials/sky/free-hdr-skyboxes-pack-175525)
 
-Liberation Mono Bold font by Red Hat, licenced under GNU GPL (https://www.dafont.com/liberation-mono.font)
+Liberation Mono Bold font by Red Hat, licenced under the GNU GPL (https://www.dafont.com/liberation-mono.font)
+
+
+
+This software is copyrighted under the MIT License.
+
+Copyright (c) 2026 Alec Pike.
 

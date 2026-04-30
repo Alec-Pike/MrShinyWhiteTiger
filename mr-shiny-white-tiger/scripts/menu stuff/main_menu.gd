@@ -8,6 +8,7 @@ extends Control
 @export var quit_btn : Button;
 @export_category("Refs to other menus")
 @export var options_menu : Control;
+@export var credits_menu : Control;
 
 func _ready() -> void:
 	play_btn.pressed.connect(_on_play_btn_pressed);
@@ -18,6 +19,7 @@ func _ready() -> void:
 	
 	self.visible = true;
 	options_menu.visible = false;
+	credits_menu.visible = false;
 	
 	play_btn.grab_focus.call_deferred();
 
@@ -33,7 +35,8 @@ func _on_options_btn_pressed() -> void:
 	options_menu.visible = true;
 
 func _on_credits_btn_pressed() -> void:
-	pass
+	self.visible = false;
+	credits_menu.visible = true;
 
 func _on_quit_btn_pressed() -> void:
 	get_tree().quit();
