@@ -1,7 +1,25 @@
-[gd_resource type="Resource" script_class="AttackResource" load_steps=2 format=3 uid="uid://decdkvbycb5oj"]
+[gd_resource type="Resource" script_class="AttackResource" load_steps=5 format=3 uid="uid://decdkvbycb5oj"]
 
+[ext_resource type="Resource" uid="uid://cemn6ofgq4u2" path="res://resources/attack_resources/air_atks/Air_Side_Kick.tres" id="1_h20u0"]
 [ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="1_vb3uh"]
+[ext_resource type="Resource" uid="uid://gxyp4k41fddu" path="res://resources/attack_resources/air_atks/Air_Punch.tres" id="2_gpd5n"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6mxpv"]
+radius = 0.3
+height = 1.5
 
 [resource]
 script = ExtResource("1_vb3uh")
+animation_name = &"MrShinyAirAtksLib/L_Knee"
+active_time_start = 0.19
+active_time_end = 0.53
+transition_ok_time = 0.57
+speed_factor = 1.5
+damage = 10
+hit_shape = SubResource("CapsuleShape3D_6mxpv")
+hit_range = 1.0
+knockback = Vector3(0, 1, -1)
+style_points = 6
+next_light_atk = ExtResource("2_gpd5n")
+next_heavy_atk = ExtResource("1_h20u0")
 metadata/_custom_type_script = "uid://b3m1xa3wp4bdx"

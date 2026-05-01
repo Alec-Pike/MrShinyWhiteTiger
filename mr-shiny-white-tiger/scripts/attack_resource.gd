@@ -6,6 +6,7 @@ extends Resource
 @export var active_time_start : float;
 @export var active_time_end : float;
 @export var transition_ok_time : float;
+@export var speed_factor : float = 1.0;
 @export_category("Stats")
 @export var damage : int;
 @export var hit_shape : Shape3D;

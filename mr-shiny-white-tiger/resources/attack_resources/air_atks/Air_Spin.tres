@@ -1,7 +1,21 @@
-[gd_resource type="Resource" script_class="AttackResource" load_steps=2 format=3 uid="uid://dhuleuq5by7j1"]
+[gd_resource type="Resource" script_class="AttackResource" load_steps=4 format=3 uid="uid://dhuleuq5by7j1"]
 
 [ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="1_3knsa"]
+[ext_resource type="Resource" uid="uid://cemn6ofgq4u2" path="res://resources/attack_resources/air_atks/Air_Side_Kick.tres" id="1_lne7p"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rls0l"]
+radius = 0.8
 
 [resource]
 script = ExtResource("1_3knsa")
+animation_name = &"MrShinyAirAtksLib/Air_Spin"
+active_time_start = 0.65
+active_time_end = 0.7
+transition_ok_time = 0.12
+damage = 15
+hit_shape = SubResource("SphereShape3D_rls0l")
+hit_range = 1.2
+knockback = Vector3(0, -5, -1)
+style_points = 15
+next_heavy_atk = ExtResource("1_lne7p")
 metadata/_custom_type_script = "uid://b3m1xa3wp4bdx"

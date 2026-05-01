@@ -5,7 +5,6 @@ extends PlayerState
 @export var camera : Camera3D;
 @export var targeting_shapecast : ShapeCast3D;
 @export var hit_shapecast : ShapeCast3D;
-@export var style_manager : Node;
 @export_category("Starting Attacks")
 @export var starting_ground_light_atk : AttackResource;
 @export var starting_ground_heavy_atk : AttackResource;
@@ -59,7 +58,7 @@ func execute_current_attack():
 	targets_hit.clear();
 	
 	# Play Animation
-	pose_anim.play(curr_atk.animation_name)
+	pose_anim.play(curr_atk.animation_name, -1, curr_atk.speed_factor);
 	
 	# Clear buffer so we don't double-attack
 	pending_attack_type = ""

@@ -1,9 +1,10 @@
-[gd_scene load_steps=43 format=3 uid="uid://c64slysg5u0dt"]
+[gd_scene load_steps=47 format=3 uid="uid://c64slysg5u0dt"]
 
 [ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
 [ext_resource type="PackedScene" uid="uid://b5yxc4jeaywb0" path="res://models/character models/MrShinyFinal.vrm" id="2_f2e50"]
 [ext_resource type="Script" uid="uid://byunh6r4lygh5" path="res://addons/vrm/vrm_collider_group.gd" id="3_joqdm"]
+[ext_resource type="AnimationLibrary" uid="uid://rdo3l2dnd8tf" path="res://animations/MrShiny/MrShinyAirAtksLib.res" id="5_dcfia"]
 [ext_resource type="AnimationLibrary" uid="uid://hx6hwsrlgsp8" path="res://animations/MrShiny/MrShinyGroundLightAtksLib.res" id="5_edtk3"]
 [ext_resource type="Script" uid="uid://o0ssfc6rq1kp" path="res://scripts/grapple_targeting.gd" id="5_g2jcq"]
 [ext_resource type="AnimationLibrary" uid="uid://bhr3qel2vrf22" path="res://animations/MrShiny/MrShinyLocomotionLib.res" id="5_lulei"]
@@ -18,10 +19,13 @@
 [ext_resource type="Script" uid="uid://csbub0jiyspxt" path="res://scripts/style_manager.gd" id="11_22xyk"]
 [ext_resource type="Script" uid="uid://c7xv43yg7jfh6" path="res://scripts/states/player states/air_state.gd" id="11_f2e50"]
 [ext_resource type="Script" uid="uid://cb10pu58mdyaj" path="res://scripts/states/player states/attacking_state.gd" id="12_22xyk"]
+[ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="13_xbada"]
 [ext_resource type="Script" uid="uid://crj4tn2a2ba67" path="res://scripts/states/player states/grappling_state.gd" id="15_nmymu"]
 [ext_resource type="Script" uid="uid://chcu74c7xyki3" path="res://scripts/states/getting_hit.gd" id="20_373r6"]
+[ext_resource type="Resource" uid="uid://decdkvbycb5oj" path="res://resources/attack_resources/air_atks/Air_Knee.tres" id="21_fpvv5"]
 [ext_resource type="Resource" uid="uid://cueb8ric3w518" path="res://resources/attack_resources/ground_heavy_atks/L_Side_Kick.tres" id="21_gf0v6"]
 [ext_resource type="Script" uid="uid://ctev77pe4gsrp" path="res://scripts/states/player states/dodging.gd" id="22_373r6"]
+[ext_resource type="Resource" uid="uid://cemn6ofgq4u2" path="res://resources/attack_resources/air_atks/Air_Side_Kick.tres" id="22_xbada"]
 [ext_resource type="Script" uid="uid://bva6ixuqk4wbx" path="res://scripts/states/recovering_state.gd" id="23_aj6rt"]
 [ext_resource type="Script" uid="uid://cm1afagd0va2d" path="res://scripts/states/death_state.gd" id="24_jh3hg"]
 
@@ -110,9 +114,11 @@ height = 1.7312012
 radius = 32.6
 
 [sub_resource type="LabelSettings" id="LabelSettings_r3tw4"]
+font = ExtResource("13_xbada")
 font_size = 40
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-3, -2)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_22xyk"]
 size = Vector2(256, 64)
@@ -153,6 +159,7 @@ spring_bones = Array[ExtResource("2_cmorj")]([SubResource("Resource_2ue6v"), Sub
 [node name="PoseAnimator" type="AnimationPlayer" parent="CharacterPivot"]
 root_node = NodePath("../CharacterModel")
 libraries = {
+&"MrShinyAirAtksLib": ExtResource("5_dcfia"),
 &"MrShinyGroundHeavyAtksLib": ExtResource("5_q2wkl"),
 &"MrShinyGroundLightAtksLib": ExtResource("5_edtk3"),
 &"MrShinyLocomotionLib": ExtResource("5_lulei"),
@@ -291,6 +298,8 @@ targeting_shapecast = NodePath("../../CharacterPivot/AtkTargetingShapeCast")
 hit_shapecast = NodePath("../../CharacterPivot/AtkHitShapeCast")
 starting_ground_light_atk = ExtResource("7_kbsxf")
 starting_ground_heavy_atk = ExtResource("21_gf0v6")
+starting_air_light_atk = ExtResource("21_fpvv5")
+starting_air_heavy_atk = ExtResource("22_xbada")
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"

@@ -15,4 +15,5 @@ damage = 10
 hit_shape = SubResource("SphereShape3D_kohio")
 hit_range = 1.5
 knockback = Vector3(0, 0, -5)
+style_points = 8
 metadata/_custom_type_script = "uid://b3m1xa3wp4bdx"

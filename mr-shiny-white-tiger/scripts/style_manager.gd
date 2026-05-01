@@ -87,8 +87,9 @@ func increase_style(points : int):
 	style_score += points;
 	style_score_display.text = str(style_score);
 	# Animate the score display
-	style_score_display.scale = score_display_pop_scale;
-	var tween : Tween = create_tween();
-	tween.tween_property(style_score_display, "scale", score_display_original_scale, 0.3) \
-		.set_trans(Tween.TRANS_BACK) \
-		.set_ease(Tween.EASE_OUT);
+	if points != 0:
+		style_score_display.scale = score_display_pop_scale;
+		var tween : Tween = create_tween();
+		tween.tween_property(style_score_display, "scale", score_display_original_scale, 0.3) \
+			.set_trans(Tween.TRANS_BACK) \
+			.set_ease(Tween.EASE_OUT);
