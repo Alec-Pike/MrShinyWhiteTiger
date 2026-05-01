@@ -270,6 +270,7 @@ size_flags_vertical = 8
 text = "Done"
 
 [node name="CreditsPanel" type="PanelContainer" parent="." node_paths=PackedStringArray("back_button", "default_focus")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
