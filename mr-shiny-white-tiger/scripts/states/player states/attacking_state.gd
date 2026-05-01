@@ -58,7 +58,7 @@ func execute_current_attack():
 	targets_hit.clear();
 	
 	# Play Animation
-	pose_anim.play(curr_atk.animation_name, -1, curr_atk.speed_factor);
+	pose_anim.play(curr_atk.animation_name, 0.1, curr_atk.speed_factor);
 	
 	# Clear buffer so we don't double-attack
 	pending_attack_type = ""

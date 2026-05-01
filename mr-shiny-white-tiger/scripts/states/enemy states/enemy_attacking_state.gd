@@ -48,7 +48,7 @@ func execute_next_attack():
 	
 	already_hit = false;
 	# Play Animation
-	pose_anim.play(curr_atk.animation_name, -1, curr_atk.speed_factor);
+	pose_anim.play(curr_atk.animation_name, 0.1, curr_atk.speed_factor);
 	
 
 
