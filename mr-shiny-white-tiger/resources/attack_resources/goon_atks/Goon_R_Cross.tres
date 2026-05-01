@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=3 format=3 uid="uid://wda2es4trptf"]
+
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="3_0fuib"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6tytm"]
+radius = 0.6
+
+[resource]
+script = ExtResource("3_0fuib")
+animation_name = &"GoonAtksLib/R_Cross"
+active_time_start = 0.14
+active_time_end = 0.29
+transition_ok_time = 0.38
+damage = 7
+hit_shape = SubResource("SphereShape3D_6tytm")
+hit_range = 1.0
+knockback = Vector3(0, 0, -0.5)
+style_points = 2
