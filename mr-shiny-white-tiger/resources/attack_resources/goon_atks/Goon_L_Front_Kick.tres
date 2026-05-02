@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=3 format=3 uid="uid://c51vjbbokq441"]
+
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="1_1o1ew"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6tytm"]
+radius = 0.6
+
+[resource]
+script = ExtResource("1_1o1ew")
+animation_name = &"GoonAtksLib/L_Front_Kick"
+active_time_start = 0.75
+active_time_end = 0.91
+transition_ok_time = 1.41
+damage = 7
+hit_shape = SubResource("SphereShape3D_6tytm")
+hit_range = 1.0
+knockback = Vector3(0, 0, -1)

@@ -14,6 +14,6 @@ transition_ok_time = 1.33
 damage = 20
 hit_shape = SubResource("SphereShape3D_kohio")
 hit_range = 1.0
-knockback = Vector3(0, 0, -10)
+knockback = Vector3(0, 0, -6)
 style_points = 20
 metadata/_custom_type_script = "uid://b3m1xa3wp4bdx"

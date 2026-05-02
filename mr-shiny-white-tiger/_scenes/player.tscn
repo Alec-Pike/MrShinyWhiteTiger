@@ -147,6 +147,7 @@ width = 256
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("health_bar")]
 collision_layer = 8
 script = ExtResource("1_cmorj")
+starting_hp = 500
 health_bar = NodePath("CanvasLayer/HealthBar")
 
 [node name="CharacterPivot" type="Node3D" parent="."]

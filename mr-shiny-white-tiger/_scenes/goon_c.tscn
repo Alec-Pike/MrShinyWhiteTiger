@@ -1,0 +1,111 @@
+[gd_scene load_steps=19 format=3 uid="uid://dovh8l4o63uja"]
+
+[ext_resource type="PackedScene" uid="uid://bwgh11eofhruj" path="res://_scenes/abstract_enemy.tscn" id="1_5xikq"]
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="2_3s8wp"]
+[ext_resource type="PackedScene" uid="uid://cwaapfs1vovpx" path="res://models/character models/WTGoonC.vrm" id="2_mo4r5"]
+[ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="3_elrqu"]
+[ext_resource type="Resource" uid="uid://carco52fpcm28" path="res://resources/attack_resources/goon_atks/Goon_R_Leg_Kick.tres" id="3_xue53"]
+[ext_resource type="Script" uid="uid://byunh6r4lygh5" path="res://addons/vrm/vrm_collider_group.gd" id="4_etthg"]
+[ext_resource type="Resource" uid="uid://rqaayx5pk66" path="res://resources/attack_resources/goon_atks/Goon_R_Side_Kick.tres" id="4_ye0sy"]
+[ext_resource type="Resource" uid="uid://dcuj2ouiisfu" path="res://resources/attack_resources/goon_atks/Goon_L_Jab.tres" id="5_deyom"]
+[ext_resource type="Resource" uid="uid://crmrw0ye4gt0j" path="res://resources/attack_resources/goon_atks/Goob_R_Haymaker.tres" id="6_s5hx4"]
+[ext_resource type="Resource" uid="uid://dwxut4ntqkhar" path="res://resources/attack_resources/goon_atks/Goon_2H_Shove.tres" id="7_mwawb"]
+[ext_resource type="Resource" uid="uid://c51vjbbokq441" path="res://resources/attack_resources/goon_atks/Goon_L_Front_Kick.tres" id="8_v4ox8"]
+[ext_resource type="Resource" uid="uid://dnrjn4ilve8ca" path="res://resources/attack_resources/goon_atks/Goon_R_Uppercut.tres" id="9_77n62"]
+
+[sub_resource type="Resource" id="Resource_noyeo"]
+resource_name = "TopsUpperArm"
+script = ExtResource("3_elrqu")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_L_CoatSkirtBack_01", "J_Sec_L_CoatSkirtBack_end_01", "J_Sec_L_CoatSkirtBack_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.0309906173
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_xwkgi"]
+resource_name = "TopsUpperArm"
+script = ExtResource("3_elrqu")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_L_CoatSkirtFront_01", "J_Sec_L_CoatSkirtFront_end_01", "J_Sec_L_CoatSkirtFront_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.0309906173
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_avu1y"]
+resource_name = "TopsUpperArm"
+script = ExtResource("3_elrqu")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_L_CoatSkirtSide1_01", "J_Sec_L_CoatSkirtSide2_01", "J_Sec_L_CoatSkirtSide2_end_01", "J_Sec_L_CoatSkirtSide2_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.0309906173
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_24dv5"]
+resource_name = "TopsUpperArm"
+script = ExtResource("3_elrqu")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_R_CoatSkirtBack_01", "J_Sec_R_CoatSkirtBack_end_01", "J_Sec_R_CoatSkirtBack_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.0309906173
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_jflk0"]
+resource_name = "TopsUpperArm"
+script = ExtResource("3_elrqu")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_R_CoatSkirtFront_01", "J_Sec_R_CoatSkirtFront_end_01", "J_Sec_R_CoatSkirtFront_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.0309906173
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 0)
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_kv6pj"]
+resource_name = "TopsUpperArm"
+script = ExtResource("3_elrqu")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_R_CoatSkirtSide1_01", "J_Sec_R_CoatSkirtSide2_01", "J_Sec_R_CoatSkirtSide2_end_01", "J_Sec_R_CoatSkirtSide2_end_01_end")
+drag_force_scale = 0.5
+hit_radius_scale = 0.0309906173
+gravity_scale = 0.0
+drag_force = PackedFloat64Array(0, 0, 0, 1)
+hit_radius = PackedFloat64Array(1, 1, 1, 0)
+center_bone = "Root_"
+
+[node name="Goon_C" instance=ExtResource("1_5xikq")]
+hp = 200
+chase_speed = 7.0
+air_speed = 6.0
+min_num_atks = 3
+attacks_and_probabilities = Dictionary[ExtResource("2_3s8wp"), float]({
+ExtResource("3_xue53"): 0.2,
+ExtResource("4_ye0sy"): 0.3,
+ExtResource("5_deyom"): 0.1,
+ExtResource("6_s5hx4"): 0.1,
+ExtResource("7_mwawb"): 0.1,
+ExtResource("8_v4ox8"): 0.1,
+ExtResource("9_77n62"): 0.1
+})
+
+[node name="WTGoonC" parent="CharacterPivot" index="0" instance=ExtResource("2_mo4r5")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+spring_bones = Array[ExtResource("3_elrqu")]([SubResource("Resource_noyeo"), SubResource("Resource_xwkgi"), SubResource("Resource_avu1y"), SubResource("Resource_24dv5"), SubResource("Resource_jflk0"), SubResource("Resource_kv6pj")])
+
+[node name="PoseAnimator" parent="CharacterPivot" index="1"]
+root_node = NodePath("../WTGoonC")
+
+[node name="Death" parent="StateMachine" index="8" node_paths=PackedStringArray("character_model")]
+character_model = NodePath("../../CharacterPivot/WTGoonC")

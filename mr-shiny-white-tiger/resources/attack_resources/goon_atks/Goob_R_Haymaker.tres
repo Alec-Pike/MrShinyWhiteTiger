@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=3 format=3 uid="uid://crmrw0ye4gt0j"]
+
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="1_fpc42"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6tytm"]
+
+[resource]
+script = ExtResource("1_fpc42")
+animation_name = &"GoonAtksLib/R_Haymaker"
+active_time_start = 0.39
+active_time_end = 0.47
+transition_ok_time = 1.17
+damage = 6
+hit_shape = SubResource("SphereShape3D_6tytm")
+hit_range = 1.0
+knockback = Vector3(-2, 0, 0)

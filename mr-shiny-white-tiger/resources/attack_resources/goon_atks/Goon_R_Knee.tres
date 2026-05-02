@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=3 format=3 uid="uid://bng2hcm341k0a"]
+
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="1_oiamg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oiamg"]
+
+[resource]
+script = ExtResource("1_oiamg")
+animation_name = &"GoonAtksLib/R_Knee"
+active_time_start = 0.61
+active_time_end = 0.77
+transition_ok_time = 2.21
+damage = 10
+hit_shape = SubResource("CapsuleShape3D_oiamg")
+hit_range = 0.75
+knockback = Vector3(0, 2, -0.5)

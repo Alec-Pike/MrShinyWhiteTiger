@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=3 format=3 uid="uid://tun620lj8qj1"]
+
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="3_10xtk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6tytm"]
+radius = 0.75
+
+[resource]
+script = ExtResource("3_10xtk")
+animation_name = &"GoonAtksLib/L_Hook"
+active_time_start = 0.14
+active_time_end = 0.32
+transition_ok_time = 0.45
+speed_factor = 0.75
+damage = 7
+hit_shape = SubResource("SphereShape3D_6tytm")
+hit_range = 1.0
+knockback = Vector3(0.1, 0, -0.75)

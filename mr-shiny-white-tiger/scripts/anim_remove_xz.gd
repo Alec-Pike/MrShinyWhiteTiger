@@ -3,7 +3,7 @@ extends EditorScript
 
 func _run():
 	# 1. Update this path to where you saved your .res file
-	var anim : Animation = load("res://animations/MrShiny/misc/L_Flying_Side_Kick_noXZ.res") 
+	var anim : Animation = load("res://animations/R_Uppercut_noXZ.res") 
 	if not anim:
 		print("Animation not found!")
 		return
