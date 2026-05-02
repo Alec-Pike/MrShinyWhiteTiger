@@ -90,7 +90,7 @@ air_speed = 4.0
 min_circle_time = 3.0
 max_circle_time = 3.5
 return_speed = 4.0
-max_num_atks = 4
+max_num_atks = 3
 attacks_and_probabilities = Dictionary[ExtResource("2_x6d25"), float]({
 ExtResource("3_yxo7v"): 0.1,
 ExtResource("4_gmm66"): 0.1,

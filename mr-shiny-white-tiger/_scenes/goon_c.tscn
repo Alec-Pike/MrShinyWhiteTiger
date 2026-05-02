@@ -89,7 +89,8 @@ center_bone = "Root_"
 hp = 200
 chase_speed = 7.0
 air_speed = 6.0
-min_num_atks = 3
+min_num_atks = 2
+max_num_atks = 4
 attacks_and_probabilities = Dictionary[ExtResource("2_3s8wp"), float]({
 ExtResource("3_xue53"): 0.2,
 ExtResource("4_ye0sy"): 0.3,

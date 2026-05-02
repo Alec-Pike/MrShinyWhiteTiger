@@ -56,10 +56,23 @@ func physics_update(_delta: float) -> void:
 	# Check for Hit Window
 	var anim_time : float = pose_anim.current_animation_position;
 	
-	if anim_time >= curr_atk.active_time_start && anim_time <= curr_atk.active_time_end:
+	if (
+		!already_hit 
+		&& anim_time < curr_atk.active_time_start 
+		&& Input.is_action_just_pressed("dodge") 
+		&& (Global.player.global_position - this_enemy.global_position).length() <= this_enemy.atk_range
+	):
+		# Style point gain for "perfect dodge"
+		Global.increase_style.emit(curr_atk.damage * 2);
+		already_hit = true;
+	elif (
+		!already_hit 
+		&& anim_time >= curr_atk.active_time_start 
+		&& anim_time <= curr_atk.active_time_end
+	):
 		hit_shapecast.enabled = true
 		hit_shapecast.force_shapecast_update();
-		if !already_hit && hit_shapecast.is_colliding():
+		if hit_shapecast.is_colliding():
 			Global.player.take_damage(curr_atk.damage, curr_atk.knockback, character_pivot.global_position);
 			print("Attack '" + curr_atk.animation_name + "' hit Player");
 			if !already_hit: # Only do this once
