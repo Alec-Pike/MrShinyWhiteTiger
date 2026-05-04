@@ -1,9 +1,9 @@
 class_name Player extends CharacterBody3D
 
 
-@export var starting_hp : int = 100;
+@export var starting_hp : int;
 @export var health_bar : TextureProgressBar;
-var hp : int = starting_hp;
+@onready var hp : int = starting_hp;
 
 
 func _enter_tree():
@@ -19,6 +19,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if hp > starting_hp:
 		hp = starting_hp;
+	
 	health_bar.value = hp;
 
 

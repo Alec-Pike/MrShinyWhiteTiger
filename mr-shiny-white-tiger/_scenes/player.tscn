@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://c64slysg5u0dt"]
+[gd_scene load_steps=45 format=3 uid="uid://c64slysg5u0dt"]
 
 [ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
@@ -10,7 +10,6 @@
 [ext_resource type="AnimationLibrary" uid="uid://bhr3qel2vrf22" path="res://animations/MrShiny/MrShinyLocomotionLib.res" id="5_lulei"]
 [ext_resource type="AnimationLibrary" uid="uid://dm3qsspj1k7wl" path="res://animations/MrShiny/MrShinyGroundHeavyAtksLib.res" id="5_q2wkl"]
 [ext_resource type="Script" uid="uid://b5c7bki52ubh6" path="res://scripts/camera_controller.gd" id="5_x0bak"]
-[ext_resource type="Texture2D" uid="uid://c10xehdnk1p01" path="res://sprites/grapple_marker.png" id="6_g2jcq"]
 [ext_resource type="Resource" uid="uid://i7kl5sa80evv" path="res://resources/attack_resources/ground_light_atks/L_Jab.tres" id="7_kbsxf"]
 [ext_resource type="Script" uid="uid://c382udfugqyvh" path="res://scripts/states/state_machine.gd" id="8_lulei"]
 [ext_resource type="AnimationLibrary" uid="uid://ywtsrua8fk68" path="res://animations/Common/TakingDamageLib.res" id="8_r3tw4"]
@@ -19,8 +18,14 @@
 [ext_resource type="Script" uid="uid://csbub0jiyspxt" path="res://scripts/style_manager.gd" id="11_22xyk"]
 [ext_resource type="Script" uid="uid://c7xv43yg7jfh6" path="res://scripts/states/player states/air_state.gd" id="11_f2e50"]
 [ext_resource type="Script" uid="uid://cb10pu58mdyaj" path="res://scripts/states/player states/attacking_state.gd" id="12_22xyk"]
+[ext_resource type="Texture2D" uid="uid://c2okxsjs81ks1" path="res://sprites/GrappleIconOutline.png" id="12_xbada"]
 [ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="13_xbada"]
+[ext_resource type="Script" uid="uid://d0lwyc7mp4uu5" path="res://scripts/sp_atk_meter.gd" id="14_iaxvb"]
+[ext_resource type="Texture2D" uid="uid://qfqysp7smfyl" path="res://sprites/HealthbarBackground.png" id="14_ydd26"]
+[ext_resource type="Texture2D" uid="uid://01ojipiycswu" path="res://sprites/ShinyMeterFill.png" id="15_j3pc2"]
 [ext_resource type="Script" uid="uid://crj4tn2a2ba67" path="res://scripts/states/player states/grappling_state.gd" id="15_nmymu"]
+[ext_resource type="Texture2D" uid="uid://buar1aixdr6eo" path="res://sprites/HealthbarFill.png" id="15_ydd26"]
+[ext_resource type="Texture2D" uid="uid://hg5agxitutx7" path="res://sprites/ShinyMeter100pct.png" id="17_47hby"]
 [ext_resource type="Script" uid="uid://chcu74c7xyki3" path="res://scripts/states/getting_hit.gd" id="20_373r6"]
 [ext_resource type="Resource" uid="uid://decdkvbycb5oj" path="res://resources/attack_resources/air_atks/Air_Knee.tres" id="21_fpvv5"]
 [ext_resource type="Resource" uid="uid://cueb8ric3w518" path="res://resources/attack_resources/ground_heavy_atks/L_Side_Kick.tres" id="21_gf0v6"]
@@ -115,39 +120,15 @@ radius = 32.6
 
 [sub_resource type="LabelSettings" id="LabelSettings_r3tw4"]
 font = ExtResource("13_xbada")
-font_size = 40
-shadow_size = 7
+font_size = 64
+shadow_size = 10
 shadow_color = Color(0, 0, 0, 1)
-shadow_offset = Vector2(-3, -2)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_22xyk"]
-size = Vector2(256, 64)
-
-[sub_resource type="Gradient" id="Gradient_r3tw4"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.89411765, 0.6901961, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nmymu"]
-gradient = SubResource("Gradient_r3tw4")
-width = 256
-
-[sub_resource type="Gradient" id="Gradient_jh3hg"]
-offsets = PackedFloat32Array(0.9954955, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dcfia"]
-gradient = SubResource("Gradient_jh3hg")
-width = 256
-
-[sub_resource type="Gradient" id="Gradient_ykfka"]
-colors = PackedColorArray(1, 0, 0, 1, 0.38431373, 1, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_fpvv5"]
-gradient = SubResource("Gradient_ykfka")
-width = 256
+shadow_offset = Vector2(-4, -3)
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("health_bar")]
 collision_layer = 8
 script = ExtResource("1_cmorj")
-starting_hp = 500
+starting_hp = 300
 health_bar = NodePath("CanvasLayer/HealthBar")
 
 [node name="CharacterPivot" type="Node3D" parent="."]
@@ -213,42 +194,47 @@ player_obj = NodePath("../../../..")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GrappleMarker" type="TextureRect" parent="CanvasLayer"]
-offset_right = 32.0
-offset_bottom = 32.0
-pivot_offset = Vector2(16, 16)
-texture = ExtResource("6_g2jcq")
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("12_xbada")
 
 [node name="StyleScoreDisplay" type="Label" parent="CanvasLayer"]
-offset_left = 8.0
-offset_top = 40.0
-offset_right = 122.0
-offset_bottom = 95.0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 208.0
+offset_bottom = 154.0
 text = "10000"
 label_settings = SubResource("LabelSettings_r3tw4")
 
 [node name="SpAtkMeter" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 8.0
+offset_left = 16.0
 offset_top = 8.0
-offset_right = 264.0
-offset_bottom = 72.0
-scale = Vector2(0.98480374, 0.49225837)
-value = 50.0
-texture_under = SubResource("PlaceholderTexture2D_22xyk")
-texture_progress = SubResource("GradientTexture2D_nmymu")
+offset_right = 432.0
+offset_bottom = 136.0
+scale = Vector2(1, 0.8)
+value = 100.0
+texture_under = ExtResource("14_ydd26")
+texture_progress = ExtResource("15_j3pc2")
+texture_progress_offset = Vector2(13, 0)
+script = ExtResource("14_iaxvb")
+filled_overlay = ExtResource("17_47hby")
 
 [node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -42.0
-offset_right = 264.0
-offset_bottom = 22.0
+offset_left = 16.0
+offset_top = -8.0
+offset_right = 432.0
+offset_bottom = 120.0
 grow_vertical = 0
-scale = Vector2(0.985, 0.492)
-value = 50.0
-texture_under = SubResource("GradientTexture2D_dcfia")
-texture_progress = SubResource("GradientTexture2D_fpvv5")
+scale = Vector2(1, -0.8)
+value = 100.0
+texture_under = ExtResource("14_ydd26")
+texture_progress = ExtResource("15_ydd26")
+texture_progress_offset = Vector2(13, 0)
 
 [node name="StyleManager" type="Node" parent="." node_paths=PackedStringArray("sp_atk_meter_display", "style_score_display", "atk_state")]
 script = ExtResource("11_22xyk")

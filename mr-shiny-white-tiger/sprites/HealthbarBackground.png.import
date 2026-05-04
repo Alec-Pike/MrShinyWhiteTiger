@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c10xehdnk1p01"
-path="res://.godot/imported/grapple_marker.png-90a4f9dcf459a358a3f2a0608673f68d.ctex"
+uid="uid://qfqysp7smfyl"
+path="res://.godot/imported/HealthbarBackground.png-bbd2953a04d33df27ae62180cb3e565e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/grapple_marker.png"
-dest_files=["res://.godot/imported/grapple_marker.png-90a4f9dcf459a358a3f2a0608673f68d.ctex"]
+source_file="res://sprites/HealthbarBackground.png"
+dest_files=["res://.godot/imported/HealthbarBackground.png-bbd2953a04d33df27ae62180cb3e565e.ctex"]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bbu5rq5uxcd6o" path="res://scripts/enemy.gd" id="1_5hvrv"]
 [ext_resource type="PackedScene" uid="uid://ckp88nw877i4w" path="res://_scenes/Grapple Point.prefab.scn" id="1_w2uy8"]
-[ext_resource type="AnimationLibrary" uid="uid://t2kcokmk2rr4" path="res://animations/GoonAtksLib.res" id="6_dqa4n"]
+[ext_resource type="AnimationLibrary" uid="uid://t2kcokmk2rr4" path="res://animations/Enemies/GoonAtksLib.res" id="6_dqa4n"]
 [ext_resource type="AnimationLibrary" uid="uid://bhr3qel2vrf22" path="res://animations/MrShiny/MrShinyLocomotionLib.res" id="7_igsl0"]
 [ext_resource type="Script" uid="uid://c382udfugqyvh" path="res://scripts/states/state_machine.gd" id="7_jp2p8"]
 [ext_resource type="AnimationLibrary" uid="uid://ywtsrua8fk68" path="res://animations/Common/TakingDamageLib.res" id="8_p6350"]
