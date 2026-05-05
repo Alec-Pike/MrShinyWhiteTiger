@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=3 format=3 uid="uid://b4t6k6sppme2e"]
+
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="1_k0iq2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kohio"]
+radius = 1.0
+
+[resource]
+script = ExtResource("1_k0iq2")
+animation_name = &"DirBaekLib/R_Spinning_Hook_Kick"
+active_time_start = 0.35
+active_time_end = 0.68
+transition_ok_time = 0.93
+damage = 15
+hit_shape = SubResource("SphereShape3D_kohio")
+hit_range = 1.0
+knockback = Vector3(5, 0, 0)
+style_points = 14
+metadata/_custom_type_script = "uid://b3m1xa3wp4bdx"

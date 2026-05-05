@@ -56,11 +56,13 @@ func physics_update(_delta: float) -> void:
 	# Check for Hit Window
 	var anim_time : float = pose_anim.current_animation_position;
 	
+	var player_in_range : bool = ((Vector3(Global.player.global_position.x, this_enemy.global_position.y, Global.player.global_position.z) - this_enemy.global_position).length_squared() <= this_enemy.atk_range ** 2);
+	
 	if (
 		!already_hit 
 		&& anim_time < curr_atk.active_time_start 
 		&& Input.is_action_just_pressed("dodge") 
-		&& (Global.player.global_position - this_enemy.global_position).length() <= this_enemy.atk_range
+		&& player_in_range
 	):
 		# Style point gain for "perfect dodge"
 		Global.increase_style.emit(curr_atk.damage * 2);
@@ -83,10 +85,10 @@ func physics_update(_delta: float) -> void:
 	# Check for Transition
 	# If the animation is finished
 	if anim_time >= curr_atk.transition_ok_time:
-		if !pending_attacks.is_empty():
+		if !pending_attacks.is_empty() && player_in_range:
 			# --- ADVANCE COMBO ---
 			execute_next_attack() # Recursively start the next node
-		elif anim_time >= pose_anim.current_animation_length:
+		elif !player_in_range || anim_time >= pose_anim.current_animation_length:
 			# Animation done, no next -> Return to CHASING
 			finished.emit(CHASING);
 
@@ -95,3 +97,6 @@ func exit() -> void:
 	hit_shapecast.enabled = false;
 	curr_atk = null;
 	pending_attacks = [];
+
+func is_invulnerable() -> bool:
+	return (!already_hit);

@@ -23,6 +23,7 @@ func physics_update(_delta: float) -> void:
 	this_enemy.move_and_slide();
 	
 	if vec_to_player.length() <= this_enemy.atk_range:
+		chase_timer = 0.0;
 		finished.emit(CIRCLING);
 	
 	chase_timer += _delta;

@@ -1,14 +1,32 @@
-[gd_scene load_steps=63 format=3 uid="uid://y2xcffxef0cj"]
+[gd_scene load_steps=81 format=3 uid="uid://y2xcffxef0cj"]
 
 [ext_resource type="PackedScene" uid="uid://bwgh11eofhruj" path="res://_scenes/abstract_enemy.tscn" id="1_dlgtt"]
 [ext_resource type="PackedScene" uid="uid://oybij82se8w" path="res://models/character models/DirectorBaekFinal.vrm" id="2_1teel"]
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="2_7tk08"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="3_idrcv"]
+[ext_resource type="Resource" uid="uid://bxxbu7ntp8l0n" path="res://resources/attack_resources/boss_atks/Boss_L_Flying_Side_Kick.tres" id="3_t5wod"]
+[ext_resource type="Resource" uid="uid://clby4jv2pvece" path="res://resources/attack_resources/boss_atks/Boss_L_Spinning_Punch.tres" id="4_2lqqf"]
 [ext_resource type="Script" uid="uid://byunh6r4lygh5" path="res://addons/vrm/vrm_collider_group.gd" id="4_xuuav"]
 [ext_resource type="Script" uid="uid://brlqsowi6ytji" path="res://addons/vrm/vrm_collider.gd" id="5_8krld"]
+[ext_resource type="Resource" uid="uid://cdq0l6qnh7xgp" path="res://resources/attack_resources/boss_atks/Boss_L_Uppercut.tres" id="5_btysd"]
 [ext_resource type="AnimationLibrary" uid="uid://boqb21rtcm2cq" path="res://animations/Enemies/DirBaekLib.res" id="6_n7nu6"]
+[ext_resource type="Resource" uid="uid://p5cvbpwreflr" path="res://resources/attack_resources/boss_atks/Boss_R_Front_Kick.tres" id="6_upl50"]
+[ext_resource type="Resource" uid="uid://cbw0xxpdw7xnt" path="res://resources/attack_resources/boss_atks/Boss_R_Inside_Crescent_Kick.tres" id="7_dcwp4"]
 [ext_resource type="AnimationLibrary" uid="uid://bhr3qel2vrf22" path="res://animations/MrShiny/MrShinyLocomotionLib.res" id="7_t4bh0"]
 [ext_resource type="AnimationLibrary" uid="uid://ywtsrua8fk68" path="res://animations/Common/TakingDamageLib.res" id="8_3yk81"]
+[ext_resource type="Resource" uid="uid://c0psb0nss81u" path="res://resources/attack_resources/boss_atks/Boss_R_Leg_Sweep.tres" id="8_kbuk5"]
 [ext_resource type="Script" uid="uid://cxfps6iaxxh7v" path="res://scripts/states/boss states/boss_chasing_state.gd" id="9_1teel"]
+[ext_resource type="Resource" uid="uid://dmbr8vbpb7pd2" path="res://resources/attack_resources/boss_atks/Boss_R_Peddle_Step_Front_Kick.tres" id="9_rpytk"]
+[ext_resource type="Resource" uid="uid://c67naeo132xrp" path="res://resources/attack_resources/boss_atks/Boss_R_Side_Kick.tres" id="10_0fvml"]
+[ext_resource type="Resource" uid="uid://fi0tutb623yq" path="res://resources/attack_resources/boss_atks/Boss_R_Spinning_Hammerfist.tres" id="11_x4s4o"]
+[ext_resource type="Resource" uid="uid://b4t6k6sppme2e" path="res://resources/attack_resources/boss_atks/Boss_R_Spinning_Hook_Kick.tres" id="12_wy5b1"]
+[ext_resource type="Resource" uid="uid://dvhfmyfr70l71" path="res://resources/attack_resources/boss_atks/Boss_R_Uppercut.tres" id="13_fda38"]
+[ext_resource type="Resource" uid="uid://pqqf75iyi1v7" path="res://resources/attack_resources/boss_atks/Boss_Stomp.tres" id="14_pq3dj"]
+[ext_resource type="Script" uid="uid://bg0kyw0x1skrt" path="res://scripts/states/boss states/boss_ready_state.gd" id="22_2lqqf"]
+[ext_resource type="Script" uid="uid://bxvxck0caq0m1" path="res://scripts/states/boss states/boss_death_state.gd" id="23_t5wod"]
+[ext_resource type="Texture2D" uid="uid://qfqysp7smfyl" path="res://sprites/HealthbarBackground.png" id="25_dcwp4"]
+[ext_resource type="Texture2D" uid="uid://buar1aixdr6eo" path="res://sprites/HealthbarFill.png" id="26_kbuk5"]
+[ext_resource type="Script" uid="uid://dwgrghltx822i" path="res://scripts/boss_health_bar.gd" id="27_rpytk"]
 
 [sub_resource type="Resource" id="Resource_fdgye"]
 resource_name = "Bust"
@@ -465,11 +483,25 @@ center_bone = "Root_"
 hp = 500
 detection_range = 3.0
 fov = 180.0
-chase_speed = 4.0
-air_speed = 4.0
+chase_speed = 1.5
+air_speed = 1.5
 min_circle_time = 2.5
 max_circle_time = 9.5
-return_speed = 4.0
+return_speed = 1.5
+attacks_and_probabilities = Dictionary[ExtResource("2_7tk08"), float]({
+ExtResource("3_t5wod"): 0.1,
+ExtResource("4_2lqqf"): 0.05,
+ExtResource("5_btysd"): 0.1,
+ExtResource("6_upl50"): 0.15,
+ExtResource("7_dcwp4"): 0.05,
+ExtResource("8_kbuk5"): 0.05,
+ExtResource("9_rpytk"): 0.1,
+ExtResource("10_0fvml"): 0.15,
+ExtResource("11_x4s4o"): 0.05,
+ExtResource("12_wy5b1"): 0.05,
+ExtResource("13_fda38"): 0.1,
+ExtResource("14_pq3dj"): 0.05
+})
 
 [node name="DirectorBaekFinal" parent="CharacterPivot" index="0" instance=ExtResource("2_1teel")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
@@ -486,8 +518,14 @@ libraries = {
 &"TakingDamageLib": ExtResource("8_3yk81")
 }
 
-[node name="Ready" parent="StateMachine" index="0"]
+[node name="PlayerDetectionRayCast" parent="." index="2"]
+visible = false
+enabled = false
+
+[node name="Ready" parent="StateMachine" index="0" node_paths=PackedStringArray("boss_health_bar")]
+script = ExtResource("22_2lqqf")
 idle_anim_name = &"DirBaekLib/Nails_Idle"
+boss_health_bar = NodePath("../../CanvasLayer/BossHealthBar")
 
 [node name="Chasing" parent="StateMachine" index="1"]
 script = ExtResource("9_1teel")
@@ -500,5 +538,26 @@ running_anim_name = &"DirBaekLib/Fem_Walk_4"
 walking_anim_name = &"DirBaekLib/Fem_Walk_4"
 
 [node name="Death" parent="StateMachine" index="8" node_paths=PackedStringArray("character_model")]
+script = ExtResource("23_t5wod")
 character_model = NodePath("../../CharacterPivot/DirectorBaekFinal")
 death_anim_name = &"TakingDamageLib/Dying Slow"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="6"]
+
+[node name="BossHealthBar" type="TextureProgressBar" parent="CanvasLayer" index="0" node_paths=PackedStringArray("this_enemy")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -424.0
+offset_top = 120.0
+offset_right = -8.0
+offset_bottom = 248.0
+grow_horizontal = 0
+scale = Vector2(1, -0.8)
+value = 100.0
+fill_mode = 1
+texture_under = ExtResource("25_dcwp4")
+texture_progress = ExtResource("26_kbuk5")
+texture_progress_offset = Vector2(13, 0)
+script = ExtResource("27_rpytk")
+this_enemy = NodePath("../..")

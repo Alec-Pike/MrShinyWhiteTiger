@@ -3,7 +3,7 @@ class_name Player extends CharacterBody3D
 
 @export var starting_hp : int;
 @export var health_bar : TextureProgressBar;
-@onready var hp : int = starting_hp;
+var hp : int;
 
 
 func _enter_tree():
@@ -14,6 +14,8 @@ func _enter_tree():
 func _ready() -> void:
 	health_bar.max_value = starting_hp;
 	health_bar.min_value = 0;
+	
+	hp = starting_hp;
 
 
 func _process(_delta: float) -> void:

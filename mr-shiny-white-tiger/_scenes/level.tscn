@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cm1it1jbc2fas"]
+[gd_scene load_steps=13 format=3 uid="uid://cm1it1jbc2fas"]
 
 [ext_resource type="Texture2D" uid="uid://c8n2tl830eil6" path="res://Assets/Free HDR Skyboxes Pack/Texture/Sky-5.hdr" id="1_3q5j6"]
 [ext_resource type="PackedScene" uid="uid://c64slysg5u0dt" path="res://_scenes/player.tscn" id="1_dmym1"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://t1j85g731tad" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_1 Variant.prefab.scn" id="4_lavtb"]
 [ext_resource type="PackedScene" uid="uid://c1r8v2bk2elkn" path="res://_scenes/goon_b.tscn" id="5_3m2wx"]
 [ext_resource type="PackedScene" uid="uid://dovh8l4o63uja" path="res://_scenes/goon_c.tscn" id="6_nnmj8"]
+[ext_resource type="PackedScene" uid="uid://y2xcffxef0cj" path="res://_scenes/director_baek.tscn" id="7_nnmj8"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lavtb"]
 panorama = ExtResource("1_3q5j6")
@@ -62,3 +63,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1718636, -7.0842134e-07, -6
 
 [node name="Goon_C" parent="." instance=ExtResource("6_nnmj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0227537, 0, -5.4705257)
+
+[node name="Director_Baek" parent="." instance=ExtResource("7_nnmj8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)

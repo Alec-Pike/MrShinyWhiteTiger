@@ -15,7 +15,6 @@ var this_enemy: Enemy
 @export var pose_anim: AnimationPlayer;
 @export var face_anim: AnimationPlayer;
 
+
 func _ready() -> void:
-	await owner.ready
-	this_enemy = owner as Enemy
-	assert(this_enemy != null, "The EnemyState state type must be used only in enemy scenes. It needs the owner to be an Enemy node.")
+	this_enemy = owner as Enemy;

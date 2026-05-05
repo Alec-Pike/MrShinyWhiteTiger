@@ -6,6 +6,12 @@ class_name State extends Node
 ## Emitted when the state finishes and wants to transition to another state.
 signal finished(next_state_path: String, data: Dictionary);
 
+func _ready() -> void:
+	pass; # Literally just here so I don't have to comment out a bunch of await statements I wrote before
+
+func init(character: Node3D) -> void:
+	pass;
+
 ## Called by the state machine when receiving unhandled input events.
 func handle_input(_event: InputEvent) -> void:
 	pass;

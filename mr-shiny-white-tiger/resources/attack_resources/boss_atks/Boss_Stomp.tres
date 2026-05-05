@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=4 format=3 uid="uid://pqqf75iyi1v7"]
+
+[ext_resource type="Resource" uid="uid://cemn6ofgq4u2" path="res://resources/attack_resources/air_atks/Air_Side_Kick.tres" id="1_gybap"]
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="2_nqdfl"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rls0l"]
+radius = 0.8
+
+[resource]
+script = ExtResource("2_nqdfl")
+animation_name = &"DirBaekLib/Stomp"
+active_time_start = 0.65
+active_time_end = 0.98
+transition_ok_time = 1.51
+damage = 15
+hit_shape = SubResource("SphereShape3D_rls0l")
+hit_range = 1.2
+knockback = Vector3(0, -5, -3)
+style_points = 15
+next_heavy_atk = ExtResource("1_gybap")
+metadata/_custom_type_script = "uid://b3m1xa3wp4bdx"

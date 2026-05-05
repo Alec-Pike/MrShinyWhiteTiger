@@ -9,13 +9,19 @@ extends PlayerState
 @export var finishing_boost: float = 25.0;
 @export var gravity : float = 75.0;
 @export var grapple_anim : StringName;
-@export var rotation_speed: float = 5.0
-var is_grappling: bool = false;
+@export var rotation_speed: float = 5.0;
+@export var rope_mesh: MeshInstance3D;
+@export var rope_origin: Node3D;
 var grapple_target_point: Vector3;
 
-# override
-func is_invulnerable() -> bool:
-	return true;
+func _ready() -> void:
+	# Crucial: Duplicate the mesh resource so changing its length 
+	# doesn't affect other entities sharing the same CylinderMesh.
+	rope_mesh.mesh = rope_mesh.mesh.duplicate();
+	rope_mesh.hide();
+	
+	if !player: # duct tape fix
+		player = $"../..";
 
 # I had a lot of help from Google Gemini
 
@@ -53,6 +59,37 @@ func calculate_arc_velocity(start_pos: Vector3, target_pos: Vector3, speed: floa
 #endfunc
 
 
+func update_rope(start_pos: Vector3, end_pos: Vector3) -> void:
+	# Prevent math errors if the points are exactly the same
+	if start_pos.is_equal_approx(end_pos): return
+	
+	var distance: float = start_pos.distance_to(end_pos)
+	
+	# 1. Scale the cylinder's height to match the distance
+	# The casting is necessary to prevent the static type checker
+	# from getting mad
+	var cylinder: CylinderMesh = rope_mesh.mesh as CylinderMesh
+	cylinder.height = distance
+	
+	# 2. Position the mesh exactly halfway between start and end
+	rope_mesh.global_position = start_pos.lerp(end_pos, 0.5)
+	
+	# 3. Orient the mesh
+	var direction: Vector3 = start_pos.direction_to(end_pos)
+	var up_vector: Vector3 = Vector3.UP
+	
+	# Fallback to prevent look_at() errors when aiming straight up or down
+	if abs(direction.y) > 0.999:
+		up_vector = Vector3.RIGHT
+		
+	rope_mesh.look_at(end_pos, up_vector)
+	
+	# Godot's CylinderMesh aligns to the Y-axis by default.
+	# look_at() points the negative Z-axis at the target.
+	# We must rotate the mesh 90 degrees locally on the X-axis to align the cylinder correctly.
+	rope_mesh.rotate_object_local(Vector3.RIGHT, PI / 2.0)
+
+
 func physics_update(delta: float) -> void:
 	# 1. Apply Gravity (Critical for the arc to work!)
 	# The initial velocity we calculated ASSUMES gravity will be dragging us down.
@@ -84,6 +121,8 @@ func physics_update(delta: float) -> void:
 
 func update(_delta: float) -> void:
 	point_top_smoothly(player.global_position + player.velocity, _delta);
+	rope_mesh.show();
+	update_rope(rope_origin.global_position, grapple_target_point - Vector3.UP * target_position_y_offset);
 
 
 func point_top_smoothly(target_position: Vector3, delta: float):
@@ -110,3 +149,4 @@ func point_top_smoothly(target_position: Vector3, delta: float):
 func exit() -> void:
 	character_model.rotation_degrees.x = 0;
 	character_pivot.rotation_degrees.x = 0;
+	rope_mesh.hide();

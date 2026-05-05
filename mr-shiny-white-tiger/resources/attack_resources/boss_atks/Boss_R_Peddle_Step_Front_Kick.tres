@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=3 format=3 uid="uid://dmbr8vbpb7pd2"]
+
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="1_pnnup"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pnnup"]
+
+[resource]
+script = ExtResource("1_pnnup")
+animation_name = &"DirBaekLib/R_Peddle_Step_Front_Kick"
+active_time_start = 0.64
+active_time_end = 1.07
+transition_ok_time = 1.69
+damage = 16
+hit_shape = SubResource("CapsuleShape3D_pnnup")
+hit_range = 0.5
+knockback = Vector3(0, 4, -3)

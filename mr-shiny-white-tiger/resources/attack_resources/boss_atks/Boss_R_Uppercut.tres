@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=3 format=3 uid="uid://dvhfmyfr70l71"]
+
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="1_sc2uw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ynfsu"]
+radius = 0.25
+height = 3.0
+
+[resource]
+script = ExtResource("1_sc2uw")
+animation_name = &"DirBaekLib/R_Uppercut"
+active_time_start = 0.56
+active_time_end = 0.66
+transition_ok_time = 1.7
+damage = 9
+hit_shape = SubResource("CapsuleShape3D_ynfsu")
+hit_range = 0.5
+knockback = Vector3(0, 3, -1)

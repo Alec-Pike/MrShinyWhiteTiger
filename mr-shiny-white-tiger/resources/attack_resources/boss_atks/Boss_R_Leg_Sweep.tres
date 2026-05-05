@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=3 format=3 uid="uid://c0psb0nss81u"]
+
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="1_os2qv"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kohio"]
+radius = 1.5
+
+[resource]
+script = ExtResource("1_os2qv")
+animation_name = &"DirBaekLib/R_Leg_Sweep"
+active_time_start = 0.96
+active_time_end = 1.19
+transition_ok_time = 1.7
+damage = 5
+hit_shape = SubResource("SphereShape3D_kohio")
+hit_range = 1.0
+knockback = Vector3(-5, 1, 0)
+style_points = 16
+metadata/_custom_type_script = "uid://b3m1xa3wp4bdx"

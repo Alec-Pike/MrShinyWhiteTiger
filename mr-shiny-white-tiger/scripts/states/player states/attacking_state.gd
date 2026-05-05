@@ -143,3 +143,6 @@ func exit() -> void:
 	targeting_shapecast.enabled = false;
 	curr_atk = null;
 	pending_attack_type = "";
+
+func is_invulnerable() -> bool:
+	return (!targets_hit.is_empty());

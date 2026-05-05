@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AttackResource" load_steps=3 format=3 uid="uid://p5cvbpwreflr"]
+
+[ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="1_nbvh5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6tytm"]
+radius = 0.6
+
+[resource]
+script = ExtResource("1_nbvh5")
+animation_name = &"DirBaekLib/Fem_R_Front_Kick"
+active_time_start = 0.64
+active_time_end = 0.925
+transition_ok_time = 1.46
+damage = 8
+hit_shape = SubResource("SphereShape3D_6tytm")
+hit_range = 1.5
+knockback = Vector3(0, 0, -3)
