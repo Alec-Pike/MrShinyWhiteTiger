@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://c64slysg5u0dt"]
+[gd_scene load_steps=48 format=3 uid="uid://c64slysg5u0dt"]
 
 [ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
@@ -33,6 +33,7 @@
 [ext_resource type="Resource" uid="uid://cemn6ofgq4u2" path="res://resources/attack_resources/air_atks/Air_Side_Kick.tres" id="22_xbada"]
 [ext_resource type="Script" uid="uid://bva6ixuqk4wbx" path="res://scripts/states/recovering_state.gd" id="23_aj6rt"]
 [ext_resource type="Script" uid="uid://cm1afagd0va2d" path="res://scripts/states/death_state.gd" id="24_jh3hg"]
+[ext_resource type="PackedScene" uid="uid://kbc4un6b7pmx" path="res://_scenes/shadow_blob_caster.tscn" id="34_q80l8"]
 
 [sub_resource type="Resource" id="Resource_2ue6v"]
 resource_name = "TopsUpperArm"
@@ -291,6 +292,8 @@ script = ExtResource("11_f2e50")
 _character_pivot = NodePath("../../CharacterPivot")
 _camera_pivot = NodePath("../../CameraController")
 landing_check_raycast = NodePath("../../LandingAnimTrigger")
+jump_strength = 25.0
+gravity = 60.0
 jump_anim_name = "MrShinyLocomotionLib/JumpingUp"
 falling_anim_name = "MrShinyLocomotionLib/Falling"
 landing_anim_name = &"MrShinyLocomotionLib/Landing"
@@ -317,6 +320,7 @@ script = ExtResource("15_nmymu")
 targeting_system = NodePath("../../CameraController/SpringArm3D/Camera3D/GrappleTargeting")
 character_pivot = NodePath("../../CharacterPivot")
 character_model = NodePath("../../CharacterPivot/CharacterModel")
+gravity = 50.0
 grapple_anim = &"MrShinyLocomotionLib/Grappling"
 rope_mesh = NodePath("../../RopeMeshInstance")
 rope_origin = NodePath("../../CharacterPivot/CharacterModel/RopeOrigin")
@@ -337,7 +341,7 @@ metadata/_custom_type_script = "uid://ddmjwym8aja1o"
 [node name="Getting_Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_pivot", "pose_anim", "face_anim")]
 script = ExtResource("20_373r6")
 character_pivot = NodePath("../../CharacterPivot")
-gravity = 75.0
+gravity = 60.0
 next_state_name = &"Idle"
 i_frame_seconds = 0.5
 hit_small_anim_name = &"TakingDamageLib/Getting Hit Small"
@@ -368,6 +372,9 @@ metadata/_custom_type_script = "uid://hnvtv7wnt2qf"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8112928, 0.8564433, 0.020202816)
 mesh = SubResource("CylinderMesh_q80l8")
 skeleton = NodePath("../CharacterPivot")
+
+[node name="ShadowBlobCaster" parent="." instance=ExtResource("34_q80l8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
 [connection signal="set_special_mode" from="StyleManager" to="StateMachine/Running" method="set_special_mode"]
 [connection signal="set_special_mode" from="StyleManager" to="StateMachine/Air" method="set_special_mode"]

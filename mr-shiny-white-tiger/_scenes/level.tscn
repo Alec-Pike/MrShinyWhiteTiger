@@ -1,14 +1,23 @@
-[gd_scene load_steps=16 format=3 uid="uid://cm1it1jbc2fas"]
+[gd_scene load_steps=25 format=3 uid="uid://cm1it1jbc2fas"]
 
 [ext_resource type="Texture2D" uid="uid://c8n2tl830eil6" path="res://Assets/Free HDR Skyboxes Pack/Texture/Sky-5.hdr" id="1_3q5j6"]
 [ext_resource type="PackedScene" uid="uid://c64slysg5u0dt" path="res://_scenes/player.tscn" id="1_dmym1"]
 [ext_resource type="Script" uid="uid://bpb4a0xmcnwhw" path="res://scripts/game_timer.gd" id="1_geman"]
 [ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="2_f54uh"]
-[ext_resource type="PackedScene" uid="uid://bmubmx1kqvtpx" path="res://_scenes/goon_a.tscn" id="3_lavtb"]
 [ext_resource type="PackedScene" uid="uid://t1j85g731tad" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_1 Variant.prefab.scn" id="4_lavtb"]
-[ext_resource type="PackedScene" uid="uid://c1r8v2bk2elkn" path="res://_scenes/goon_b.tscn" id="5_3m2wx"]
-[ext_resource type="PackedScene" uid="uid://dovh8l4o63uja" path="res://_scenes/goon_c.tscn" id="6_nnmj8"]
+[ext_resource type="PackedScene" uid="uid://77n3fjwwfcgs" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_2 Variant.prefab.scn" id="6_yui6f"]
 [ext_resource type="PackedScene" uid="uid://y2xcffxef0cj" path="res://_scenes/director_baek.tscn" id="7_nnmj8"]
+[ext_resource type="PackedScene" uid="uid://cujfpqem1qe02" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_9_1 Variant.prefab.scn" id="8_xhglb"]
+[ext_resource type="PackedScene" uid="uid://mnb5hsduflbn" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_6_2 Variant.prefab.scn" id="9_uckv7"]
+[ext_resource type="PackedScene" uid="uid://css4scchi7qyl" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_6_1 Variant.prefab.scn" id="10_1y6cb"]
+[ext_resource type="PackedScene" uid="uid://blhqexrtx3r1y" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_3_1 Variant.prefab.scn" id="11_11ebp"]
+[ext_resource type="PackedScene" uid="uid://bfh81hjgsj6lh" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_3_2 Variant.prefab.scn" id="12_htmqc"]
+[ext_resource type="PackedScene" uid="uid://dsjo1iu5nkejg" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_9_2 Variant.prefab.scn" id="13_xhglb"]
+[ext_resource type="PackedScene" uid="uid://bbofo7voslbwn" path="res://_scenes/building_6_10_boss.scn" id="14_uckv7"]
+[ext_resource type="PackedScene" uid="uid://7bjnuvbwuffr" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_3 Variant.prefab.scn" id="15_htmqc"]
+[ext_resource type="PackedScene" uid="uid://es7ay8jjdhyb" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_3_3 Variant.prefab.scn" id="16_3vjy1"]
+[ext_resource type="PackedScene" uid="uid://b23kl13veim0s" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_9_4 Variant.prefab.scn" id="16_vyfui"]
+[ext_resource type="PackedScene" uid="uid://cvvq76oma4p0g" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Tree.prefab.scn" id="17_vyfui"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ob8vc"]
 font = ExtResource("2_f54uh")
@@ -27,14 +36,21 @@ sky_material = SubResource("PanoramaSkyMaterial_lavtb")
 [sub_resource type="Environment" id="Environment_lavtb"]
 background_mode = 2
 sky = SubResource("Sky_3q5j6")
-sky_rotation = Vector3(0, 0.56548667, 0)
-tonemap_mode = 2
+sky_rotation = Vector3(0, -0.7853982, 0)
+ambient_light_source = 3
+ambient_light_color = Color(0.9882353, 0.7294118, 0.2509804, 1)
+ambient_light_sky_contribution = 0.91
+ambient_light_energy = 5.28
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 0.23
+tonemap_white = 0.56
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3q5j6"]
-size = Vector3(60, 2, 60)
+size = Vector3(64, 2, 63)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lavtb"]
-size = Vector3(60, 2, 60)
+size = Vector3(64, 2, 64)
 
 [node name="Main" type="Node3D"]
 
@@ -64,15 +80,18 @@ label_settings = SubResource("LabelSettings_ob8vc")
 environment = SubResource("Environment_lavtb")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.7477981, -0.1459616, -0.647683, -8.5283936e-08, -0.97553456, 0.21984622, -0.66392624, 0.16440064, 0.72950286, 0, 26, 0)
-light_color = Color(0.9116014, 0.72117347, 0.42295617, 1)
+transform = Transform3D(-0.515038, 0.082155846, -0.85322106, 0, 0.9953962, 0.09584575, 0.8571673, 0.049364205, -0.5126669, 0, 26, 0)
+light_color = Color(0.8751419, 0.57393324, 0.25406727, 1)
+light_energy = 9.959
+light_angular_distance = 0.6
+light_specular = 2.707
 light_bake_mode = 1
-shadow_enabled = true
 
 [node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(-8.742278e-07, 0, -8, 0, 1, 0, 20, 0, -3.496911e-07, -216.09995, 0, -1253.2999)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, -1, -32)
 shape = SubResource("BoxShape3D_3q5j6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/CollisionShape3D"]
@@ -80,21 +99,115 @@ mesh = SubResource("BoxMesh_lavtb")
 skeleton = NodePath("../..")
 
 [node name="Player" parent="." instance=ExtResource("1_dmym1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 20.3, -2)
 
-[node name="building_1_1 Variant" parent="." instance=ExtResource("4_lavtb")]
-transform = Transform3D(0.19999999, 0, 0, 0, 0.099999964, 0, 0, 0, 0.099999964, 5.0546875, 9.1873835e-06, -12.847191)
+[node name="Alleyway Zone" type="Node3D" parent="."]
 
-[node name="building_1_1 Variant2" parent="." instance=ExtResource("4_lavtb")]
-transform = Transform3D(-8.742277e-09, 0, 0.099999964, 0, 0.099999964, 0, -0.19999999, 0, -4.3711372e-09, -6.9453125, 9.1873835e-06, -11.847191)
+[node name="building_1_2 Variant" parent="Alleyway Zone" instance=ExtResource("6_yui6f")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 47.899994, 0, 31.699997)
 
-[node name="Goon_A" parent="." instance=ExtResource("3_lavtb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7970971, 2.129405e-07, -5.595106)
+[node name="building_1_1 Variant" parent="Alleyway Zone" instance=ExtResource("4_lavtb")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 30.899994, 0, -6.300003)
 
-[node name="Goon_B" parent="." instance=ExtResource("5_3m2wx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1718636, -7.0842134e-07, -6.3735723)
+[node name="building_1_1 Variant2" parent="Alleyway Zone" instance=ExtResource("4_lavtb")]
+transform = Transform3D(-7.5099095e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -7.5099095e-08, 47.899994, 0, -40.300003)
 
-[node name="Goon_C" parent="." instance=ExtResource("6_nnmj8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0227537, 0, -5.4705257)
+[node name="building_9_1 Variant" parent="Alleyway Zone" instance=ExtResource("8_xhglb")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, -6.100006, 0, -77.3)
 
-[node name="Director_Baek" parent="." instance=ExtResource("7_nnmj8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
+[node name="building_9_1 Variant2" parent="Alleyway Zone" instance=ExtResource("8_xhglb")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 0.8999939, 0, 1.699997)
+
+[node name="building_6_2 Variant" parent="Alleyway Zone" instance=ExtResource("9_uckv7")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 84.899994, 0, -19.300003)
+
+[node name="building_6_1 Variant" parent="Alleyway Zone" instance=ExtResource("10_1y6cb")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 13.899994, 0, 10.699997)
+
+[node name="building_6_1 Variant2" parent="Alleyway Zone" instance=ExtResource("10_1y6cb")]
+transform = Transform3D(-7.5099095e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -7.5099095e-08, 84.899994, 0, -46.300003)
+
+[node name="building_6_1 Variant3" parent="Alleyway Zone" instance=ExtResource("10_1y6cb")]
+transform = Transform3D(-7.5099095e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -7.5099095e-08, 13.899994, 0, -53.300003)
+
+[node name="building_3_1 Variant" parent="Alleyway Zone" instance=ExtResource("11_11ebp")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 59.399994, 0, -53.300003)
+
+[node name="building_1_2 Variant2" parent="Alleyway Zone" instance=ExtResource("6_yui6f")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 18.399994, 0, -70.3)
+
+[node name="building_3_2 Variant" parent="Alleyway Zone" instance=ExtResource("12_htmqc")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 33.399994, 0, -112.3)
+
+[node name="building_1_2 Variant3" parent="Alleyway Zone" instance=ExtResource("6_yui6f")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 67.4, 0, -184.29999)
+
+[node name="building_1_2 Variant4" parent="Alleyway Zone" instance=ExtResource("6_yui6f")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 56.399998, 0, -146.3)
+
+[node name="building_9_2 Variant" parent="Alleyway Zone" instance=ExtResource("13_xhglb")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 77, 0, -213)
+
+[node name="building_6_2 Variant2" parent="Alleyway Zone" instance=ExtResource("9_uckv7")]
+transform = Transform3D(-0.7, 0, -6.119594e-08, 0, 0.7, 0, 6.119594e-08, 0, -0.7, 38.899994, 0, -208.3)
+
+[node name="building_6_2 Variant3" parent="Alleyway Zone" instance=ExtResource("9_uckv7")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 63.899994, 0, -208.3)
+
+[node name="building_6_2 Variant6" parent="Alleyway Zone" instance=ExtResource("9_uckv7")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 89.899994, 0, -212.3)
+
+[node name="building_6_2 Variant5" parent="Alleyway Zone" instance=ExtResource("9_uckv7")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 16.899994, 0, -179.3)
+
+[node name="building_6_2 Variant4" parent="Alleyway Zone" instance=ExtResource("9_uckv7")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 93.899994, 0, -124.3)
+
+[node name="building_1_3 Variant" parent="Alleyway Zone" instance=ExtResource("15_htmqc")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 18, 0, -196)
+
+[node name="building_1_1 Variant3" parent="Alleyway Zone" instance=ExtResource("4_lavtb")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 55.899994, 0, -246.3)
+
+[node name="building_1_1 Variant4" parent="Alleyway Zone" instance=ExtResource("4_lavtb")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 102.899994, 0, -246.3)
+
+[node name="building_1_1 Variant5" parent="Alleyway Zone" instance=ExtResource("4_lavtb")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 55.899994, 0, -285.3)
+
+[node name="building_1_1 Variant6" parent="Alleyway Zone" instance=ExtResource("4_lavtb")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 102.899994, 0, -285.3)
+
+[node name="building_3_3 Variant" parent="Alleyway Zone" instance=ExtResource("16_3vjy1")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 128, 0, -265)
+
+[node name="building_3_3 Variant2" parent="Alleyway Zone" instance=ExtResource("16_3vjy1")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 43, 0, -265)
+
+[node name="Tree" parent="Alleyway Zone" instance=ExtResource("17_vyfui")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 67, 0, -261)
+
+[node name="Tree2" parent="Alleyway Zone" instance=ExtResource("17_vyfui")]
+transform = Transform3D(-0.21631195, 0, -0.66573954, 0, 0.6999999, 0, 0.66573954, 0, -0.21631195, 58, 0, -255)
+
+[node name="Tree4" parent="Alleyway Zone" instance=ExtResource("17_vyfui")]
+transform = Transform3D(0.66573954, 0, 0.21631192, 0, 0.69999987, 0, -0.21631192, 0, 0.66573954, 63, 0, -157)
+
+[node name="Tree3" parent="Alleyway Zone" instance=ExtResource("17_vyfui")]
+transform = Transform3D(0.17534846, 0, 0.35951763, 0, 0.4, 0, -0.35951763, 0, 0.17534846, 69, 0, -254)
+
+[node name="Lower Tower Zone" type="Node3D" parent="."]
+
+[node name="building_3_3 Variant3" parent="Lower Tower Zone" instance=ExtResource("16_3vjy1")]
+transform = Transform3D(-0.7, 0, -1.0569706e-07, 0, 0.7, 0, 1.0569706e-07, 0, -0.7, 39.5, 0, -302)
+
+[node name="building_9_4 Variant" parent="Lower Tower Zone" instance=ExtResource("16_vyfui")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 31, 0, -290)
+
+[node name="Boss Building" parent="." instance=ExtResource("14_uckv7")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 41, 0, -1218)
+
+[node name="Director_Baek" parent="Boss Building" instance=ExtResource("7_nnmj8")]
+transform = Transform3D(1.4285715, 0, 0, 0, 1.4285715, 0, 0, 0, 1.4285715, 0, 244.75, -15.714287)
+collision_mask = 5
+gravity = 75.0

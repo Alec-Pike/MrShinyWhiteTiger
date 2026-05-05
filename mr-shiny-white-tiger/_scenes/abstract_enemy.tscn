@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bwgh11eofhruj"]
+[gd_scene load_steps=19 format=3 uid="uid://bwgh11eofhruj"]
 
 [ext_resource type="Script" uid="uid://bbu5rq5uxcd6o" path="res://scripts/enemy.gd" id="1_5hvrv"]
 [ext_resource type="PackedScene" uid="uid://ckp88nw877i4w" path="res://_scenes/Grapple Point.prefab.scn" id="1_w2uy8"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://cvet2qo0in07e" path="res://scripts/states/enemy states/circling_state.gd" id="11_p6350"]
 [ext_resource type="Script" uid="uid://bcb0ofjr7tuwm" path="res://scripts/states/enemy states/returning_state.gd" id="13_lsuae"]
 [ext_resource type="Script" uid="uid://bjcdls3e3vkjt" path="res://scripts/states/enemy states/enemy_air_state.gd" id="14_yimgy"]
+[ext_resource type="PackedScene" uid="uid://kbc4un6b7pmx" path="res://_scenes/shadow_blob_caster.tscn" id="16_ghj7r"]
 [ext_resource type="Script" uid="uid://di5opniqg4cxn" path="res://scripts/states/enemy states/enemy_attacking_state.gd" id="18_8ooy2"]
 [ext_resource type="Script" uid="uid://chcu74c7xyki3" path="res://scripts/states/getting_hit.gd" id="20_l8sre"]
 [ext_resource type="Script" uid="uid://bva6ixuqk4wbx" path="res://scripts/states/recovering_state.gd" id="21_tpipv"]
@@ -24,9 +25,9 @@ height = 1.85
 
 [node name="BasicEnemy" type="CharacterBody3D"]
 collision_layer = 4
-collision_mask = 5
 script = ExtResource("1_5hvrv")
 fov = 65.0
+gravity = 60.0
 atk_range = 2.0
 
 [node name="Grapple Point" parent="." instance=ExtResource("1_w2uy8")]
@@ -124,7 +125,7 @@ metadata/_custom_type_script = "uid://c7c5ra2s3ce2n"
 [node name="Getting_Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_pivot", "pose_anim")]
 script = ExtResource("20_l8sre")
 character_pivot = NodePath("../../CharacterPivot")
-gravity = 75.0
+gravity = 60.0
 next_state_name = &"Chasing"
 hit_small_anim_name = &"TakingDamageLib/Getting Hit Small"
 hit_large_anim_name = &"TakingDamageLib/Getting Hit Large"
@@ -145,3 +146,5 @@ to_deactivate = [NodePath("../../Grapple Point"), NodePath("../../CharacterPivot
 death_anim_name = &"TakingDamageLib/Dying Fast"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 metadata/_custom_type_script = "uid://hnvtv7wnt2qf"
+
+[node name="ShadowBlobCaster" parent="." instance=ExtResource("16_ghj7r")]

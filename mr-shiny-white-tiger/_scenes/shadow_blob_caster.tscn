@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://kbc4un6b7pmx"]
+
+[ext_resource type="Script" uid="uid://bpuv56giu503s" path="res://scripts/shadow_raycast.gd" id="1_ca1lw"]
+[ext_resource type="Texture2D" uid="uid://srhas5s1ypgn" path="res://sprites/ShadowBlob.png" id="2_gblne"]
+
+[node name="ShadowBlobCaster" type="RayCast3D"]
+target_position = Vector3(0, -50, 0)
+script = ExtResource("1_ca1lw")
+
+[node name="ShadowDecal" type="Decal" parent="."]
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("2_gblne")
+albedo_mix = 0.8
+distance_fade_enabled = true
+distance_fade_begin = 25.0
+distance_fade_length = 25.0
