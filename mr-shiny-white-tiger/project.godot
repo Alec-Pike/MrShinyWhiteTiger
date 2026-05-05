@@ -143,3 +143,4 @@ dodge={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.1764706, 0.2, 0.24705882, 1)

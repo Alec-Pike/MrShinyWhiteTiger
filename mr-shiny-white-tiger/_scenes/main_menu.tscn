@@ -1,15 +1,15 @@
 [gd_scene load_steps=16 format=3 uid="uid://6td4spwofdgn"]
 
 [ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="1_j2tf1"]
-[ext_resource type="Script" uid="uid://dj2l47m3tw6j2" path="res://scripts/menu stuff/main_menu.gd" id="1_jx3df"]
+[ext_resource type="Script" uid="uid://dj2l47m3tw6j2" path="res://scripts/menu stuff/main menu/main_menu.gd" id="1_jx3df"]
 [ext_resource type="Texture2D" uid="uid://cd0vmheamvv7a" path="res://sprites/MrShinyControlsImage.png" id="2_fasvp"]
-[ext_resource type="Script" uid="uid://do4mndlvxboer" path="res://scripts/menu stuff/submenu.gd" id="2_tcb7q"]
-[ext_resource type="Script" uid="uid://ddaiob86lhxi4" path="res://scripts/menu stuff/invert_camera_h_check_box.gd" id="3_niher"]
-[ext_resource type="Script" uid="uid://byu3ld32035go" path="res://scripts/menu stuff/invert_camera_v_check_box.gd" id="4_j2tf1"]
-[ext_resource type="Script" uid="uid://xk7li4us6a15" path="res://scripts/menu stuff/volume_slider.gd" id="4_q13kq"]
-[ext_resource type="Script" uid="uid://buqj8ht6a2egd" path="res://scripts/menu stuff/fullscreen_check_button.gd" id="4_tmamg"]
-[ext_resource type="Script" uid="uid://c6od37i026cwm" path="res://scripts/menu stuff/3d_rendering_quality_dropdown.gd" id="7_xeutb"]
-[ext_resource type="Script" uid="uid://dmsyo8ftrdgkb" path="res://scripts/menu stuff/credits_text.gd" id="10_xeutb"]
+[ext_resource type="Script" uid="uid://do4mndlvxboer" path="res://scripts/menu stuff/main menu/submenu.gd" id="2_tcb7q"]
+[ext_resource type="Script" uid="uid://ddaiob86lhxi4" path="res://scripts/menu stuff/main menu/invert_camera_h_check_box.gd" id="3_niher"]
+[ext_resource type="Script" uid="uid://byu3ld32035go" path="res://scripts/menu stuff/main menu/invert_camera_v_check_box.gd" id="4_j2tf1"]
+[ext_resource type="Script" uid="uid://xk7li4us6a15" path="res://scripts/menu stuff/main menu/volume_slider.gd" id="4_q13kq"]
+[ext_resource type="Script" uid="uid://buqj8ht6a2egd" path="res://scripts/menu stuff/main menu/fullscreen_check_button.gd" id="4_tmamg"]
+[ext_resource type="Script" uid="uid://c6od37i026cwm" path="res://scripts/menu stuff/main menu/3d_rendering_quality_dropdown.gd" id="7_xeutb"]
+[ext_resource type="Script" uid="uid://dmsyo8ftrdgkb" path="res://scripts/menu stuff/main menu/credits_text.gd" id="10_xeutb"]
 
 [sub_resource type="Theme" id="Theme_xeutb"]
 default_font = ExtResource("1_j2tf1")

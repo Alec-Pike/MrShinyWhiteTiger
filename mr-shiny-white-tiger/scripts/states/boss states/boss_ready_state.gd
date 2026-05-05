@@ -29,6 +29,10 @@ func physics_update(_delta: float) -> void:
 	var player_in_range : bool = ((Vector3(Global.player.global_position.x, this_enemy.global_position.y, Global.player.global_position.z) - this_enemy.global_position).length_squared() <= this_enemy.atk_range ** 2);
 	if player_in_range:
 		finished.emit(CHASING);
+	
+	# cheat code
+	if Input.is_key_pressed(KEY_ALT) && Input.is_key_pressed(KEY_B):
+		finished.emit(DEATH);
 
 func _on_animation_finished(_anim_name: StringName):
 	pose_anim.play(idle_anim_name);

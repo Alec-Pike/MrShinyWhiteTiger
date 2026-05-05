@@ -24,6 +24,7 @@ var score_display_original_scale : Vector2;
 var score_display_pop_scale : Vector2;
 
 func _ready() -> void:
+	Global.style_manager = self;
 	Global.increase_style.connect(increase_style);
 	atk_state.atk_successful.connect(handle_atk);
 	style_score_display.text = "0";

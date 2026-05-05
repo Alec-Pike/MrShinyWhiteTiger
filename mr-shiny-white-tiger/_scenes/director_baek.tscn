@@ -24,8 +24,8 @@
 [ext_resource type="Resource" uid="uid://pqqf75iyi1v7" path="res://resources/attack_resources/boss_atks/Boss_Stomp.tres" id="14_pq3dj"]
 [ext_resource type="Script" uid="uid://bg0kyw0x1skrt" path="res://scripts/states/boss states/boss_ready_state.gd" id="22_2lqqf"]
 [ext_resource type="Script" uid="uid://bxvxck0caq0m1" path="res://scripts/states/boss states/boss_death_state.gd" id="23_t5wod"]
-[ext_resource type="Texture2D" uid="uid://qfqysp7smfyl" path="res://sprites/HealthbarBackground.png" id="25_dcwp4"]
-[ext_resource type="Texture2D" uid="uid://buar1aixdr6eo" path="res://sprites/HealthbarFill.png" id="26_kbuk5"]
+[ext_resource type="Texture2D" uid="uid://bxba2ikbsqa58" path="res://sprites/BossHealthbarBackground.png" id="25_dcwp4"]
+[ext_resource type="Texture2D" uid="uid://b5lkoxp64mnvl" path="res://sprites/BossHealthbarFill.png" id="26_kbuk5"]
 [ext_resource type="Script" uid="uid://dwgrghltx822i" path="res://scripts/boss_health_bar.gd" id="27_rpytk"]
 
 [sub_resource type="Resource" id="Resource_fdgye"]
@@ -548,16 +548,15 @@ death_anim_name = &"TakingDamageLib/Dying Slow"
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -424.0
-offset_top = 120.0
-offset_right = -8.0
-offset_bottom = 248.0
+offset_left = -16.0
+offset_top = 8.0
+offset_right = 475.0
+offset_bottom = 136.0
 grow_horizontal = 0
-scale = Vector2(1, -0.8)
+scale = Vector2(-1, 0.8)
 value = 100.0
-fill_mode = 1
 texture_under = ExtResource("25_dcwp4")
 texture_progress = ExtResource("26_kbuk5")
-texture_progress_offset = Vector2(13, 0)
+texture_progress_offset = Vector2(15, 1)
 script = ExtResource("27_rpytk")
 this_enemy = NodePath("../..")

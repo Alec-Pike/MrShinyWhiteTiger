@@ -14,7 +14,8 @@ extends State
 
 func enter(_previous_state_path: String, _data := {}) -> void:
 	# Stop everything
-	#TODO: stop game timer here
+	Global.stop_timer();
+	
 	character.set_physics_process(false);
 	for node in to_deactivate:
 		node.set_deferred("disabled", true);
@@ -40,8 +41,8 @@ func _on_animation_finished(_anim_name: StringName):
 		#blink_delay *= 0.85
 	
 	#character.die();
-	#TODO: go to win screen instead
-	get_tree().change_scene_to_file("res://_scenes/main_menu.tscn");
+	Global.victory();
+	#get_tree().change_scene_to_file("res://_scenes/main_menu.tscn");
 
 
 # --- HELPER FUNCTION ---

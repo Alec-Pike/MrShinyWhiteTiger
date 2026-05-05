@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck6gjj71h86bq"]
+
+[ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="1_3v12o"]
+[ext_resource type="Script" uid="uid://b7jp3y8yfxbvy" path="res://scripts/menu stuff/lose_screen.gd" id="2_nnvo4"]
+
+[sub_resource type="Theme" id="Theme_nnvo4"]
+default_font = ExtResource("1_3v12o")
+default_font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_3v12o"]
+font_size = 50
+font_color = Color(0.70244163, 0.50152117, 1, 1)
+
+[node name="lose_screen" type="Control" node_paths=PackedStringArray("retry_button", "exit_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_nnvo4")
+script = ExtResource("2_nnvo4")
+retry_button = NodePath("VBoxContainer/retry_button")
+exit_button = NodePath("VBoxContainer/exit_button")
+
+[node name="Game_Over_Text" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.0
+offset_top = -324.0
+offset_right = 284.0
+offset_bottom = -266.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MISSION FAILED..."
+label_settings = SubResource("LabelSettings_3v12o")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -125.0
+offset_right = 100.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="retry_button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Retry"
+
+[node name="exit_button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Exit"

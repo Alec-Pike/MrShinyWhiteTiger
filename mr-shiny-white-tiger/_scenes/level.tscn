@@ -1,12 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://cm1it1jbc2fas"]
+[gd_scene load_steps=16 format=3 uid="uid://cm1it1jbc2fas"]
 
 [ext_resource type="Texture2D" uid="uid://c8n2tl830eil6" path="res://Assets/Free HDR Skyboxes Pack/Texture/Sky-5.hdr" id="1_3q5j6"]
 [ext_resource type="PackedScene" uid="uid://c64slysg5u0dt" path="res://_scenes/player.tscn" id="1_dmym1"]
+[ext_resource type="Script" uid="uid://bpb4a0xmcnwhw" path="res://scripts/game_timer.gd" id="1_geman"]
+[ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="2_f54uh"]
 [ext_resource type="PackedScene" uid="uid://bmubmx1kqvtpx" path="res://_scenes/goon_a.tscn" id="3_lavtb"]
 [ext_resource type="PackedScene" uid="uid://t1j85g731tad" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_1 Variant.prefab.scn" id="4_lavtb"]
 [ext_resource type="PackedScene" uid="uid://c1r8v2bk2elkn" path="res://_scenes/goon_b.tscn" id="5_3m2wx"]
 [ext_resource type="PackedScene" uid="uid://dovh8l4o63uja" path="res://_scenes/goon_c.tscn" id="6_nnmj8"]
 [ext_resource type="PackedScene" uid="uid://y2xcffxef0cj" path="res://_scenes/director_baek.tscn" id="7_nnmj8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ob8vc"]
+font = ExtResource("2_f54uh")
+font_size = 64
+font_color = Color(1, 0.8627451, 0.007843138, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 3)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lavtb"]
 panorama = ExtResource("1_3q5j6")
@@ -28,8 +38,36 @@ size = Vector3(60, 2, 60)
 
 [node name="Main" type="Node3D"]
 
+[node name="Game_Timer" type="Timer" parent="." node_paths=PackedStringArray("timer_display")]
+script = ExtResource("1_geman")
+level_time_minutes = 15.0
+timer_display = NodePath("../CanvasLayer/Timer_Display")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Timer_Display" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -208.0
+offset_top = -80.0
+offset_right = -16.0
+offset_bottom = -6.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "15:00"
+label_settings = SubResource("LabelSettings_ob8vc")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lavtb")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.7477981, -0.1459616, -0.647683, -8.5283936e-08, -0.97553456, 0.21984622, -0.66392624, 0.16440064, 0.72950286, 0, 26, 0)
+light_color = Color(0.9116014, 0.72117347, 0.42295617, 1)
+light_bake_mode = 1
+shadow_enabled = true
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
@@ -40,12 +78,6 @@ shape = SubResource("BoxShape3D_3q5j6")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/CollisionShape3D"]
 mesh = SubResource("BoxMesh_lavtb")
 skeleton = NodePath("../..")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.7477981, -0.1459616, -0.647683, -8.5283936e-08, -0.97553456, 0.2198462, -0.66392624, 0.16440064, 0.72950286, 0, 26, 0)
-light_color = Color(0.9116014, 0.72117347, 0.42295617, 1)
-light_bake_mode = 1
-shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_dmym1")]
 
