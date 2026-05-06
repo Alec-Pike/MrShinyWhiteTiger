@@ -20,6 +20,8 @@ var remaining_coyote_time : float = coyote_time;
 @export var falling_anim_name : String;
 @export var landing_anim_name: StringName;
 
+const TERMINAL_VELOCITY : float = -100;
+
 
 func enter(_previous_state_path: String, data := {}) -> void:
 	if data.has("jumping") && data["jumping"]:
@@ -73,10 +75,11 @@ func physics_update(delta: float) -> void:
 	if (player.velocity.y <= 0 && landing_check_raycast.is_colliding()) || player.is_on_floor():
 		if pose_anim.current_animation != landing_anim_name:
 			print("signaled landing anim")
+			print("y vel = %f" % player.velocity.y)
 			pose_anim.play(landing_anim_name, 0.1);
 	
 	# State Transitions
-	if (player.global_position.y < -5):
+	if (player.global_position.y < -5) || (player.velocity.y < TERMINAL_VELOCITY && landing_check_raycast.is_colliding()):
 		finished.emit(DEATH);
 	
 	if pose_anim.current_animation == landing_anim_name:

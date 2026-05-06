@@ -113,8 +113,10 @@ grow_vertical = 2
 
 [node name="retry_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../exit_button")
 text = "Retry"
 
 [node name="exit_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../retry_button")
 text = "Exit"

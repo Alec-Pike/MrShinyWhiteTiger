@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cm1it1jbc2fas"]
+[gd_scene load_steps=34 format=3 uid="uid://cm1it1jbc2fas"]
 
 [ext_resource type="Texture2D" uid="uid://c8n2tl830eil6" path="res://Assets/Free HDR Skyboxes Pack/Texture/Sky-5.hdr" id="1_3q5j6"]
 [ext_resource type="PackedScene" uid="uid://c64slysg5u0dt" path="res://_scenes/player.tscn" id="1_dmym1"]
@@ -13,11 +13,20 @@
 [ext_resource type="PackedScene" uid="uid://blhqexrtx3r1y" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_3_1 Variant.prefab.scn" id="11_11ebp"]
 [ext_resource type="PackedScene" uid="uid://bfh81hjgsj6lh" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_3_2 Variant.prefab.scn" id="12_htmqc"]
 [ext_resource type="PackedScene" uid="uid://dsjo1iu5nkejg" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_9_2 Variant.prefab.scn" id="13_xhglb"]
-[ext_resource type="PackedScene" uid="uid://bbofo7voslbwn" path="res://_scenes/building_6_10_boss.scn" id="14_uckv7"]
 [ext_resource type="PackedScene" uid="uid://7bjnuvbwuffr" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_3 Variant.prefab.scn" id="15_htmqc"]
 [ext_resource type="PackedScene" uid="uid://es7ay8jjdhyb" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_3_3 Variant.prefab.scn" id="16_3vjy1"]
 [ext_resource type="PackedScene" uid="uid://b23kl13veim0s" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_9_4 Variant.prefab.scn" id="16_vyfui"]
+[ext_resource type="PackedScene" uid="uid://cf0et4b3j5xpv" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Parts/building_3_roof_high.prefab.scn" id="17_727wn"]
+[ext_resource type="PackedScene" uid="uid://cjw5hqrl4h5x6" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_6_4 Variant.prefab.scn" id="17_eseuy"]
 [ext_resource type="PackedScene" uid="uid://cvvq76oma4p0g" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Tree.prefab.scn" id="17_vyfui"]
+[ext_resource type="PackedScene" uid="uid://b1wuoftqotv3y" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Parts/building_3_middle.prefab.scn" id="18_8021l"]
+[ext_resource type="PackedScene" uid="uid://cbxlqo52tsso7" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_5 Variant.prefab.scn" id="18_tujbs"]
+[ext_resource type="PackedScene" uid="uid://pdvl64qom3sy" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_6_3 Variant.prefab.scn" id="21_cb7dt"]
+[ext_resource type="PackedScene" uid="uid://cjufio4cg752h" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_9_3 Variant.prefab.scn" id="22_0fvky"]
+[ext_resource type="PackedScene" uid="uid://begafva4sp62y" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_4 Variant.prefab.scn" id="23_8021l"]
+[ext_resource type="PackedScene" uid="uid://crye0k8fjuapc" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_9_5 Variant.prefab.scn" id="24_0fvky"]
+[ext_resource type="PackedScene" uid="uid://d4ftcfdraxh78" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_3_4 Variant.prefab.scn" id="24_k3npn"]
+[ext_resource type="PackedScene" uid="uid://cjqa7jhpi4xbk" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_6_6 Variant.prefab.scn" id="25_8021l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ob8vc"]
 font = ExtResource("2_f54uh")
@@ -56,7 +65,7 @@ size = Vector3(64, 2, 64)
 
 [node name="Game_Timer" type="Timer" parent="." node_paths=PackedStringArray("timer_display")]
 script = ExtResource("1_geman")
-level_time_minutes = 15.0
+level_time_minutes = 25.0
 timer_display = NodePath("../CanvasLayer/Timer_Display")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -88,7 +97,7 @@ light_specular = 2.707
 light_bake_mode = 1
 
 [node name="Ground" type="StaticBody3D" parent="."]
-transform = Transform3D(-8.742278e-07, 0, -8, 0, 1, 0, 20, 0, -3.496911e-07, -216.09995, 0, -1253.2999)
+transform = Transform3D(-4.152582e-07, 0, -4, 0, 1, 0, 9.5, 0, -1.7484555e-07, -46.099945, 0, -549.2999)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, -1, -32)
@@ -98,8 +107,11 @@ shape = SubResource("BoxShape3D_3q5j6")
 mesh = SubResource("BoxMesh_lavtb")
 skeleton = NodePath("../..")
 
-[node name="Player" parent="." instance=ExtResource("1_dmym1")]
+[node name="Player Start Pos" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 20.3, -2)
+gizmo_extents = 2.28
+
+[node name="Player" parent="Player Start Pos" instance=ExtResource("1_dmym1")]
 
 [node name="Alleyway Zone" type="Node3D" parent="."]
 
@@ -201,13 +213,81 @@ transform = Transform3D(0.17534846, 0, 0.35951763, 0, 0.4, 0, -0.35951763, 0, 0.
 [node name="building_3_3 Variant3" parent="Lower Tower Zone" instance=ExtResource("16_3vjy1")]
 transform = Transform3D(-0.7, 0, -1.0569706e-07, 0, 0.7, 0, 1.0569706e-07, 0, -0.7, 39.5, 0, -302)
 
+[node name="building_3_3 Variant4" parent="Lower Tower Zone" instance=ExtResource("16_3vjy1")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 71, 0, -389)
+
 [node name="building_9_4 Variant" parent="Lower Tower Zone" instance=ExtResource("16_vyfui")]
-transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 31, 0, -290)
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 95, 0, -317)
 
-[node name="Boss Building" parent="." instance=ExtResource("14_uckv7")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 41, 0, -1218)
+[node name="building_9_4 Variant3" parent="Lower Tower Zone" instance=ExtResource("16_vyfui")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 56, 0, -317)
 
-[node name="Director_Baek" parent="Boss Building" instance=ExtResource("7_nnmj8")]
-transform = Transform3D(1.4285715, 0, 0, 0, 1.4285715, 0, 0, 0, 1.4285715, 0, 244.75, -15.714287)
+[node name="building_9_4 Variant2" parent="Lower Tower Zone" instance=ExtResource("16_vyfui")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 145, 0, -265)
+
+[node name="building_1_1 Variant7" parent="Lower Tower Zone" instance=ExtResource("4_lavtb")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 119.9, 0, -290)
+
+[node name="building_9_1 Variant" parent="Lower Tower Zone" instance=ExtResource("8_xhglb")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 120, 0, -319)
+
+[node name="building_9_2 Variant2" parent="Lower Tower Zone" instance=ExtResource("13_xhglb")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 169, 0, -505)
+
+[node name="building_9_2 Variant3" parent="Lower Tower Zone" instance=ExtResource("13_xhglb")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 194, 0, -530)
+
+[node name="building_3_roof_high" parent="Lower Tower Zone" instance=ExtResource("17_727wn")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 56, 58.1, -380)
+
+[node name="building_3_middle" parent="Lower Tower Zone/building_3_roof_high" instance=ExtResource("18_8021l")]
+transform = Transform3D(1.1, 0, 3.5527137e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 5.7142334, -24, 0)
+
+[node name="building_1_5 Variant3" parent="Lower Tower Zone" instance=ExtResource("18_tujbs")]
+transform = Transform3D(-3.059797e-08, 2.6749597e-15, -0.7, 6.119594e-08, 0.7, 0, -0.7, 6.119594e-08, 3.059797e-08, -4, 0, -324)
+
+[node name="building_6_4 Variant" parent="Lower Tower Zone" instance=ExtResource("17_eseuy")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 107.5, 0, -407)
+
+[node name="building_1_3 Variant2" parent="Lower Tower Zone" instance=ExtResource("15_htmqc")]
+transform = Transform3D(-0.7, -6.119594e-08, -6.119594e-08, -6.119594e-08, 0.7, 0, 6.119594e-08, 5.3499194e-15, -0.7, 129, 0, -403)
+
+[node name="building_1_2 Variant5" parent="Lower Tower Zone" instance=ExtResource("6_yui6f")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 129, 0, -395.3)
+
+[node name="building_6_3 Variant2" parent="Lower Tower Zone" instance=ExtResource("21_cb7dt")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 18.596, 0, -304.313)
+
+[node name="building_6_3 Variant4" parent="Lower Tower Zone" instance=ExtResource("21_cb7dt")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 99.596, 0, -517.313)
+
+[node name="building_6_3 Variant3" parent="Lower Tower Zone" instance=ExtResource("21_cb7dt")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -12.403999, 0, -345.313)
+
+[node name="building_9_3 Variant" parent="Lower Tower Zone" instance=ExtResource("22_0fvky")]
+transform = Transform3D(-0.7, 0, -6.119594e-08, 0, 0.7, 0, 6.119594e-08, 0, -0.7, 5, 0, -504)
+
+[node name="building_9_3 Variant2" parent="Lower Tower Zone" instance=ExtResource("22_0fvky")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, -25, 0, -441)
+
+[node name="building_1_4 Variant" parent="Lower Tower Zone" instance=ExtResource("23_8021l")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 184, 0, -386)
+
+[node name="building_3_4 Variant" parent="Lower Tower Zone" instance=ExtResource("24_k3npn")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, -15, 0, -500)
+
+[node name="building_9_5 Variant" parent="Lower Tower Zone" instance=ExtResource("24_0fvky")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 6, 0, -392.5)
+
+[node name="Upper Tower Zone" type="Node3D" parent="."]
+
+[node name="building_6_6 Variant" parent="Upper Tower Zone" instance=ExtResource("25_8021l")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 64, 58, -456)
+
+[node name="building_6_4 Variant2" parent="Upper Tower Zone/building_6_6 Variant" instance=ExtResource("17_eseuy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100.85715, 0)
+
+[node name="Director_Baek" parent="Upper Tower Zone/building_6_6 Variant" instance=ExtResource("7_nnmj8")]
+transform = Transform3D(1.4285715, 0, 0, 0, 1.4285715, 0, 0, 0, 1.4285715, 0, 148.85, -15.714)
 collision_mask = 5
 gravity = 75.0
