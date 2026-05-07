@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvylnypuihuck"]
+[gd_scene load_steps=8 format=3 uid="uid://bvylnypuihuck"]
 
 [ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="1_jb6jg"]
 [ext_resource type="Script" uid="uid://b2yk0ascggkle" path="res://scripts/menu stuff/win_screen.gd" id="2_tb78a"]
+[ext_resource type="AudioStream" uid="uid://7hm3m6i32sh0" path="res://audio/music/MrShinyTitleThemeV1.mp3" id="3_tb78a"]
 
 [sub_resource type="Theme" id="Theme_oio1f"]
 default_font = ExtResource("1_jb6jg")
@@ -120,3 +121,9 @@ text = "Retry"
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../retry_button")
 text = "Exit"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tb78a")
+autoplay = true
+bus = &"Music"
+parameters/looping = true

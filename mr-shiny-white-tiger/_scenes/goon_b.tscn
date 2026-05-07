@@ -86,7 +86,7 @@ center_bone = "Root_"
 
 [node name="Goon_B" instance=ExtResource("1_sp0aq")]
 hp = 150
-fov = 75.0
+fov = 80.0
 chase_speed = 7.0
 air_speed = 6.0
 atk_range = 1.25

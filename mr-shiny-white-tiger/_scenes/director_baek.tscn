@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bwgh11eofhruj" path="res://_scenes/abstract_enemy.tscn" id="1_dlgtt"]
 [ext_resource type="PackedScene" uid="uid://oybij82se8w" path="res://models/character models/DirectorBaekFinal.vrm" id="2_1teel"]
 [ext_resource type="Script" uid="uid://b3m1xa3wp4bdx" path="res://scripts/attack_resource.gd" id="2_7tk08"]
+[ext_resource type="Script" uid="uid://cthccexstjoqh" path="res://scripts/boss.gd" id="2_dcwp4"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="3_idrcv"]
 [ext_resource type="Resource" uid="uid://bxxbu7ntp8l0n" path="res://resources/attack_resources/boss_atks/Boss_L_Flying_Side_Kick.tres" id="3_t5wod"]
 [ext_resource type="Resource" uid="uid://clby4jv2pvece" path="res://resources/attack_resources/boss_atks/Boss_L_Spinning_Punch.tres" id="4_2lqqf"]
@@ -23,7 +24,6 @@
 [ext_resource type="Resource" uid="uid://dvhfmyfr70l71" path="res://resources/attack_resources/boss_atks/Boss_R_Uppercut.tres" id="13_fda38"]
 [ext_resource type="Resource" uid="uid://pqqf75iyi1v7" path="res://resources/attack_resources/boss_atks/Boss_Stomp.tres" id="14_pq3dj"]
 [ext_resource type="Script" uid="uid://bg0kyw0x1skrt" path="res://scripts/states/boss states/boss_ready_state.gd" id="22_2lqqf"]
-[ext_resource type="Script" uid="uid://bxvxck0caq0m1" path="res://scripts/states/boss states/boss_death_state.gd" id="23_t5wod"]
 [ext_resource type="Texture2D" uid="uid://bxba2ikbsqa58" path="res://sprites/BossHealthbarBackground.png" id="25_dcwp4"]
 [ext_resource type="Texture2D" uid="uid://b5lkoxp64mnvl" path="res://sprites/BossHealthbarFill.png" id="26_kbuk5"]
 [ext_resource type="Script" uid="uid://dwgrghltx822i" path="res://scripts/boss_health_bar.gd" id="27_rpytk"]
@@ -480,6 +480,7 @@ collider_groups = Array[ExtResource("4_xuuav")]([SubResource("Resource_3fbmr"), 
 center_bone = "Root_"
 
 [node name="Director_Baek" instance=ExtResource("1_dlgtt")]
+script = ExtResource("2_dcwp4")
 hp = 500
 detection_range = 3.0
 fov = 180.0
@@ -538,7 +539,6 @@ running_anim_name = &"DirBaekLib/Fem_Walk_4"
 walking_anim_name = &"DirBaekLib/Fem_Walk_4"
 
 [node name="Death" parent="StateMachine" index="8" node_paths=PackedStringArray("character_model")]
-script = ExtResource("23_t5wod")
 character_model = NodePath("../../CharacterPivot/DirectorBaekFinal")
 death_anim_name = &"TakingDamageLib/Dying Slow"
 

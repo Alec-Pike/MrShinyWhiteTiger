@@ -19,6 +19,7 @@ var is_big_hit : bool = false;
 var anim_is_done : bool = false;
 var i_frame_timer : float = 0.0;
 
+const TERMINAL_VELOCITY : float = -100;
 
 
 func _ready() -> void:
@@ -60,7 +61,7 @@ func physics_update(_delta: float) -> void:
 	character.velocity.y -= gravity * _delta;
 	character.move_and_slide();
 	
-	if character.global_position.y <= -5:
+	if character.global_position.y <= -5 || (character.velocity.y <= TERMINAL_VELOCITY && character.is_on_floor()):
 		finished.emit("Death");
 		return;
 	

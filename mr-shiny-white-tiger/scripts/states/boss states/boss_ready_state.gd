@@ -6,19 +6,14 @@ extends EnemyState
 #@export var player_detection_raycast : RayCast3D;
 #@export var _character_pivot : Node3D;
 
-func _ready() -> void:
-	await super._ready();
-	if boss_health_bar != null:
-		boss_health_bar.visible = false;
-	#player_detection_raycast.target_position = Vector3(0, 0, -this_enemy.detection_range);
-
-
 func enter(_previous_state_path: String, _data := {}) -> void:
 	this_enemy.velocity.x = 0.0;
 	this_enemy.velocity.z = 0.0;
 	pose_anim.animation_finished.connect(_on_animation_finished);
 	pose_anim.play(idle_anim_name, 0.2);
 	#player_detection_raycast.enabled = true;
+	if boss_health_bar != null:
+		boss_health_bar.visible = false;
 
 
 func physics_update(_delta: float) -> void:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=34 format=3 uid="uid://cm1it1jbc2fas"]
+[gd_scene load_steps=41 format=3 uid="uid://cm1it1jbc2fas"]
 
 [ext_resource type="Texture2D" uid="uid://c8n2tl830eil6" path="res://Assets/Free HDR Skyboxes Pack/Texture/Sky-5.hdr" id="1_3q5j6"]
 [ext_resource type="PackedScene" uid="uid://c64slysg5u0dt" path="res://_scenes/player.tscn" id="1_dmym1"]
 [ext_resource type="Script" uid="uid://bpb4a0xmcnwhw" path="res://scripts/game_timer.gd" id="1_geman"]
 [ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="2_f54uh"]
+[ext_resource type="AudioStream" uid="uid://7hm3m6i32sh0" path="res://audio/music/MrShinyTitleThemeV1.mp3" id="3_uegip"]
 [ext_resource type="PackedScene" uid="uid://t1j85g731tad" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_1 Variant.prefab.scn" id="4_lavtb"]
 [ext_resource type="PackedScene" uid="uid://77n3fjwwfcgs" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_2 Variant.prefab.scn" id="6_yui6f"]
 [ext_resource type="PackedScene" uid="uid://y2xcffxef0cj" path="res://_scenes/director_baek.tscn" id="7_nnmj8"]
@@ -19,14 +20,20 @@
 [ext_resource type="PackedScene" uid="uid://cf0et4b3j5xpv" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Parts/building_3_roof_high.prefab.scn" id="17_727wn"]
 [ext_resource type="PackedScene" uid="uid://cjw5hqrl4h5x6" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_6_4 Variant.prefab.scn" id="17_eseuy"]
 [ext_resource type="PackedScene" uid="uid://cvvq76oma4p0g" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Tree.prefab.scn" id="17_vyfui"]
+[ext_resource type="PackedScene" uid="uid://bmubmx1kqvtpx" path="res://_scenes/goon_a.tscn" id="17_x3txq"]
+[ext_resource type="PackedScene" uid="uid://dovh8l4o63uja" path="res://_scenes/goon_c.tscn" id="18_2urii"]
 [ext_resource type="PackedScene" uid="uid://b1wuoftqotv3y" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Parts/building_3_middle.prefab.scn" id="18_8021l"]
 [ext_resource type="PackedScene" uid="uid://cbxlqo52tsso7" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_5 Variant.prefab.scn" id="18_tujbs"]
+[ext_resource type="PackedScene" uid="uid://c1r8v2bk2elkn" path="res://_scenes/goon_b.tscn" id="19_0wlie"]
 [ext_resource type="PackedScene" uid="uid://pdvl64qom3sy" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_6_3 Variant.prefab.scn" id="21_cb7dt"]
 [ext_resource type="PackedScene" uid="uid://cjufio4cg752h" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_9_3 Variant.prefab.scn" id="22_0fvky"]
 [ext_resource type="PackedScene" uid="uid://begafva4sp62y" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_1_4 Variant.prefab.scn" id="23_8021l"]
 [ext_resource type="PackedScene" uid="uid://crye0k8fjuapc" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_9_5 Variant.prefab.scn" id="24_0fvky"]
 [ext_resource type="PackedScene" uid="uid://d4ftcfdraxh78" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_3_4 Variant.prefab.scn" id="24_k3npn"]
-[ext_resource type="PackedScene" uid="uid://cjqa7jhpi4xbk" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_6_6 Variant.prefab.scn" id="25_8021l"]
+[ext_resource type="PackedScene" uid="uid://b2305x2a8r50m" path="res://_scenes/building_6_6_variant_boss.scn" id="27_8021l"]
+[ext_resource type="PackedScene" uid="uid://rmk6u58pwclu" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_3_5 Variant.prefab.scn" id="28_drw0k"]
+[ext_resource type="PackedScene" uid="uid://4oqfu6i1sjv3" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_6_5 Variant.prefab.scn" id="29_uegip"]
+[ext_resource type="PackedScene" uid="uid://c3ed64dpaqwbb" path="res://Assets/(HDRP) NYC-Like City Buildings Set (PBR)/Prefabs/Buildings/building_6_7 Variant.prefab.scn" id="30_drw0k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ob8vc"]
 font = ExtResource("2_f54uh")
@@ -85,6 +92,12 @@ grow_vertical = 0
 text = "15:00"
 label_settings = SubResource("LabelSettings_ob8vc")
 
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_uegip")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lavtb")
 
@@ -115,179 +128,580 @@ gizmo_extents = 2.28
 
 [node name="Alleyway Zone" type="Node3D" parent="."]
 
-[node name="building_1_2 Variant" parent="Alleyway Zone" instance=ExtResource("6_yui6f")]
+[node name="Buildings" type="Node3D" parent="Alleyway Zone"]
+
+[node name="building_1_2 Variant" parent="Alleyway Zone/Buildings" instance=ExtResource("6_yui6f")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 47.899994, 0, 31.699997)
 
-[node name="building_1_1 Variant" parent="Alleyway Zone" instance=ExtResource("4_lavtb")]
+[node name="building_1_1 Variant" parent="Alleyway Zone/Buildings" instance=ExtResource("4_lavtb")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 30.899994, 0, -6.300003)
 
-[node name="building_1_1 Variant2" parent="Alleyway Zone" instance=ExtResource("4_lavtb")]
+[node name="building_1_1 Variant2" parent="Alleyway Zone/Buildings" instance=ExtResource("4_lavtb")]
 transform = Transform3D(-7.5099095e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -7.5099095e-08, 47.899994, 0, -40.300003)
 
-[node name="building_9_1 Variant" parent="Alleyway Zone" instance=ExtResource("8_xhglb")]
+[node name="building_9_1 Variant" parent="Alleyway Zone/Buildings" instance=ExtResource("8_xhglb")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, -6.100006, 0, -77.3)
 
-[node name="building_9_1 Variant2" parent="Alleyway Zone" instance=ExtResource("8_xhglb")]
+[node name="building_9_1 Variant2" parent="Alleyway Zone/Buildings" instance=ExtResource("8_xhglb")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 0.8999939, 0, 1.699997)
 
-[node name="building_6_2 Variant" parent="Alleyway Zone" instance=ExtResource("9_uckv7")]
+[node name="building_6_2 Variant" parent="Alleyway Zone/Buildings" instance=ExtResource("9_uckv7")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 84.899994, 0, -19.300003)
 
-[node name="building_6_1 Variant" parent="Alleyway Zone" instance=ExtResource("10_1y6cb")]
+[node name="building_6_1 Variant" parent="Alleyway Zone/Buildings" instance=ExtResource("10_1y6cb")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 13.899994, 0, 10.699997)
 
-[node name="building_6_1 Variant2" parent="Alleyway Zone" instance=ExtResource("10_1y6cb")]
+[node name="building_6_1 Variant2" parent="Alleyway Zone/Buildings" instance=ExtResource("10_1y6cb")]
 transform = Transform3D(-7.5099095e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -7.5099095e-08, 84.899994, 0, -46.300003)
 
-[node name="building_6_1 Variant3" parent="Alleyway Zone" instance=ExtResource("10_1y6cb")]
+[node name="building_6_1 Variant3" parent="Alleyway Zone/Buildings" instance=ExtResource("10_1y6cb")]
 transform = Transform3D(-7.5099095e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -7.5099095e-08, 13.899994, 0, -53.300003)
 
-[node name="building_3_1 Variant" parent="Alleyway Zone" instance=ExtResource("11_11ebp")]
+[node name="building_3_1 Variant" parent="Alleyway Zone/Buildings" instance=ExtResource("11_11ebp")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 59.399994, 0, -53.300003)
 
-[node name="building_1_2 Variant2" parent="Alleyway Zone" instance=ExtResource("6_yui6f")]
+[node name="building_1_2 Variant2" parent="Alleyway Zone/Buildings" instance=ExtResource("6_yui6f")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 18.399994, 0, -70.3)
 
-[node name="building_3_2 Variant" parent="Alleyway Zone" instance=ExtResource("12_htmqc")]
+[node name="building_3_2 Variant" parent="Alleyway Zone/Buildings" instance=ExtResource("12_htmqc")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 33.399994, 0, -112.3)
 
-[node name="building_1_2 Variant3" parent="Alleyway Zone" instance=ExtResource("6_yui6f")]
+[node name="building_1_2 Variant3" parent="Alleyway Zone/Buildings" instance=ExtResource("6_yui6f")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 67.4, 0, -184.29999)
 
-[node name="building_1_2 Variant4" parent="Alleyway Zone" instance=ExtResource("6_yui6f")]
+[node name="building_1_2 Variant4" parent="Alleyway Zone/Buildings" instance=ExtResource("6_yui6f")]
 transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 56.399998, 0, -146.3)
 
-[node name="building_9_2 Variant" parent="Alleyway Zone" instance=ExtResource("13_xhglb")]
+[node name="building_9_2 Variant" parent="Alleyway Zone/Buildings" instance=ExtResource("13_xhglb")]
 transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 77, 0, -213)
 
-[node name="building_6_2 Variant2" parent="Alleyway Zone" instance=ExtResource("9_uckv7")]
+[node name="building_6_2 Variant2" parent="Alleyway Zone/Buildings" instance=ExtResource("9_uckv7")]
 transform = Transform3D(-0.7, 0, -6.119594e-08, 0, 0.7, 0, 6.119594e-08, 0, -0.7, 38.899994, 0, -208.3)
 
-[node name="building_6_2 Variant3" parent="Alleyway Zone" instance=ExtResource("9_uckv7")]
+[node name="building_6_2 Variant3" parent="Alleyway Zone/Buildings" instance=ExtResource("9_uckv7")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 63.899994, 0, -208.3)
 
-[node name="building_6_2 Variant6" parent="Alleyway Zone" instance=ExtResource("9_uckv7")]
+[node name="building_6_2 Variant6" parent="Alleyway Zone/Buildings" instance=ExtResource("9_uckv7")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 89.899994, 0, -212.3)
 
-[node name="building_6_2 Variant5" parent="Alleyway Zone" instance=ExtResource("9_uckv7")]
+[node name="building_6_2 Variant5" parent="Alleyway Zone/Buildings" instance=ExtResource("9_uckv7")]
 transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 16.899994, 0, -179.3)
 
-[node name="building_6_2 Variant4" parent="Alleyway Zone" instance=ExtResource("9_uckv7")]
+[node name="building_6_2 Variant4" parent="Alleyway Zone/Buildings" instance=ExtResource("9_uckv7")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 93.899994, 0, -124.3)
 
-[node name="building_1_3 Variant" parent="Alleyway Zone" instance=ExtResource("15_htmqc")]
+[node name="building_1_3 Variant" parent="Alleyway Zone/Buildings" instance=ExtResource("15_htmqc")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 18, 0, -196)
 
-[node name="building_1_1 Variant3" parent="Alleyway Zone" instance=ExtResource("4_lavtb")]
+[node name="building_1_1 Variant3" parent="Alleyway Zone/Buildings" instance=ExtResource("4_lavtb")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 55.899994, 0, -246.3)
 
-[node name="building_1_1 Variant4" parent="Alleyway Zone" instance=ExtResource("4_lavtb")]
+[node name="building_1_1 Variant4" parent="Alleyway Zone/Buildings" instance=ExtResource("4_lavtb")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 102.899994, 0, -246.3)
 
-[node name="building_1_1 Variant5" parent="Alleyway Zone" instance=ExtResource("4_lavtb")]
+[node name="building_1_1 Variant5" parent="Alleyway Zone/Buildings" instance=ExtResource("4_lavtb")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 55.899994, 0, -285.3)
 
-[node name="building_1_1 Variant6" parent="Alleyway Zone" instance=ExtResource("4_lavtb")]
+[node name="building_1_1 Variant6" parent="Alleyway Zone/Buildings" instance=ExtResource("4_lavtb")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 102.899994, 0, -285.3)
 
-[node name="building_3_3 Variant" parent="Alleyway Zone" instance=ExtResource("16_3vjy1")]
+[node name="building_3_3 Variant" parent="Alleyway Zone/Buildings" instance=ExtResource("16_3vjy1")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 128, 0, -265)
 
-[node name="building_3_3 Variant2" parent="Alleyway Zone" instance=ExtResource("16_3vjy1")]
+[node name="building_3_3 Variant2" parent="Alleyway Zone/Buildings" instance=ExtResource("16_3vjy1")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 43, 0, -265)
 
-[node name="Tree" parent="Alleyway Zone" instance=ExtResource("17_vyfui")]
+[node name="Tree" parent="Alleyway Zone/Buildings" instance=ExtResource("17_vyfui")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 67, 0, -261)
 
-[node name="Tree2" parent="Alleyway Zone" instance=ExtResource("17_vyfui")]
+[node name="Tree2" parent="Alleyway Zone/Buildings" instance=ExtResource("17_vyfui")]
 transform = Transform3D(-0.21631195, 0, -0.66573954, 0, 0.6999999, 0, 0.66573954, 0, -0.21631195, 58, 0, -255)
 
-[node name="Tree4" parent="Alleyway Zone" instance=ExtResource("17_vyfui")]
+[node name="Tree4" parent="Alleyway Zone/Buildings" instance=ExtResource("17_vyfui")]
 transform = Transform3D(0.66573954, 0, 0.21631192, 0, 0.69999987, 0, -0.21631192, 0, 0.66573954, 63, 0, -157)
 
-[node name="Tree3" parent="Alleyway Zone" instance=ExtResource("17_vyfui")]
+[node name="Tree3" parent="Alleyway Zone/Buildings" instance=ExtResource("17_vyfui")]
 transform = Transform3D(0.17534846, 0, 0.35951763, 0, 0.4, 0, -0.35951763, 0, 0.17534846, 69, 0, -254)
+
+[node name="Enemies" type="Node3D" parent="Alleyway Zone"]
+
+[node name="Goon_A" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -44)
+
+[node name="Goon_A2" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0, -44)
+
+[node name="Goon_C" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(0.258819, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.258819, 13, 20.24618, -58)
+
+[node name="Goon_A3" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071067, 23, 0, -67)
+
+[node name="Goon_A4" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, 22, 0, -69)
+
+[node name="Goon_C2" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, 38, 7.717148, -85)
+
+[node name="Goon_A5" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 53, 0, -111)
+
+[node name="Goon_B" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 60, 20.340754, -143)
+
+[node name="Goon_B2" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-0.2588191, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.2588191, 67, 20.340754, -144)
+
+[node name="Goon_B3" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, 44, 0, -162)
+
+[node name="Goon_A6" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 50, 0, -136)
+
+[node name="Goon_A7" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 40, 7.7125874, -139)
+
+[node name="Goon_B4" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 40, 7.7125874, -135)
+
+[node name="Goon_C3" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-0.8660254, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660254, 26, 43.40589, -137)
+
+[node name="Goon_C4" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-0.9659258, 0, 0.25881913, 0, 1, 0, -0.25881913, 0, -0.9659258, 25, 45.40589, -154)
+
+[node name="Goon_B5" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, -0.70710677, -12, 24.503036, -131)
+
+[node name="Goon_A8" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -14, 24.503036, -129)
+
+[node name="Goon_C5" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -11, 24.503036, -119)
+
+[node name="Goon_B6" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75, 0, -150)
+
+[node name="Goon_C6" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(0.8660253, 0, 0.49999997, 0, 1, 0, -0.49999997, 0, 0.8660253, 65, 0, -154)
+
+[node name="Goon_B7" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-0.8660254, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660254, 69, 0, -164)
+
+[node name="Goon_C7" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 65, 21, -180)
+
+[node name="Goon_A9" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 44, 21, -176)
+
+[node name="Goon_A10" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 45, 21, -180)
+
+[node name="Goon_C8" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 28.714808, -216)
+
+[node name="Goon_C9" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 14, 28.714808, -222)
+
+[node name="Goon_B8" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 59, 39.18517, -205)
+
+[node name="Goon_B9" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, 44, 37, -206)
+
+[node name="Goon_C10" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 37, -217)
+
+[node name="Goon_C11" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 0, -190)
+
+[node name="Goon_A11" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(0.49999997, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.49999997, 48, 0, -192)
+
+[node name="Goon_B10" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, 21, 0, -195)
+
+[node name="Goon_C12" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 57, 12, -241)
+
+[node name="Goon_A12" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 72, 12, -243)
+
+[node name="Goon_C13" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, 54, 12, -248)
+
+[node name="Goon_B11" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76, 12, -238)
+
+[node name="Goon_B12" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 67, 0, -249)
+
+[node name="Goon_B13" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071067, 58, 0, -249)
+
+[node name="Goon_A13" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 53, 0, -258)
+
+[node name="Goon_A14" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 72, 0, -257)
+
+[node name="Goon_C14" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-0.50000006, 0, 0.8660254, 0, 1, 0, -0.8660254, 0, -0.50000006, 70, 0, -263)
+
+[node name="Goon_A15" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, 54, 0, -263)
+
+[node name="Goon_C15" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, 55, 12, -274)
+
+[node name="Goon_B14" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, 72, 12, -273)
+
+[node name="Goon_B15" parent="Alleyway Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 72, 12, -281)
+
+[node name="Goon_A16" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 49, 12, -268)
+
+[node name="Goon_A17" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 46, 12, -270)
 
 [node name="Lower Tower Zone" type="Node3D" parent="."]
 
-[node name="building_3_3 Variant3" parent="Lower Tower Zone" instance=ExtResource("16_3vjy1")]
+[node name="Buildings" type="Node3D" parent="Lower Tower Zone"]
+
+[node name="building_3_3 Variant3" parent="Lower Tower Zone/Buildings" instance=ExtResource("16_3vjy1")]
 transform = Transform3D(-0.7, 0, -1.0569706e-07, 0, 0.7, 0, 1.0569706e-07, 0, -0.7, 39.5, 0, -302)
 
-[node name="building_3_3 Variant4" parent="Lower Tower Zone" instance=ExtResource("16_3vjy1")]
-transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 71, 0, -389)
+[node name="building_3_3 Variant4" parent="Lower Tower Zone/Buildings" instance=ExtResource("16_3vjy1")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 56, 0, -435)
 
-[node name="building_9_4 Variant" parent="Lower Tower Zone" instance=ExtResource("16_vyfui")]
+[node name="building_9_4 Variant" parent="Lower Tower Zone/Buildings" instance=ExtResource("16_vyfui")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 95, 0, -317)
 
-[node name="building_9_4 Variant3" parent="Lower Tower Zone" instance=ExtResource("16_vyfui")]
+[node name="building_9_4 Variant3" parent="Lower Tower Zone/Buildings" instance=ExtResource("16_vyfui")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 56, 0, -317)
 
-[node name="building_9_4 Variant2" parent="Lower Tower Zone" instance=ExtResource("16_vyfui")]
+[node name="building_9_4 Variant2" parent="Lower Tower Zone/Buildings" instance=ExtResource("16_vyfui")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 145, 0, -265)
 
-[node name="building_1_1 Variant7" parent="Lower Tower Zone" instance=ExtResource("4_lavtb")]
+[node name="building_1_1 Variant7" parent="Lower Tower Zone/Buildings" instance=ExtResource("4_lavtb")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 119.9, 0, -290)
 
-[node name="building_9_1 Variant" parent="Lower Tower Zone" instance=ExtResource("8_xhglb")]
+[node name="building_9_1 Variant" parent="Lower Tower Zone/Buildings" instance=ExtResource("8_xhglb")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 120, 0, -319)
 
-[node name="building_9_2 Variant2" parent="Lower Tower Zone" instance=ExtResource("13_xhglb")]
+[node name="building_9_2 Variant2" parent="Lower Tower Zone/Buildings" instance=ExtResource("13_xhglb")]
 transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 169, 0, -505)
 
-[node name="building_9_2 Variant3" parent="Lower Tower Zone" instance=ExtResource("13_xhglb")]
+[node name="building_9_2 Variant3" parent="Lower Tower Zone/Buildings" instance=ExtResource("13_xhglb")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 194, 0, -530)
 
-[node name="building_3_roof_high" parent="Lower Tower Zone" instance=ExtResource("17_727wn")]
+[node name="building_3_roof_high" parent="Lower Tower Zone/Buildings" instance=ExtResource("17_727wn")]
 transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 56, 58.1, -380)
 
-[node name="building_3_middle" parent="Lower Tower Zone/building_3_roof_high" instance=ExtResource("18_8021l")]
+[node name="building_3_middle" parent="Lower Tower Zone/Buildings/building_3_roof_high" instance=ExtResource("18_8021l")]
 transform = Transform3D(1.1, 0, 3.5527137e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 5.7142334, -24, 0)
 
-[node name="building_1_5 Variant3" parent="Lower Tower Zone" instance=ExtResource("18_tujbs")]
+[node name="building_1_5 Variant3" parent="Lower Tower Zone/Buildings" instance=ExtResource("18_tujbs")]
 transform = Transform3D(-3.059797e-08, 2.6749597e-15, -0.7, 6.119594e-08, 0.7, 0, -0.7, 6.119594e-08, 3.059797e-08, -4, 0, -324)
 
-[node name="building_6_4 Variant" parent="Lower Tower Zone" instance=ExtResource("17_eseuy")]
+[node name="building_6_4 Variant" parent="Lower Tower Zone/Buildings" instance=ExtResource("17_eseuy")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 107.5, 0, -407)
 
-[node name="building_1_3 Variant2" parent="Lower Tower Zone" instance=ExtResource("15_htmqc")]
+[node name="building_1_3 Variant2" parent="Lower Tower Zone/Buildings" instance=ExtResource("15_htmqc")]
 transform = Transform3D(-0.7, -6.119594e-08, -6.119594e-08, -6.119594e-08, 0.7, 0, 6.119594e-08, 5.3499194e-15, -0.7, 129, 0, -403)
 
-[node name="building_1_2 Variant5" parent="Lower Tower Zone" instance=ExtResource("6_yui6f")]
+[node name="building_1_2 Variant5" parent="Lower Tower Zone/Buildings" instance=ExtResource("6_yui6f")]
 transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 129, 0, -395.3)
 
-[node name="building_6_3 Variant2" parent="Lower Tower Zone" instance=ExtResource("21_cb7dt")]
+[node name="building_6_3 Variant2" parent="Lower Tower Zone/Buildings" instance=ExtResource("21_cb7dt")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 18.596, 0, -304.313)
 
-[node name="building_6_3 Variant4" parent="Lower Tower Zone" instance=ExtResource("21_cb7dt")]
+[node name="building_6_3 Variant4" parent="Lower Tower Zone/Buildings" instance=ExtResource("21_cb7dt")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 99.596, 0, -517.313)
 
-[node name="building_6_3 Variant3" parent="Lower Tower Zone" instance=ExtResource("21_cb7dt")]
+[node name="building_6_3 Variant3" parent="Lower Tower Zone/Buildings" instance=ExtResource("21_cb7dt")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -12.403999, 0, -345.313)
 
-[node name="building_9_3 Variant" parent="Lower Tower Zone" instance=ExtResource("22_0fvky")]
+[node name="building_9_3 Variant" parent="Lower Tower Zone/Buildings" instance=ExtResource("22_0fvky")]
 transform = Transform3D(-0.7, 0, -6.119594e-08, 0, 0.7, 0, 6.119594e-08, 0, -0.7, 5, 0, -504)
 
-[node name="building_9_3 Variant2" parent="Lower Tower Zone" instance=ExtResource("22_0fvky")]
+[node name="building_9_3 Variant2" parent="Lower Tower Zone/Buildings" instance=ExtResource("22_0fvky")]
 transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, -25, 0, -441)
 
-[node name="building_1_4 Variant" parent="Lower Tower Zone" instance=ExtResource("23_8021l")]
+[node name="building_1_4 Variant" parent="Lower Tower Zone/Buildings" instance=ExtResource("23_8021l")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 184, 0, -386)
 
-[node name="building_3_4 Variant" parent="Lower Tower Zone" instance=ExtResource("24_k3npn")]
+[node name="building_3_4 Variant" parent="Lower Tower Zone/Buildings" instance=ExtResource("24_k3npn")]
 transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, -15, 0, -500)
 
-[node name="building_9_5 Variant" parent="Lower Tower Zone" instance=ExtResource("24_0fvky")]
+[node name="building_9_5 Variant" parent="Lower Tower Zone/Buildings" instance=ExtResource("24_0fvky")]
 transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 6, 0, -392.5)
+
+[node name="Enemies" type="Node3D" parent="Lower Tower Zone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Goon_A18" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, 116, 12.497173, -303)
+
+[node name="Goon_C16" parent="Lower Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 111, 25.505821, -364)
+
+[node name="Goon_B16" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 107, 25.505821, -364)
+
+[node name="Goon_A" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 21.282005, -393)
+
+[node name="Goon_A2" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 133, 21.282005, -393)
+
+[node name="Goon_C" parent="Lower Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 156, 29.282005, -411)
+
+[node name="Goon_C2" parent="Lower Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, 134, 29.282005, -411)
+
+[node name="Goon_B" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-0.8660254, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660254, 182, 38, -418)
+
+[node name="Goon_B2" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 177, 38, -418)
+
+[node name="Goon_A3" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 179, 38, -388)
+
+[node name="Goon_C3" parent="Lower Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-0.8660254, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660254, 185, 46.498127, -442)
+
+[node name="Goon_B3" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 174, 46.498127, -483)
+
+[node name="Goon_B4" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 190, 46.498127, -468)
+
+[node name="Goon_A4" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 160, 46.50468, -516)
+
+[node name="Goon_A5" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 158, 46.50468, -514)
+
+[node name="Goon_A6" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 158, 46.50468, -518)
+
+[node name="Goon_C4" parent="Lower Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, 122, 46.514988, -525)
+
+[node name="Goon_B5" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122, 46.514988, -509)
+
+[node name="Goon_A7" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 142, 48.50468, -514)
+
+[node name="Goon_B6" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, 97, 57, -521)
+
+[node name="Goon_A8" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 99, 55, -513)
+
+[node name="Goon_C5" parent="Lower Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 61, 69.50846, -519)
+
+[node name="Goon_B7" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 60, 67.49835, -511)
+
+[node name="Goon_A9" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 58, 71.49835, -515)
+
+[node name="Goon_A10" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 54, 67.49835, -515)
+
+[node name="Goon_A11" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 53, 67.49835, -517)
+
+[node name="Goon_B8" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 11, 67.4977, -515)
+
+[node name="Goon_C6" parent="Lower Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 76, -486)
+
+[node name="Goon_C7" parent="Lower Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 76, -483)
+
+[node name="Goon_C8" parent="Lower Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 76, -483)
+
+[node name="Goon_B9" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 78, -475)
+
+[node name="Goon_B10" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -9, 80, -473)
+
+[node name="Goon_A12" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, -8, 80, -456)
+
+[node name="Goon_A13" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(0.5, 0, 0.8660253, 0, 1, 0, -0.8660253, 0, 0.5, -12, 78, -453)
+
+[node name="Goon_B11" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 67.702, -394)
+
+[node name="Goon_C9" parent="Lower Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -15, 67.52256, -429)
+
+[node name="Goon_A14" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -14, 71.702, -389)
+
+[node name="Goon_C10" parent="Lower Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-0.50000006, 0, 0.8660254, 0, 1, 0, -0.8660254, 0, -0.50000006, -14, 67.702, -385)
+
+[node name="Goon_A15" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14, 59, -346)
+
+[node name="Goon_B12" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 46.517803, -299)
+
+[node name="Goon_B13" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 46.517803, -301)
+
+[node name="Goon_B14" parent="Lower Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 46.517803, -299)
+
+[node name="Goon_A16" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 15, 54.841824, -301)
+
+[node name="Goon_A17" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 63, 59, -336)
+
+[node name="Goon_A19" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63, 59, -396)
+
+[node name="Goon_A20" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-0.9659258, 0, -0.25881913, 0, 1, 0, 0.25881913, 0, -0.9659258, 59, 59, -439)
+
+[node name="Goon_A21" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-0.9659258, 0, -0.25881913, 0, 1, 0, 0.25881913, 0, -0.9659258, 59, 59, -436)
+
+[node name="Goon_A22" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-0.9659258, 0, -0.25881913, 0, 1, 0, 0.25881913, 0, -0.9659258, 59, 59, -433)
+
+[node name="Goon_A23" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-0.9659258, 0, 0.25881898, 0, 1, 0, -0.25881898, 0, -0.9659258, 68, 59, -433)
+
+[node name="Goon_A24" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-0.9659258, 0, 0.25881898, 0, 1, 0, -0.25881898, 0, -0.9659258, 68, 59, -436)
+
+[node name="Goon_A25" parent="Lower Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-0.9659258, 0, 0.25881898, 0, 1, 0, -0.25881898, 0, -0.9659258, 68, 59, -439)
+
+[node name="Goon_C11" parent="Lower Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 63.5, 59, -439)
 
 [node name="Upper Tower Zone" type="Node3D" parent="."]
 
-[node name="building_6_6 Variant" parent="Upper Tower Zone" instance=ExtResource("25_8021l")]
+[node name="Buildings" type="Node3D" parent="Upper Tower Zone"]
+
+[node name="building_6_6 Variant_boss" parent="Upper Tower Zone/Buildings" instance=ExtResource("27_8021l")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 64, 58, -456)
 
-[node name="building_6_4 Variant2" parent="Upper Tower Zone/building_6_6 Variant" instance=ExtResource("17_eseuy")]
+[node name="building_6_4 Variant3" parent="Upper Tower Zone/Buildings/building_6_6 Variant_boss" instance=ExtResource("17_eseuy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100.85715, 0)
 
-[node name="Director_Baek" parent="Upper Tower Zone/building_6_6 Variant" instance=ExtResource("7_nnmj8")]
-transform = Transform3D(1.4285715, 0, 0, 0, 1.4285715, 0, 0, 0, 1.4285715, 0, 148.85, -15.714)
+[node name="building_6_4 Variant2" parent="Upper Tower Zone/Buildings" instance=ExtResource("17_eseuy")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 89.5, 0, -456)
+
+[node name="building_6_4 Variant3" parent="Upper Tower Zone/Buildings" instance=ExtResource("17_eseuy")]
+transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 119.5, 0, -443)
+
+[node name="building_6_4 Variant4" parent="Upper Tower Zone/Buildings" instance=ExtResource("17_eseuy")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 89.5, 0, -456)
+
+[node name="building_3_5 Variant" parent="Upper Tower Zone/Buildings" instance=ExtResource("28_drw0k")]
+transform = Transform3D(-0.7, 0, -6.119594e-08, 0, 0.7, 0, 6.119594e-08, 0, -0.7, 107, 3, -474)
+
+[node name="building_6_5 Variant2" parent="Upper Tower Zone/Buildings" instance=ExtResource("29_uegip")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 149, 0, -443)
+
+[node name="building_9_5 Variant2" parent="Upper Tower Zone/Buildings" instance=ExtResource("24_0fvky")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 93, 0, -498.5)
+
+[node name="building_1_5 Variant" parent="Upper Tower Zone/Buildings" instance=ExtResource("18_tujbs")]
+transform = Transform3D(-0.7, 0, -6.119594e-08, 0, 0.7, 0, 6.119594e-08, 0, -0.7, 5, 0, -414)
+
+[node name="building_1_5 Variant2" parent="Upper Tower Zone/Buildings" instance=ExtResource("18_tujbs")]
+transform = Transform3D(-0.7, 0, -6.119594e-08, 0, 0.7, 0, 6.119594e-08, 0, -0.7, 5, 45.5, -414)
+
+[node name="building_1_5 Variant3" parent="Upper Tower Zone/Buildings" instance=ExtResource("18_tujbs")]
+transform = Transform3D(-0.7, 0, -6.119594e-08, 0, 0.7, 0, 6.119594e-08, 0, -0.7, 5, 91, -414)
+
+[node name="building_6_7 Variant" parent="Upper Tower Zone/Buildings" instance=ExtResource("30_drw0k")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 30, 0, -456)
+
+[node name="Enemies" type="Node3D" parent="Upper Tower Zone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Director_Baek" parent="Upper Tower Zone/Enemies" instance=ExtResource("7_nnmj8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 163.195, -462)
 collision_mask = 5
 gravity = 75.0
+
+[node name="Goon_B" parent="Upper Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 116, 71.5, -438)
+
+[node name="Goon_A" parent="Upper Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 147, 92.60697, -442)
+
+[node name="Goon_A2" parent="Upper Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-0.8660254, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660254, 147, 88.42469, -438)
+
+[node name="Goon_C" parent="Upper Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 149, 99.8979, -482)
+
+[node name="Goon_A3" parent="Upper Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, 136, 99.8979, -481)
+
+[node name="Goon_B2" parent="Upper Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, 66, 109.517296, -484)
+
+[node name="Goon_C2" parent="Upper Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 109.517296, -488)
+
+[node name="Goon_A4" parent="Upper Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 68, 109.517296, -480)
+
+[node name="Goon_A5" parent="Upper Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, 70, 109.517296, -477)
+
+[node name="Goon_A6" parent="Upper Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 113.5, -487)
+
+[node name="Goon_A7" parent="Upper Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 111.5, -483)
+
+[node name="Goon_C3" parent="Upper Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 109.517296, -489)
+
+[node name="Goon_C4" parent="Upper Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 109.5, -484)
+
+[node name="Goon_A8" parent="Upper Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, 31, 126, -457)
+
+[node name="Goon_C5" parent="Upper Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, 26, 124, -454)
+
+[node name="Goon_C6" parent="Upper Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25, 122, -449)
+
+[node name="Goon_C7" parent="Upper Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 31, 122, -449)
+
+[node name="Goon_C8" parent="Upper Tower Zone/Enemies" instance=ExtResource("18_2urii")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 28, 122, -449)
+
+[node name="Goon_A9" parent="Upper Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 41, 137, -430)
+
+[node name="Goon_B3" parent="Upper Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
+transform = Transform3D(-0.8660254, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660254, 31, 141, -425)

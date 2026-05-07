@@ -22,9 +22,16 @@ class_name Enemy extends CharacterBody3D
 @export var attacks_and_probabilities : Dictionary[AttackResource, float];
 
 @onready var starting_transform : Transform3D = global_transform;
+@onready var landing_anim_trigger: RayCast3D = $LandingAnimTrigger
 
 func _ready() -> void:
 	fov = deg_to_rad(fov);
+
+func _physics_process(_delta: float) -> void:
+	if velocity.y < -100:
+		landing_anim_trigger.force_raycast_update();
+		if landing_anim_trigger.is_colliding():
+			die();
 
 # Damage taking
 signal taking_damage(damage: int, knockback: Vector3, attacker_rotation: Vector3);

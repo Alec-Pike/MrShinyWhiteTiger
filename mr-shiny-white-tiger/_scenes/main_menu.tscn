@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://6td4spwofdgn"]
+[gd_scene load_steps=18 format=3 uid="uid://6td4spwofdgn"]
 
 [ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="1_j2tf1"]
 [ext_resource type="Script" uid="uid://dj2l47m3tw6j2" path="res://scripts/menu stuff/main menu/main_menu.gd" id="1_jx3df"]
@@ -10,10 +10,16 @@
 [ext_resource type="Script" uid="uid://buqj8ht6a2egd" path="res://scripts/menu stuff/main menu/fullscreen_check_button.gd" id="4_tmamg"]
 [ext_resource type="Script" uid="uid://c6od37i026cwm" path="res://scripts/menu stuff/main menu/3d_rendering_quality_dropdown.gd" id="7_xeutb"]
 [ext_resource type="Script" uid="uid://dmsyo8ftrdgkb" path="res://scripts/menu stuff/main menu/credits_text.gd" id="10_xeutb"]
+[ext_resource type="AudioStream" uid="uid://7hm3m6i32sh0" path="res://audio/music/MrShinyTitleThemeV1.mp3" id="11_uvo6p"]
 
 [sub_resource type="Theme" id="Theme_xeutb"]
 default_font = ExtResource("1_j2tf1")
 default_font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_xeutb"]
+font_size = 40
+font_color = Color(2.1755099e-05, 0.641825, 0.96163696, 1)
+outline_size = 15
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmamg"]
 content_margin_left = 0.0
@@ -71,12 +77,15 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -63.0
-offset_top = -192.0
-offset_right = 61.0
-offset_bottom = -169.0
+offset_left = -288.0
+offset_top = -307.0
+offset_right = 288.0
+offset_bottom = -160.0
 grow_horizontal = 2
-text = "[logo goes here]"
+text = "THE INCREDIBLE MR. SHINY
+in:
+THE WHITE TIGER HUNT"
+label_settings = SubResource("LabelSettings_xeutb")
 horizontal_alignment = 1
 
 [node name="MainVBoxContainer" type="VBoxContainer" parent="MainMenu"]
@@ -194,6 +203,7 @@ layout_mode = 2
 text = "3D Rendering Quality"
 
 [node name="VoiceVolumeLabel" type="Label" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/LabelsVBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Voice Volume"
 
@@ -231,6 +241,7 @@ popup/item_3/id = 3
 script = ExtResource("7_xeutb")
 
 [node name="VoiceVolumeSlider" type="HSlider" parent="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/ButtonsVBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_styles/slider = SubResource("StyleBoxLine_tcb7q")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_q13kq")
@@ -352,3 +363,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Done"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_uvo6p")
+autoplay = true
+bus = &"Music"
+parameters/looping = true

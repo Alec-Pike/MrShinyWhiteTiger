@@ -26,7 +26,7 @@ func physics_update(_delta: float) -> void:
 		finished.emit(ATTACKING);
 	
 	chase_timer += _delta;
-	if chase_timer >= this_enemy.chase_time_out_threshold:
+	if chase_timer >= this_enemy.chase_time_out_threshold || (this_enemy.global_position.y - Global.player.global_position.y > 20):
 		chase_timer = 0.0;
 		finished.emit(RETURNING);
 		

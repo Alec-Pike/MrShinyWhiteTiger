@@ -5,6 +5,9 @@ class_name Player extends CharacterBody3D
 @export var health_bar : TextureProgressBar;
 var hp : int;
 
+@onready var landing_anim_trigger: RayCast3D = $LandingAnimTrigger
+
+
 
 func _enter_tree():
 	Global.player = self
@@ -24,6 +27,11 @@ func _process(_delta: float) -> void:
 	
 	health_bar.value = hp;
 
+func _physics_process(_delta: float) -> void:
+	if velocity.y < -100:
+		landing_anim_trigger.force_raycast_update();
+		if landing_anim_trigger.is_colliding():
+			die();
 
 # Damage taking
 signal taking_damage(damage: int, knockback: Vector3, attacker_rotation: Vector3);
