@@ -17,7 +17,7 @@ func _process(delta) -> void:
 		scrollbar.value = scrollbar.min_value;
 	# Auto-scrolls the text down continuously 
 	scrollbar.value += scroll_speed * delta;
-	#print("scrollbar var = " + str(scrollbar.value))
+	print("scrollbar var = " + str(scrollbar.value))
 	
 func _on_visibility_changed() -> void:
 	scrollbar.value = scrollbar.min_value;

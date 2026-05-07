@@ -313,6 +313,9 @@ layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
 text = "
+
+
+
 [u]Credits[/u]
 
 [u]The Incredible Mr. Shiny in: The White Tiger Hunt[/u]
@@ -328,29 +331,30 @@ Lead Developer - Alec Pike
 Music - Jimmy Saldana
 Character Modeler - Alec Pike
 UI Artist - Bella Lemmons
-Writing Director - Alec Pike
-Writer - Eliseo McCarthy
-
-[u]Voice Cast[/u]
-
-Mr. Shiny - Alec Pike
-Director Baek - Mary Rollins
-White Tiger Goons - Alec Pike
 
 [u]Tools[/u]
 
 Developed using the Godot game engine, v4.5.1
 Character models made using VRoid Studio, v2.8.0
 Controls diagram created with Canva
+HUD elements created using Ibis Paint X
+Music made in GarageBand
 VRM importer and MToon Shader by V-Sekai
 Unidot asset importer by Lyuma and V-Sekai
 Gitignore template by VeeronTen on GitHub
 
 [u]Assets[/u]
 
-(HDRP) NYC-like City Buildings Set (PBR) by MARCIN'S ASSETS, licenced under the Standard Unity Asset Store EULA
-Free HDR Skyboxes Pack by BG Studio, licenced under the Standard Unity Asset Store EULA
-Liberation Mono Bold font by Red Hat, licenced under the GNU GPL
+\"(HDRP) NYC-like City Buildings Set (PBR)\" package by MARCIN'S ASSETS, licenced under the Standard Unity Asset Store EULA
+\"Free HDR Skyboxes Pack\" package by BG Studio, licenced under the Standard Unity Asset Store EULA
+\"Liberation Mono Bold\" font by Red Hat, licenced under the GNU GPL
+\"Female Horror Voice: Creepy Laughter (Vol 001)\" sound by AlesiaDavina, licensed under the Pixabay Content License
+\"whish\" sound by feline9, licensed under the Pixabay Content License
+\"grappling hook\" sound by 16bitstudios, licensed under the Pixabay Content License
+\"Zoom sound effect\" sound by emircanalp, licensed under the Pixabay Content License
+\"male-death-sound\" sound by Vinodadora, licensed under the Pixabay Content License
+\"Female Voice: And this is how it ends\" sound by LadyImperatrix, licensed under the Pixabay Content License
+Additional sound effects by Anthony Giuliano, originally created for [u]Robot Riot[/u] (2025)
 
 [hr]
 
@@ -361,9 +365,12 @@ Copyright (c) 2026 Alec Pike.
 
 [u]Thanks For Playing![/u]
 
+
+
 "
 horizontal_alignment = 1
 script = ExtResource("10_xeutb")
+reset_threshold = 1164.0
 
 [node name="BackButton" type="Button" parent="CreditsPanel/CreditsVBoxContainer"]
 layout_mode = 2
