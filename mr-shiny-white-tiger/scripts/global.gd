@@ -11,7 +11,7 @@ var invert_camera_v : bool = true;
 var style_score: int = 0;
 var time_bonus: int = 0;
 var total_score: int = 0;
-const POINTS_PER_SEC_REMAINING: int = 10;
+const POINTS_PER_SEC_REMAINING: int = 5;
 
 signal increase_style(points: int);
 

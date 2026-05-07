@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://6td4spwofdgn"]
+[gd_scene load_steps=22 format=3 uid="uid://6td4spwofdgn"]
 
 [ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="1_j2tf1"]
 [ext_resource type="Script" uid="uid://dj2l47m3tw6j2" path="res://scripts/menu stuff/main menu/main_menu.gd" id="1_jx3df"]
@@ -11,6 +11,9 @@
 [ext_resource type="Script" uid="uid://c6od37i026cwm" path="res://scripts/menu stuff/main menu/3d_rendering_quality_dropdown.gd" id="7_xeutb"]
 [ext_resource type="Script" uid="uid://dmsyo8ftrdgkb" path="res://scripts/menu stuff/main menu/credits_text.gd" id="10_xeutb"]
 [ext_resource type="AudioStream" uid="uid://7hm3m6i32sh0" path="res://audio/music/MrShinyTitleThemeV1.mp3" id="11_uvo6p"]
+[ext_resource type="Script" uid="uid://rmket5grk5sj" path="res://scripts/menu stuff/main menu/main_menu_sfx_player.gd" id="12_7mg6x"]
+[ext_resource type="AudioStream" uid="uid://bi1lchs1tapsw" path="res://audio/sfx/hit_sound.wav" id="13_alc80"]
+[ext_resource type="AudioStream" uid="uid://dw2abwbohmdac" path="res://audio/sfx/guage_full.wav" id="14_2x3df"]
 
 [sub_resource type="Theme" id="Theme_xeutb"]
 default_font = ExtResource("1_j2tf1")
@@ -45,6 +48,9 @@ thickness = 5
 color = Color(0.0017534032, 0.00012273341, 0.6658606, 1)
 thickness = 5
 
+[sub_resource type="LabelSettings" id="LabelSettings_5wdxp"]
+font_size = 50
+
 [node name="Root" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -54,7 +60,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_xeutb")
 
-[node name="MainMenu" type="Control" parent="." node_paths=PackedStringArray("play_btn", "records_btn", "options_btn", "credits_btn", "quit_btn", "options_menu", "credits_menu")]
+[node name="MainMenu" type="Control" parent="." node_paths=PackedStringArray("play_btn", "records_btn", "options_btn", "credits_btn", "quit_btn", "options_menu", "credits_menu", "loading_display")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,6 +77,7 @@ credits_btn = NodePath("MainVBoxContainer/CreditsButton")
 quit_btn = NodePath("MainVBoxContainer/QuitButton")
 options_menu = NodePath("../OptionsMenu")
 credits_menu = NodePath("../CreditsPanel")
+loading_display = NodePath("../Loading Text")
 
 [node name="LogoTEMP" type="Label" parent="MainMenu"]
 layout_mode = 1
@@ -369,3 +376,30 @@ stream = ExtResource("11_uvo6p")
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+script = ExtResource("12_7mg6x")
+sfx_volume_test_snd = ExtResource("13_alc80")
+game_start_snd = ExtResource("14_2x3df")
+
+[node name="Loading Text" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -14.5
+offset_right = 105.0
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "NOW LOADING..."
+label_settings = SubResource("LabelSettings_5wdxp")
+
+[connection signal="pressed" from="MainMenu/MainVBoxContainer/PlayButton" to="SFXPlayer" method="_on_play_button_pressed"]
+[connection signal="pressed" from="MainMenu/MainVBoxContainer/PlayButton" to="Loading Text" method="_on_play_button_pressed"]
+[connection signal="value_changed" from="OptionsMenu/OptionsHBoxContainer/SystemVBoxContainer/SystemHBoxContainer/ButtonsVBoxContainer/EffectsVolumeSlider" to="SFXPlayer" method="_on_effects_volume_slider_value_changed"]

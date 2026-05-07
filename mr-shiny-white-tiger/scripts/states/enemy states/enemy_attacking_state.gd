@@ -3,6 +3,9 @@ extends EnemyState
 @export_category("References")
 @export var character_pivot : Node3D;
 @export var hit_shapecast : ShapeCast3D;
+@export_category("SFX")
+@export var audio_player : AudioStreamPlayer;
+@export var perfect_dodge_sound : AudioStream;
 
 var attacks : Array[AttackResource];
 var probablilities : Array[float];
@@ -52,6 +55,7 @@ func execute_next_attack():
 	
 
 
+
 func physics_update(_delta: float) -> void:
 	# Check for Hit Window
 	var anim_time : float = pose_anim.current_animation_position;
@@ -67,6 +71,8 @@ func physics_update(_delta: float) -> void:
 		# Style point gain for "perfect dodge"
 		Global.increase_style.emit(curr_atk.damage * 2);
 		already_hit = true;
+		audio_player.stream = perfect_dodge_sound;
+		audio_player.play();
 	elif (
 		!already_hit 
 		&& anim_time >= curr_atk.active_time_start 
@@ -99,4 +105,4 @@ func exit() -> void:
 	pending_attacks = [];
 
 func is_invulnerable() -> bool:
-	return (!already_hit);
+	return pose_anim.current_animation_position > curr_atk.active_time_end;

@@ -105,7 +105,17 @@ func physics_update(_delta: float) -> void:
 	# C. Check for Transition/Combo Window
 	# If the animation is finished (or past the "cancel" point)
 	if anim_time >= curr_atk.transition_ok_time:
-		if pending_attack_type != "":
+		if (
+			Input.is_action_pressed("move_forward") ||
+			Input.is_action_pressed("move_left") ||
+			Input.is_action_pressed("move_right") ||
+			Input.is_action_pressed("move_back")
+		):
+			if player.is_on_floor():
+				finished.emit(RUNNING);
+			else:
+				finished.emit(AIR, {"jumping": false});
+		elif pending_attack_type != "":
 			# --- ADVANCE COMBO ---
 			# Using the Linked List logic
 			if pending_attack_type == "light":
@@ -145,4 +155,4 @@ func exit() -> void:
 	pending_attack_type = "";
 
 func is_invulnerable() -> bool:
-	return (!targets_hit.is_empty());
+	return pose_anim.current_animation_position > curr_atk.active_time_end;

@@ -9,10 +9,19 @@ extends State
 @export var fade_duration : float = 2.0;
 @export var pose_anim : AnimationPlayer;
 @export var face_anim : AnimationPlayer;
+@export_category("SFX")
+@export var audio_stream_player : AudioStreamPlayer;
+@export var death_sound : AudioStream;
+@export var hit_sound : AudioStream;
 
 
 
 func enter(_previous_state_path: String, _data := {}) -> void:
+	audio_stream_player.stream = hit_sound;
+	audio_stream_player.play();
+	await audio_stream_player.finished;
+	audio_stream_player.stream = death_sound;
+	audio_stream_player.play();
 	# Stop everything
 	character.set_physics_process(false);
 	for node in to_deactivate:
@@ -37,7 +46,6 @@ func _on_animation_finished(_anim_name: StringName):
 		# Multiply the delay by a fraction to make it faster each loop!
 		# (Remove this line if you want a constant, steady blink rate)
 		#blink_delay *= 0.85
-	
 	character.die();
 
 

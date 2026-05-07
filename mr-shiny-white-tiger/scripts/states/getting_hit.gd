@@ -13,13 +13,16 @@ extends State
 #@export var recovery_anim_name : StringName;
 @export var pose_anim : AnimationPlayer;
 @export var face_anim : AnimationPlayer;
+@export_category("SFX")
+@export var audio_player : AudioStreamPlayer;
+@export var hit_sound : AudioStream;
 
 var character : CharacterBody3D;
 var is_big_hit : bool = false;
 var anim_is_done : bool = false;
 var i_frame_timer : float = 0.0;
 
-const TERMINAL_VELOCITY : float = -100;
+const TERMINAL_VELOCITY : float = -7;
 
 
 func _ready() -> void:
@@ -46,7 +49,11 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 		pose_anim.play(hit_small_anim_name);
 	# calculate and set knockback velocity
 	character_pivot.look_at(_data.attacker_position);
-	character.velocity = character_pivot.global_basis * _data.knockback * -1;
+	character.velocity = character_pivot.global_basis * _data.knockback * -1 * knockback_scale;
+	character.velocity.y *= -1;
+	
+	audio_player.stream = hit_sound;
+	audio_player.play();
 
 
 func update(_delta: float) -> void:

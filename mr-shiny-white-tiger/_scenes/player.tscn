@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://c64slysg5u0dt"]
+[gd_scene load_steps=52 format=3 uid="uid://c64slysg5u0dt"]
 
 [ext_resource type="Script" uid="uid://0e0euqc8b61j" path="res://scripts/player.gd" id="1_cmorj"]
 [ext_resource type="Script" uid="uid://djcj7epyrjurs" path="res://addons/vrm/vrm_spring_bone.gd" id="2_cmorj"]
@@ -27,12 +27,16 @@
 [ext_resource type="Texture2D" uid="uid://buar1aixdr6eo" path="res://sprites/HealthbarFill.png" id="15_ydd26"]
 [ext_resource type="Texture2D" uid="uid://hg5agxitutx7" path="res://sprites/ShinyMeter100pct.png" id="17_47hby"]
 [ext_resource type="Script" uid="uid://chcu74c7xyki3" path="res://scripts/states/getting_hit.gd" id="20_373r6"]
+[ext_resource type="AudioStream" uid="uid://dw2abwbohmdac" path="res://audio/sfx/guage_full.wav" id="20_m42qb"]
 [ext_resource type="Resource" uid="uid://decdkvbycb5oj" path="res://resources/attack_resources/air_atks/Air_Knee.tres" id="21_fpvv5"]
 [ext_resource type="Resource" uid="uid://cueb8ric3w518" path="res://resources/attack_resources/ground_heavy_atks/L_Side_Kick.tres" id="21_gf0v6"]
+[ext_resource type="AudioStream" uid="uid://iuwskb4olad4" path="res://audio/sfx/special_mode_engage.wav" id="21_jgvjb"]
 [ext_resource type="Script" uid="uid://ctev77pe4gsrp" path="res://scripts/states/player states/dodging.gd" id="22_373r6"]
+[ext_resource type="AudioStream" uid="uid://cgrjmrtmn816o" path="res://audio/sfx/special_mode_end.mp3" id="22_shg8g"]
 [ext_resource type="Resource" uid="uid://cemn6ofgq4u2" path="res://resources/attack_resources/air_atks/Air_Side_Kick.tres" id="22_xbada"]
 [ext_resource type="Script" uid="uid://bva6ixuqk4wbx" path="res://scripts/states/recovering_state.gd" id="23_aj6rt"]
 [ext_resource type="Script" uid="uid://cm1afagd0va2d" path="res://scripts/states/death_state.gd" id="24_jh3hg"]
+[ext_resource type="AudioStream" uid="uid://bi1lchs1tapsw" path="res://audio/sfx/hit_sound.wav" id="32_mnm31"]
 [ext_resource type="PackedScene" uid="uid://kbc4un6b7pmx" path="res://_scenes/shadow_blob_caster.tscn" id="34_q80l8"]
 
 [sub_resource type="Resource" id="Resource_2ue6v"]
@@ -261,11 +265,15 @@ texture_under = ExtResource("14_ydd26")
 texture_progress = ExtResource("15_ydd26")
 texture_progress_offset = Vector2(13, 0)
 
-[node name="StyleManager" type="Node" parent="." node_paths=PackedStringArray("sp_atk_meter_display", "style_score_display", "atk_state")]
+[node name="StyleManager" type="Node" parent="." node_paths=PackedStringArray("sp_atk_meter_display", "style_score_display", "atk_state", "audio_player")]
 script = ExtResource("11_22xyk")
 sp_atk_meter_display = NodePath("../CanvasLayer/SpAtkMeter")
 style_score_display = NodePath("../CanvasLayer/StyleScoreDisplay")
 atk_state = NodePath("../StateMachine/Attacking")
+audio_player = NodePath("../AudioStreamPlayer")
+gauge_full_sound = ExtResource("20_m42qb")
+sp_mode_engage_sound = ExtResource("21_jgvjb")
+sp_mode_end_sound = ExtResource("22_shg8g")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "damage_state")]
 script = ExtResource("8_lulei")
@@ -318,16 +326,17 @@ pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
 
-[node name="Grappling" type="Node" parent="StateMachine" node_paths=PackedStringArray("targeting_system", "character_pivot", "character_model", "rope_mesh", "rope_origin", "pose_anim", "face_anim")]
+[node name="Grappling" type="Node" parent="StateMachine" node_paths=PackedStringArray("targeting_system", "character_pivot", "character_model", "rope_mesh", "rope_origin", "audio_player", "pose_anim", "face_anim")]
 script = ExtResource("15_nmymu")
-grapple_speed = 30.0
 targeting_system = NodePath("../../CameraController/SpringArm3D/Camera3D/GrappleTargeting")
 character_pivot = NodePath("../../CharacterPivot")
 character_model = NodePath("../../CharacterPivot/CharacterModel")
+finishing_boost = 10.0
 gravity = 45.0
 grapple_anim = &"MrShinyLocomotionLib/Grappling"
 rope_mesh = NodePath("../../RopeMeshInstance")
 rope_origin = NodePath("../../CharacterPivot/CharacterModel/RopeOrigin")
+audio_player = NodePath("../../AudioStreamPlayer")
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
@@ -342,16 +351,18 @@ pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
 
-[node name="Getting_Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_pivot", "pose_anim", "face_anim")]
+[node name="Getting_Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_pivot", "pose_anim", "face_anim", "audio_player")]
 script = ExtResource("20_373r6")
 character_pivot = NodePath("../../CharacterPivot")
-gravity = 60.0
+gravity = 10.0
 next_state_name = &"Idle"
 i_frame_seconds = 0.5
 hit_small_anim_name = &"TakingDamageLib/Getting Hit Small"
 hit_large_anim_name = &"TakingDamageLib/Getting Hit Large"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+audio_player = NodePath("../../AudioStreamPlayer")
+hit_sound = ExtResource("32_mnm31")
 metadata/_custom_type_script = "uid://ddmjwym8aja1o"
 
 [node name="Recovering" type="Node" parent="StateMachine" node_paths=PackedStringArray("pose_anim", "face_anim")]
@@ -362,7 +373,7 @@ pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
 metadata/_custom_type_script = "uid://hnvtv7wnt2qf"
 
-[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "character_model", "to_deactivate", "pose_anim", "face_anim")]
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "character_model", "to_deactivate", "pose_anim", "face_anim", "audio_stream_player")]
 script = ExtResource("24_jh3hg")
 character = NodePath("../..")
 character_model = NodePath("../../CharacterPivot/CharacterModel")
@@ -370,6 +381,8 @@ to_deactivate = [NodePath("../../CharacterPivot/AtkTargetingShapeCast"), NodePat
 death_anim_name = &"TakingDamageLib/Dying Slow"
 pose_anim = NodePath("../../CharacterPivot/PoseAnimator")
 face_anim = NodePath("../../CharacterPivot/CharacterModel/AnimationPlayer")
+audio_stream_player = NodePath("../../AudioStreamPlayer")
+hit_sound = ExtResource("32_mnm31")
 metadata/_custom_type_script = "uid://hnvtv7wnt2qf"
 
 [node name="RopeMeshInstance" type="MeshInstance3D" parent="."]
@@ -379,6 +392,9 @@ skeleton = NodePath("../CharacterPivot")
 
 [node name="ShadowBlobCaster" parent="." instance=ExtResource("34_q80l8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
 
 [connection signal="set_special_mode" from="StyleManager" to="StateMachine/Running" method="set_special_mode"]
 [connection signal="set_special_mode" from="StyleManager" to="StateMachine/Air" method="set_special_mode"]

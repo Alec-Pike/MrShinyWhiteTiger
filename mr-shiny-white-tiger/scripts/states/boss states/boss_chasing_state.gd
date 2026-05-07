@@ -23,7 +23,11 @@ func physics_update(_delta: float) -> void:
 	this_enemy.move_and_slide();
 	
 	if vec_to_player.length() <= this_enemy.atk_range:
-		finished.emit(ATTACKING);
+		chase_timer = 0.0;
+		if randf() < 0.3:
+			finished.emit(ATTACKING);
+		else:
+			finished.emit(CIRCLING);
 	
 	chase_timer += _delta;
 	if chase_timer >= this_enemy.chase_time_out_threshold || (this_enemy.global_position.y - Global.player.global_position.y > 20):

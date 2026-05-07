@@ -10,6 +10,7 @@ class_name Enemy extends CharacterBody3D
 # The downward acceleration when in the air, in meters per second squared.
 @export var gravity : float = 75.0;
 @export_category("Circling")
+@export var circle_speed : float = 3.0;
 @export var atk_range : float = 3.0;
 @export var min_circle_time : float = 0.0;
 @export var max_circle_time : float = 5.0;
@@ -23,6 +24,9 @@ class_name Enemy extends CharacterBody3D
 
 @onready var starting_transform : Transform3D = global_transform;
 @onready var landing_anim_trigger: RayCast3D = $LandingAnimTrigger
+@onready var style_points : int = hp;
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
 
 func _ready() -> void:
 	fov = deg_to_rad(fov);
@@ -41,5 +45,6 @@ func take_damage(damage: int, knockback: Vector3, attacker_rotation: Vector3):
 # Death
 signal is_dead();
 func die():
+	Global.style_manager.increase_style(style_points);
 	is_dead.emit();
 	queue_free();

@@ -8,7 +8,7 @@ extends EnemyState
 var circle_timer : float = 0;
 var circle_time_threshold : float;
 
-const HYSTERESIS : float = 1.0;
+const HYSTERESIS : float = 5.0;
 
 
 func enter(_previous_state_path: String, _data := {}) -> void:
@@ -21,7 +21,7 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 
 func physics_update(_delta: float) -> void:
 	var vec_to_player : Vector3 = Global.player.global_position - this_enemy.global_position;
-	var move_vec : Vector3 = vec_to_player.normalized() * this_enemy.chase_speed;
+	var move_vec : Vector3 = vec_to_player.normalized() * (this_enemy.circle_speed);
 	move_vec.y = 0;
 	const TURN_ANGLE : float = deg_to_rad(89);
 	move_vec = move_vec.rotated(Vector3.UP, TURN_ANGLE * circling_direction);

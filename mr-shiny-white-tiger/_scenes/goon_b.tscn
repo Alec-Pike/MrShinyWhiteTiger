@@ -85,10 +85,11 @@ hit_radius = PackedFloat64Array(1, 1, 1, 0)
 center_bone = "Root_"
 
 [node name="Goon_B" instance=ExtResource("1_sp0aq")]
-hp = 150
+hp = 75
 fov = 80.0
-chase_speed = 7.0
-air_speed = 6.0
+chase_speed = 14.5
+air_speed = 8.0
+circle_speed = 4.5
 atk_range = 1.25
 min_circle_time = 1.0
 max_circle_time = 4.0

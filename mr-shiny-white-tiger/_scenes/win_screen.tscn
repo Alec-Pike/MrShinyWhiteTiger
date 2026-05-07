@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvylnypuihuck"]
+[gd_scene load_steps=9 format=3 uid="uid://bvylnypuihuck"]
 
 [ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="1_jb6jg"]
 [ext_resource type="Script" uid="uid://b2yk0ascggkle" path="res://scripts/menu stuff/win_screen.gd" id="2_tb78a"]
 [ext_resource type="AudioStream" uid="uid://7hm3m6i32sh0" path="res://audio/music/MrShinyTitleThemeV1.mp3" id="3_tb78a"]
+[ext_resource type="AudioStream" uid="uid://dw2abwbohmdac" path="res://audio/sfx/guage_full.wav" id="4_oio1f"]
 
 [sub_resource type="Theme" id="Theme_oio1f"]
 default_font = ExtResource("1_jb6jg")
@@ -127,3 +128,8 @@ stream = ExtResource("3_tb78a")
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_oio1f")
+autoplay = true
+bus = &"SFX"

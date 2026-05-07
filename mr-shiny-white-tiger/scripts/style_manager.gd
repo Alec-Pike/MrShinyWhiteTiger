@@ -4,6 +4,11 @@ extends Node
 @export var sp_atk_meter_display : TextureProgressBar;
 @export var style_score_display : Label;
 @export var atk_state : State;
+@export_category("SFX")
+@export var audio_player : AudioStreamPlayer;
+@export var gauge_full_sound : AudioStream;
+@export var sp_mode_engage_sound : AudioStream;
+@export var sp_mode_end_sound : AudioStream;
 
 var style_score : int = 0;
 var sp_atk_meter_fill : int = 0;
@@ -42,6 +47,8 @@ func _input(event: InputEvent) -> void:
 		special_mode_timer = SPECIAL_MODE_TIME;
 		sp_atk_meter_fill = 0;
 		special_mode_on = true;
+		audio_player.stream = sp_mode_engage_sound;
+		audio_player.play();
 
 
 func _process(delta: float) -> void:
@@ -58,6 +65,8 @@ func _process(delta: float) -> void:
 			special_mode_on = false;
 			sp_atk_meter_display.value = 0.0;
 			emit_signal("set_special_mode", false);
+			audio_player.stream = sp_mode_end_sound;
+			audio_player.play();
 	
 	# Cheat code: Alt+S to completely fill sp atk meter
 	if Input.is_key_pressed(KEY_S) && Input.is_key_pressed(KEY_ALT):
@@ -81,9 +90,13 @@ func increase_style(points : int):
 	print("+" + str(points) + " style points");
 	# Update special meter
 	if !special_mode_on:
+		var prev_fill : int = sp_atk_meter_fill;
 		sp_atk_meter_fill += points;
 		if sp_atk_meter_fill >= METER_FILL_MAX:
 			sp_atk_meter_fill = METER_FILL_MAX;
+			if prev_fill < METER_FILL_MAX:
+				audio_player.stream = gauge_full_sound;
+				audio_player.play();
 		sp_atk_meter_display.value = sp_atk_meter_fill;
 	# Update total score
 	style_score += points;

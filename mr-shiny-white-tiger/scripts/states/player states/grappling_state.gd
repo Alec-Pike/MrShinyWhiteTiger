@@ -12,6 +12,9 @@ extends PlayerState
 @export var rotation_speed: float = 5.0;
 @export var rope_mesh: MeshInstance3D;
 @export var rope_origin: Node3D;
+@export_category("SFX")
+@export var audio_player : AudioStreamPlayer;
+
 var grapple_target_point: Vector3;
 
 func _ready() -> void:
@@ -29,6 +32,8 @@ func enter(previous_state_path: String, _data := {}) -> void:
 	if !targeting_system.current_grapple_target: 
 		finished.emit(previous_state_path);
 		return;
+	#audio_player.stream = grapple_sound;
+	#audio_player.play(0.1);
 	
 	grapple_target_point = targeting_system.current_grapple_target.global_position;
 	# OPTIONAL: Add a small offset so you land ON TOP of the ledge, not inside it
@@ -38,6 +43,8 @@ func enter(previous_state_path: String, _data := {}) -> void:
 	pose_anim.play(grapple_anim, 0.1);
 	character_model.rotation_degrees.x = 90;
 	character_pivot.look_at(grapple_target_point);
+	
+	
 
 
 # Calculates initial velocity for grappling

@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://y2xcffxef0cj"]
+[gd_scene load_steps=82 format=3 uid="uid://y2xcffxef0cj"]
 
 [ext_resource type="PackedScene" uid="uid://bwgh11eofhruj" path="res://_scenes/abstract_enemy.tscn" id="1_dlgtt"]
 [ext_resource type="PackedScene" uid="uid://oybij82se8w" path="res://models/character models/DirectorBaekFinal.vrm" id="2_1teel"]
@@ -24,6 +24,7 @@
 [ext_resource type="Resource" uid="uid://dvhfmyfr70l71" path="res://resources/attack_resources/boss_atks/Boss_R_Uppercut.tres" id="13_fda38"]
 [ext_resource type="Resource" uid="uid://pqqf75iyi1v7" path="res://resources/attack_resources/boss_atks/Boss_Stomp.tres" id="14_pq3dj"]
 [ext_resource type="Script" uid="uid://bg0kyw0x1skrt" path="res://scripts/states/boss states/boss_ready_state.gd" id="22_2lqqf"]
+[ext_resource type="AudioStream" uid="uid://bcrjm7vb83fpy" path="res://audio/sfx/baek_death.mp3" id="24_dcwp4"]
 [ext_resource type="Texture2D" uid="uid://bxba2ikbsqa58" path="res://sprites/BossHealthbarBackground.png" id="25_dcwp4"]
 [ext_resource type="Texture2D" uid="uid://b5lkoxp64mnvl" path="res://sprites/BossHealthbarFill.png" id="26_kbuk5"]
 [ext_resource type="Script" uid="uid://dwgrghltx822i" path="res://scripts/boss_health_bar.gd" id="27_rpytk"]
@@ -481,12 +482,11 @@ center_bone = "Root_"
 
 [node name="Director_Baek" instance=ExtResource("1_dlgtt")]
 script = ExtResource("2_dcwp4")
-hp = 500
+hp = 300
 detection_range = 3.0
 fov = 180.0
 chase_speed = 1.5
 air_speed = 1.5
-min_circle_time = 2.5
 max_circle_time = 9.5
 return_speed = 1.5
 attacks_and_probabilities = Dictionary[ExtResource("2_7tk08"), float]({
@@ -538,9 +538,14 @@ running_anim_name = &"DirBaekLib/Fem_Walk_4"
 [node name="Returning" parent="StateMachine" index="3"]
 walking_anim_name = &"DirBaekLib/Fem_Walk_4"
 
+[node name="Getting_Hit" parent="StateMachine" index="6"]
+knockback_scale = 0.5
+i_frame_seconds = 0.5
+
 [node name="Death" parent="StateMachine" index="8" node_paths=PackedStringArray("character_model")]
 character_model = NodePath("../../CharacterPivot/DirectorBaekFinal")
 death_anim_name = &"TakingDamageLib/Dying Slow"
+death_sound = ExtResource("24_dcwp4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="6"]
 

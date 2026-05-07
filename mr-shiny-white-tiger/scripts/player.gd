@@ -6,6 +6,7 @@ class_name Player extends CharacterBody3D
 var hp : int;
 
 @onready var landing_anim_trigger: RayCast3D = $LandingAnimTrigger
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 
@@ -28,7 +29,7 @@ func _process(_delta: float) -> void:
 	health_bar.value = hp;
 
 func _physics_process(_delta: float) -> void:
-	if velocity.y < -100:
+	if velocity.y < -85:
 		landing_anim_trigger.force_raycast_update();
 		if landing_anim_trigger.is_colliding():
 			die();
@@ -43,4 +44,5 @@ func take_damage(damage: int, knockback: Vector3, attacker_rotation: Vector3):
 signal is_dead();
 func die():
 	is_dead.emit();
+	
 	#queue_free();

@@ -9,6 +9,7 @@ extends Control
 @export_category("Refs to other menus")
 @export var options_menu : Control;
 @export var credits_menu : Control;
+@export var loading_display : Control;
 
 func _ready() -> void:
 	play_btn.pressed.connect(_on_play_btn_pressed);
@@ -20,10 +21,13 @@ func _ready() -> void:
 	self.visible = true;
 	options_menu.visible = false;
 	credits_menu.visible = false;
+	loading_display.visible = false;
 	
 	play_btn.grab_focus.call_deferred();
 
 func _on_play_btn_pressed() -> void:
+	self.visible = false;
+	loading_display.visible = true;
 	get_tree().change_scene_to_file("res://_scenes/level.tscn");
 	#Global.game_init();
 

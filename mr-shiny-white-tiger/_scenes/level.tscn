@@ -72,7 +72,7 @@ size = Vector3(64, 2, 64)
 
 [node name="Game_Timer" type="Timer" parent="." node_paths=PackedStringArray("timer_display")]
 script = ExtResource("1_geman")
-level_time_minutes = 25.0
+level_time_minutes = 15.0
 timer_display = NodePath("../CanvasLayer/Timer_Display")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -226,10 +226,10 @@ transform = Transform3D(0.17534846, 0, 0.35951763, 0, 0.4, 0, -0.35951763, 0, 0.
 [node name="Enemies" type="Node3D" parent="Alleyway Zone"]
 
 [node name="Goon_A" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -44)
+transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 42, 0, -44)
 
 [node name="Goon_A2" parent="Alleyway Zone/Enemies" instance=ExtResource("17_x3txq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0, -44)
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 37, 0, -44)
 
 [node name="Goon_C" parent="Alleyway Zone/Enemies" instance=ExtResource("18_2urii")]
 transform = Transform3D(0.258819, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.258819, 13, 20.24618, -58)
@@ -609,13 +609,10 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 64, 58, -456)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100.85715, 0)
 
 [node name="building_6_4 Variant2" parent="Upper Tower Zone/Buildings" instance=ExtResource("17_eseuy")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 89.5, 0, -456)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 89.5, 0, -448)
 
 [node name="building_6_4 Variant3" parent="Upper Tower Zone/Buildings" instance=ExtResource("17_eseuy")]
 transform = Transform3D(-3.059797e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.059797e-08, 119.5, 0, -443)
-
-[node name="building_6_4 Variant4" parent="Upper Tower Zone/Buildings" instance=ExtResource("17_eseuy")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 89.5, 0, -456)
 
 [node name="building_3_5 Variant" parent="Upper Tower Zone/Buildings" instance=ExtResource("28_drw0k")]
 transform = Transform3D(-0.7, 0, -6.119594e-08, 0, 0.7, 0, 6.119594e-08, 0, -0.7, 107, 3, -474)
@@ -701,7 +698,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 31, 
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 28, 122, -449)
 
 [node name="Goon_A9" parent="Upper Tower Zone/Enemies" instance=ExtResource("17_x3txq")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 41, 137, -430)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 41, 137.79749, -430)
 
 [node name="Goon_B3" parent="Upper Tower Zone/Enemies" instance=ExtResource("19_0wlie")]
-transform = Transform3D(-0.8660254, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660254, 31, 141, -425)
+transform = Transform3D(-0.8660254, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660254, 31, 141.79749, -425)

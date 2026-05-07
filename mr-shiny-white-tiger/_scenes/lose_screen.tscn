@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ck6gjj71h86bq"]
+[gd_scene load_steps=6 format=3 uid="uid://ck6gjj71h86bq"]
 
 [ext_resource type="FontFile" uid="uid://duwg5rechuocr" path="res://fonts/LiberationMono-Bold.ttf" id="1_3v12o"]
 [ext_resource type="Script" uid="uid://b7jp3y8yfxbvy" path="res://scripts/menu stuff/lose_screen.gd" id="2_nnvo4"]
+[ext_resource type="AudioStream" uid="uid://b72gcg50ami45" path="res://audio/sfx/game_over_laugh.mp3" id="3_xl6cy"]
 
 [sub_resource type="Theme" id="Theme_nnvo4"]
 default_font = ExtResource("1_3v12o")
@@ -63,3 +64,8 @@ text = "Retry"
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../retry_button")
 text = "Exit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xl6cy")
+autoplay = true
+bus = &"SFX"
